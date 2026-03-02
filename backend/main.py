@@ -295,7 +295,7 @@ def root():
 
 @app.post("/register")
 def register_user(fullname: str, email: str, password: str, db: Session = Depends(get_db)):
-    new_user = models.User(fullname=AdminLeo, email=leonyeinchan2025@gmail.com, password=Ncs3035, is_approved=True, is_admin=True) # အားလုံးကို True ပေးထားသည်
+    new_user = models.User(fullname=fullname, email=email, password=password, is_approved=True, is_admin=True) # အားလုံးကို True ပေးထားသည်
     db.add(new_user)
     db.commit()
     return {"message": "Admin အကောင့် ဆောက်ပြီးပါပြီ"}
@@ -305,8 +305,8 @@ def login_user(email: str, password: str, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.email == email).first()
     if not user or user.password != password:
         raise HTTPException(status_code=401, detail="Email သို့မဟုတ် Password မှားယွင်းနေပါသည်။")
-    if user.is_approved is not True:
-        raise HTTPException(status_code=403, detail="သင်၏အကောင့်မှာ Admin အတည်ပြုချက် မရရှိသေးပါ။")
+    # if user.is_approved is not True:
+        # raise HTTPException(status_code=403, detail="သင်၏အကောင့်မှာ Admin အတည်ပြုချက် မရရှိသေးပါ။")
     
     return {
         "message": "Login အောင်မြင်ပါသည်", 
