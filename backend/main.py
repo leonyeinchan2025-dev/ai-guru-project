@@ -282,16 +282,23 @@ def root():
     return {"message": "AI GURU Backend is running!"}
 
 # --- Register & Login ---
+# @app.post("/register")
+# def register_user(fullname: str, email: str, password: str, db: Session = Depends(get_db)):
+#     db_user = db.query(models.User).filter(models.User.email == email).first()
+#     if db_user:
+#         raise HTTPException(status_code=400, detail="Email already registered")
+    
+#     new_user = models.User(fullname=fullname, email=email, password=password)
+#     db.add(new_user)
+#     db.commit()
+#     return {"message": "Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို စောင့်ဆိုင်းပေးပါ။"}
+
 @app.post("/register")
 def register_user(fullname: str, email: str, password: str, db: Session = Depends(get_db)):
-    db_user = db.query(models.User).filter(models.User.email == email).first()
-    if db_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    
-    new_user = models.User(fullname=fullname, email=email, password=password)
+    new_user = models.User(fullname=fullname, email=email, password=password, is_approved=True, is_admin=True) # အားလုံးကို True ပေးထားသည်
     db.add(new_user)
     db.commit()
-    return {"message": "Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို စောင့်ဆိုင်းပေးပါ။"}
+    return {"message": "Admin အကောင့် ဆောက်ပြီးပါပြီ"}
 
 @app.post("/login")
 def login_user(email: str, password: str, db: Session = Depends(get_db)):
