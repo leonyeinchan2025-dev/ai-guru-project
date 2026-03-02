@@ -9,6 +9,21 @@ import shutil
 import models, schemas
 from database import engine, get_db
 
+# 🌟 အသစ်ပြင်ဆင်ထားသော Database ချိတ်ဆက်ခြင်း စနစ် 🌟
+# Render ကပေးသော DATABASE_URL ကို အရင်ရှာမည်၊ မရှိမှသာ Localhost ကို သုံးမည်
+SQLALCHEMY_DATABASE_URL = os.getenv(
+    "DATABASE_URL", 
+    "postgresql://postgres:YOUR_PASSWORD@localhost/aiguru_db" # သင့်မူလ localhost လင့်ခ်
+)
+
+# Render ၏ လင့်ခ်သည် postgres:// ဖြင့်စနေလျှင် SQLAlchemy အတွက် postgresql:// သို့ ပြောင်းပေးရမည်
+if SQLALCHEMY_DATABASE_URL.startswith("postgresql://"):
+    SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
+
 # Table များအားလုံးကို Database ထဲတွင် ဆောက်ခိုင်းခြင်း
 models.Base.metadata.create_all(bind=engine)
 
