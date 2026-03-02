@@ -145,7 +145,8 @@
 // }
 
 // src/pages/Lessons.tsx
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import api from '../api';
 

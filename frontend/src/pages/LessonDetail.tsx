@@ -62,7 +62,7 @@
 // }
 
 // src/pages/LessonDetail.tsx (Code အပြည့်အစုံ)
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../api';
 
