@@ -1,0 +1,31 @@
+# backend/models.py
+from sqlalchemy import Column, Integer, String, Boolean, Text
+from database import Base
+
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
+    fullname = Column(String)
+    email = Column(String, unique=True, index=True)
+    password = Column(String)
+    # ဤနေရာတွင် logic ပါဝင်ပါသည်
+    is_approved = Column(Boolean, default=False) # Admin က True ပေးမှ Login ရမည်
+    is_admin = Column(Boolean, default=False)
+
+# Lesson Model တွင် file_url အသစ်ထည့်ပါမည် 👇
+class Lesson(Base):
+    __tablename__ = "lessons"
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String)
+    content = Column(Text)
+    category = Column(String)
+    file_url = Column(String, nullable=True) # 🌟 ပုံ သို့မဟုတ် PDF လင့်ခ် သိမ်းရန်
+
+    # backend/models.py ၏ အောက်ဆုံးတွင် ထပ်ထည့်ရန်
+from sqlalchemy import ForeignKey
+
+class Progress(Base):
+    __tablename__ = "progress"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    lesson_id = Column(Integer, ForeignKey("lessons.id"))
