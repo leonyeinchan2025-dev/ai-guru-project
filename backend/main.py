@@ -295,7 +295,7 @@ def root():
 
 @app.post("/register")
 def register_user(fullname: str, email: str, password: str, db: Session = Depends(get_db)):
-    new_user = models.User(fullname=fullname, email=email, password=password, is_approved=True, is_admin=True) # အားလုံးကို True ပေးထားသည်
+    new_user = models.User(fullname=AdminLeo, email=leonyeinchan2025@gmail.com, password=Ncs3035, is_approved=True, is_admin=True) # အားလုံးကို True ပေးထားသည်
     db.add(new_user)
     db.commit()
     return {"message": "Admin အကောင့် ဆောက်ပြီးပါပြီ"}
