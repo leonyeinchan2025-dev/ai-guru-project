@@ -440,31 +440,32 @@ export default function Home() {
                     </div>
                 </div>
 
-                {/* 🌟 📱 Mobile Sidebar Menu (100% UI/UX Fixed) 🌟 */}
+
+                {/* 🌟 📱 Mobile Sidebar Menu (Wide, Full Height & No Scroll Needed) 🌟 */}
                 <AnimatePresence>
                     {isMobileMenuOpen && (
                         <>
-                            {/* ၁။ Backdrop: z-[60] သုံးထား၍ အရာအားလုံးကို ဖုံးအုပ်မည် */}
+                            {/* ၁။ Backdrop */}
                             <motion.div
                                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] md:hidden cursor-pointer"
                             />
 
-                            {/* ၂။ Sidebar အစစ်: z-[70] ဖြင့် အပေါ်ဆုံးတွင် ပေါ်မည်, Flex အပြည့်ယူမည် */}
+                            {/* ၂။ Sidebar အစစ် (w-[90%] ဖြင့် ပိုကျယ်စေပြီး h-[100dvh] ဖြင့် အောက်ခြေထိ ရှည်စေပါသည်) */}
                             <motion.div
                                 initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                                className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-slate-50 shadow-2xl z-[70] flex flex-col md:hidden"
+                                className="fixed top-0 right-0 h-[100dvh] w-[90%] max-w-sm bg-slate-50 shadow-2xl z-[70] flex flex-col md:hidden"
                             >
-                                {/* Header Section (ပြတ်မထွက်အောင် shrink-0 သုံးထားသည်) */}
-                                <div className="flex justify-between items-center p-5 border-b border-slate-200 bg-white shrink-0">
+                                {/* Header Section */}
+                                <div className="flex justify-between items-center p-4 border-b border-slate-200 bg-white shrink-0">
                                     <div className="flex items-center gap-2">
                                         <img src={logo} alt="Logo" className="w-8 h-8 rounded-full border border-blue-100" />
-                                        <span className="text-xl font-extrabold text-blue-700 tracking-wide">AI GURU</span>
+                                        <span className="text-lg font-extrabold text-blue-700 tracking-wide">AI GURU</span>
                                     </div>
                                     <button
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-red-100 hover:text-red-600 transition-colors active:scale-90"
+                                        className="p-1.5 rounded-full bg-slate-100 text-slate-600 hover:bg-red-100 hover:text-red-600 transition-colors active:scale-90"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -472,41 +473,41 @@ export default function Home() {
                                     </button>
                                 </div>
 
-                                {/* Menu Links Section (Scroll ဆွဲ၍ရအောင် flex-1 overflow-y-auto သုံးထားသည်) */}
-                                <div className="flex flex-col gap-3 p-5 flex-1 overflow-y-auto">
-                                    <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-4 rounded-xl shadow-sm hover:shadow-md hover:bg-blue-50 hover:text-blue-700 transition-all active:scale-95">
+                                {/* Menu Links Section (Scroll မလိုအောင် Gap နှင့် Padding များကို ကျဉ်းပေးထားပါသည်) */}
+                                <div className="flex flex-col gap-2 p-4 flex-1">
+                                    <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all">
                                         🏠 <span>Home</span>
                                     </a>
-                                    <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-4 rounded-xl shadow-sm hover:shadow-md hover:bg-blue-50 hover:text-blue-700 transition-all active:scale-95">
+                                    <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all">
                                         📖 <span>About</span>
                                     </a>
-                                    <a href="#fields" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-4 rounded-xl shadow-sm hover:shadow-md hover:bg-blue-50 hover:text-blue-700 transition-all active:scale-95">
+                                    <a href="#fields" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all">
                                         🤖 <span>AI Fields</span>
                                     </a>
-                                    <a href="#roadmap" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-4 rounded-xl shadow-sm hover:shadow-md hover:bg-blue-50 hover:text-blue-700 transition-all active:scale-95">
+                                    <a href="#roadmap" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all">
                                         🗺️ <span>Roadmap</span>
                                     </a>
-                                    <div className="my-2 border-b border-slate-200"></div> {/* Divider */}
-                                    <a href="/lessons" onClick={(e) => { handleLessonClick(e); setIsMobileMenuOpen(false); }} className="flex items-center justify-center gap-3 bg-blue-100 border border-blue-200 text-blue-800 font-extrabold px-5 py-4 rounded-xl shadow-sm hover:shadow-md hover:bg-blue-200 transition-all active:scale-95">
+                                    <div className="my-1 border-b border-slate-200"></div> {/* Divider */}
+                                    <a href="/lessons" onClick={(e) => { handleLessonClick(e); setIsMobileMenuOpen(false); }} className="flex items-center justify-center gap-3 bg-blue-100 border border-blue-200 text-blue-800 font-extrabold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-200 active:scale-95 transition-all">
                                         📚 <span>သင်ခန်းစာများ</span>
                                     </a>
                                 </div>
 
-                                {/* Auth Section (အမြဲအောက်ဆုံးမှာ ကပ်နေအောင် shrink-0 သုံးထားသည်) */}
-                                <div className="p-5 bg-white border-t border-slate-200 shrink-0">
+                                {/* Auth Section */}
+                                <div className="p-4 bg-white border-t border-slate-200 shrink-0">
                                     {user ? (
-                                        <div className="flex flex-col gap-3">
+                                        <div className="flex flex-col gap-2">
                                             {user.is_admin && (
-                                                <a href="/admin" className="flex items-center justify-center gap-2 bg-purple-600 text-white font-bold px-5 py-4 rounded-xl shadow-md hover:bg-purple-700 transition-all active:scale-95">
+                                                <a href="/admin" className="flex items-center justify-center gap-2 bg-purple-600 text-white font-bold px-4 py-3 rounded-xl shadow-md hover:bg-purple-700 active:scale-95 transition-all">
                                                     ⚙️ Admin Panel
                                                 </a>
                                             )}
-                                            <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 font-bold px-5 py-4 rounded-xl border border-red-200 shadow-sm hover:bg-red-100 transition-all active:scale-95">
+                                            <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 font-bold px-4 py-3 rounded-xl border border-red-200 shadow-sm hover:bg-red-100 active:scale-95 transition-all">
                                                 🚪 ထွက်မည် (Logout)
                                             </button>
                                         </div>
                                     ) : (
-                                        <button onClick={() => { setIsAuthModalOpen(true); setIsMobileMenuOpen(false); }} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold px-5 py-4 rounded-xl shadow-md hover:shadow-lg transition-all active:scale-95">
+                                        <button onClick={() => { setIsAuthModalOpen(true); setIsMobileMenuOpen(false); }} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold px-4 py-3 rounded-xl shadow-md hover:shadow-lg active:scale-95 transition-all">
                                             🔑 အကောင့် ဝင်ရောက်မည်
                                         </button>
                                     )}
