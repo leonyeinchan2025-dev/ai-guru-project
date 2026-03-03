@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
+from pydantic import BaseModel  # 🌟 ဤစာကြောင်း အသစ်ပါလာရပါမည်
 import os
 import shutil
 import models, schemas
@@ -30,19 +31,28 @@ app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 def root():
     return {"message": "AI GURU Backend is running!"}
 
+# 🌟 JSON လက်ခံရန် Class များ တည်ဆောက်ခြင်း 🌟
+class UserRegister(BaseModel):
+    fullname: str
+    email: str
+    password: str
+
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
 # --- 🔐 Authentication (Register & Login) ---
 
 @app.post("/register")
-def register_user(fullname: str = Form(...), email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
-    db_user = db.query(models.User).filter(models.User.email == email).first()
+def register_user(user: UserRegister, db: Session = Depends(get_db)):
+    db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="ဤ Email မှာ စာရင်းသွင်းပြီးသား ဖြစ်နေပါသည်။")
     
-    # Register လုပ်လျှင် အလိုအလျောက် Approved ဖြစ်ပြီး Admin ဖြစ်စေရန် (လိုအပ်က ပြန်ပြင်နိုင်သည်)
     new_user = models.User(
-        fullname=fullname, 
-        email=email, 
-        password=password, 
+        fullname=user.fullname, 
+        email=user.email, 
+        password=user.password, 
         is_approved=True, 
         is_admin=True
     )
@@ -52,19 +62,19 @@ def register_user(fullname: str = Form(...), email: str = Form(...), password: s
     return {"message": "အကောင့်ဖွင့်ခြင်း အောင်မြင်ပါသည်။"}
 
 @app.post("/login")
-def login_user(email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.email == email).first()
-    if not user or user.password != password:
+def login_user(user: UserLogin, db: Session = Depends(get_db)):
+    db_user = db.query(models.User).filter(models.User.email == user.email).first()
+    if not db_user or db_user.password != user.password:
         raise HTTPException(status_code=401, detail="Email သို့မဟုတ် Password မှားယွင်းနေပါသည်။")
     
-    if not user.is_approved:
+    if not db_user.is_approved:
         raise HTTPException(status_code=403, detail="သင်၏အကောင့်မှာ Admin အတည်ပြုချက် မရရှိသေးပါ။")
     
     return {
         "message": "Login အောင်မြင်ပါသည်", 
-        "user_id": user.id, 
-        "fullname": user.fullname,
-        "is_admin": user.is_admin
+        "user_id": db_user.id, 
+        "fullname": db_user.fullname,
+        "is_admin": db_user.is_admin
     }
 
 # --- 🛠️ Admin Controls (Users) ---

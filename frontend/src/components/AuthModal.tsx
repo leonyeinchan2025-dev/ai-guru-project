@@ -18,37 +18,72 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
     if (!isOpen) return null;
 
+    // const handleSubmit = async (e: React.FormEvent) => {
+    //     e.preventDefault();
+    //     setLoading(true);
+
+    //     try {
+    //         if (isLogin) {
+    //             // Login Logic
+    //             const response = await api.post(`/login?email=${email}&password=${password}`);
+    //             alert("Login အောင်မြင်ပါသည်!");
+
+    //             // User Data ကို LocalStorage တွင် သိမ်းခြင်း (Login တည်မြဲစေရန်)
+    //             localStorage.setItem("user", JSON.stringify(response.data));
+
+    //             // အောင်မြင်ပါက သင်ခန်းစာစာမျက်နှာသို့ သွားရန် သို့မဟုတ် Modal ပိတ်ရန်
+    //             onClose();
+    //             window.location.href = '/lessons';// UI update ဖြစ်စေရန်
+    //         } else {
+    //             // Register Logic
+    //             await api.post(`/register?fullname=${fullname}&email=${email}&password=${password}`);
+    //             alert("Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။");
+    //             setIsLogin(true); // Login Form ဘက်သို့ ပြန်ပြောင်းပေးခြင်း
+    //         }
+    //     } catch (error: any) {
+    //         // Error Handling
+    //         const errorMsg = error.response?.data?.detail || "တစ်ခုခုမှားယွင်းနေပါသည်။";
+    //         alert(errorMsg);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
         try {
             if (isLogin) {
-                // Login Logic
-                const response = await api.post(`/login?email=${email}&password=${password}`);
+                // 🌟 URL စာသားအစား JSON Object ဖြင့် ပို့ခြင်း 🌟
+                const response = await api.post('/login', {
+                    email: email,
+                    password: password
+                });
+
                 alert("Login အောင်မြင်ပါသည်!");
-
-                // User Data ကို LocalStorage တွင် သိမ်းခြင်း (Login တည်မြဲစေရန်)
                 localStorage.setItem("user", JSON.stringify(response.data));
-
-                // အောင်မြင်ပါက သင်ခန်းစာစာမျက်နှာသို့ သွားရန် သို့မဟုတ် Modal ပိတ်ရန်
                 onClose();
-                window.location.href = '/lessons';// UI update ဖြစ်စေရန်
+                window.location.href = '/lessons';
+
             } else {
-                // Register Logic
-                await api.post(`/register?fullname=${fullname}&email=${email}&password=${password}`);
+                // 🌟 Register အတွက်လည်း JSON Object ဖြင့် ပို့ခြင်း 🌟
+                await api.post('/register', {
+                    fullname: fullname,
+                    email: email,
+                    password: password
+                });
+
                 alert("Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။");
-                setIsLogin(true); // Login Form ဘက်သို့ ပြန်ပြောင်းပေးခြင်း
+                setIsLogin(true);
             }
         } catch (error: any) {
-            // Error Handling
-            const errorMsg = error.response?.data?.detail || "တစ်ခုခုမှားယွင်းနေပါသည်။";
+            // Error အစစ်အမှန်ကို ဆွဲထုတ်ပြသခြင်း
+            const errorMsg = error.response?.data?.detail || "အချက်အလက် မှားယွင်းနေပါသည်။ ပြန်လည်စစ်ဆေးပါ။";
             alert(errorMsg);
         } finally {
             setLoading(false);
         }
     };
-
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden relative">
