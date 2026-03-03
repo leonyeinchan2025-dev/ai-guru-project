@@ -269,6 +269,17 @@ export default function AdminDashboard() {
         } catch (error) { alert("ဖျက်ရာတွင် အမှားအယွင်းရှိပါသည်။"); }
     };
 
+    const handleToggleAdmin = async (userId: number, currentStatus: boolean) => {
+        if (!window.confirm(`ဤ User အား ${currentStatus ? 'သာမန် User' : 'Admin'} အဖြစ် ပြောင်းလဲရန် သေချာပါသလား?`)) return;
+        try {
+            await api.put(`/admin/users/${userId}/role`, { is_admin: !currentStatus });
+            alert("ရာထူး ပြောင်းလဲပြီးပါပြီ။");
+            fetchUsers();
+        } catch (error) {
+            alert("ရာထူးပြောင်းလဲရာတွင် အမှားအယွင်းရှိပါသည်။");
+        }
+    };
+
     // --- Lessons API ---
     const fetchLessons = async () => {
         try {
@@ -364,10 +375,21 @@ export default function AdminDashboard() {
 
                                 <div className="mb-4">
                                     <label className="block text-sm font-medium mb-1">အမျိုးအစား (Category)</label>
-                                    <select value={category} onChange={e => setCategory(e.target.value)} className="w-full border p-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                                    {/* <select value={category} onChange={e => setCategory(e.target.value)} className="w-full border p-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
                                         <option value="Machine Learning">Machine Learning</option>
                                         <option value="Deep Learning">Deep Learning</option>
                                         <option value="Computer Vision">Computer Vision</option>
+                                    </select> */}
+                                    <select value={category} onChange={e => setCategory(e.target.value)} className="w-full border p-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                                        <option value="AI Basics">AI Basics (အခြေခံ)</option>
+                                        <option value="Prompt Engineering">Prompt Engineering</option>
+                                        <option value="Machine Learning">Machine Learning</option>
+                                        <option value="Deep Learning">Deep Learning</option>
+                                        <option value="Generative AI">Generative AI</option>
+                                        <option value="Data Science">Data Science</option>
+                                        <option value="AI Tools & Apps">Computer Vision</option>
+                                        <option value="AI Tools & Apps">AI Tools & Apps</option>
+                                        <option value="Others">Others (အခြား)</option>
                                     </select>
                                 </div>
 
@@ -427,8 +449,76 @@ export default function AdminDashboard() {
                             </div>
                         </div>
                     )}
-
                     {/* --- Users Section --- */}
+                    {activeTab === 'users' && (
+                        <div>
+                            <h2 className="text-xl font-bold mb-6 border-b pb-2">👥 User စာရင်းနှင့် အကောင့် အတည်ပြုခြင်း</h2>
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr className="bg-slate-50 border-b">
+                                            <th className="p-3">ID</th>
+                                            <th className="p-3">အမည်</th>
+                                            <th className="p-3">Email</th>
+                                            <th className="p-3">အခြေအနေ</th>
+                                            <th className="p-3">လုပ်ဆောင်ချက်</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {users.map(u => (
+                                            <tr key={u.id} className="border-b hover:bg-slate-50">
+                                                <td className="p-3">{u.id}</td>
+                                                <td className="p-3 font-medium">
+                                                    {u.fullname}
+                                                    {u.is_admin && <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded ml-2">Admin</span>}
+                                                </td>
+                                                <td className="p-3 text-slate-500">{u.email}</td>
+                                                <td className="p-3">
+                                                    {u.is_approved ?
+                                                        <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">Approved</span> :
+                                                        <span className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs font-bold">Pending</span>
+                                                    }
+                                                </td>
+
+                                                {/* 🌟 ဤအပိုင်းသည် User Table ၏ လုပ်ဆောင်ချက် (Action) အပြည့်အစုံဖြစ်ပါသည် 🌟 */}
+                                                <td className="p-3 flex gap-2">
+                                                    {/* (၁) Pending ဖြစ်နေလျှင် Approve ခလုတ်ပြမည် */}
+                                                    {!u.is_approved && (
+                                                        <button
+                                                            onClick={() => handleApproveUser(u.id)}
+                                                            className="bg-blue-100 text-blue-700 px-3 py-1.5 rounded text-sm font-medium hover:bg-blue-200 transition"
+                                                        >
+                                                            အတည်ပြုမည်
+                                                        </button>
+                                                    )}
+
+                                                    {/* (၂) Approve ဖြစ်ပြီးသားဆိုလျှင် Admin/User ရာထူးပြောင်းသည့် ခလုတ်ပြမည် */}
+                                                    {u.is_approved && (
+                                                        <button
+                                                            onClick={() => handleToggleAdmin(u.id, u.is_admin)}
+                                                            className={`px-3 py-1.5 rounded text-sm font-medium transition ${u.is_admin ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'}`}
+                                                        >
+                                                            {u.is_admin ? '⬇️ User ပြောင်းမည်' : '⬆️ Admin ပေးမည်'}
+                                                        </button>
+                                                    )}
+
+                                                    {/* (၃) ဖျက်ရန် ခလုတ် (အမြဲပေါ်မည်) */}
+                                                    <button
+                                                        onClick={() => handleDeleteUser(u.id)}
+                                                        className="bg-red-100 text-red-700 px-3 py-1.5 rounded text-sm font-medium hover:bg-red-200 transition"
+                                                    >
+                                                        ဖျက်မည်
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    )}
+                    {/* --- Users Section ---
                     {activeTab === 'users' && (
                         <div>
                             <h2 className="text-xl font-bold mb-6 border-b pb-2">👥 User စာရင်းနှင့် အကောင့် အတည်ပြုခြင်း</h2>
@@ -471,7 +561,7 @@ export default function AdminDashboard() {
                                 </table>
                             </div>
                         </div>
-                    )}
+                    )} */}
 
                 </div>
             </div>

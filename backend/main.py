@@ -41,25 +41,33 @@ class UserLogin(BaseModel):
     email: str
     password: str
 
+class RoleUpdate(BaseModel):
+    is_admin: bool
 # --- 🔐 Authentication (Register & Login) ---
 
 @app.post("/register")
 def register_user(user: UserRegister, db: Session = Depends(get_db)):
+    # 🌟 ၁။ Email အစစ်အမှန် ဟုတ်/မဟုတ် စစ်ဆေးခြင်း
+    valid_domains = ["@gmail.com", "@yahoo.com", "@outlook.com"]
+    if not any(user.email.endswith(domain) for domain in valid_domains):
+        raise HTTPException(status_code=400, detail="ကျေးဇူးပြု၍ @gmail.com ကဲ့သို့သော အီးမေးလ် အစစ်အမှန်ကိုသာ အသုံးပြုပါ။")
+
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="ဤ Email မှာ စာရင်းသွင်းပြီးသား ဖြစ်နေပါသည်။")
     
+    # 🌟 ၂။ User အသစ်ကို အလိုအလျောက် ဝင်ခွင့်မပေးတော့ပါ (False သတ်မှတ်ထားသည်)
     new_user = models.User(
         fullname=user.fullname, 
         email=user.email, 
         password=user.password, 
-        is_approved=True, 
-        is_admin=True
+        is_approved=False,  # <--- ဒီနေရာကို False ပြောင်းလိုက်ပါပြီ
+        is_admin=False      # <--- ဒီနေရာကို False ပြောင်းလိုက်ပါပြီ
     )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return {"message": "အကောင့်ဖွင့်ခြင်း အောင်မြင်ပါသည်။"}
+    return {"message": "အကောင့်ဖွင့်ခြင်း အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။"}
 
 @app.post("/login")
 def login_user(user: UserLogin, db: Session = Depends(get_db)):
@@ -100,6 +108,16 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     db.delete(user)
     db.commit()
     return {"message": "User ကို ဖျက်ပစ်လိုက်ပါပြီ။"}
+
+@app.put("/admin/users/{user_id}/role")
+def update_user_role(user_id: int, role_data: RoleUpdate, db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User ရှာမတွေ့ပါ။")
+    
+    user.is_admin = role_data.is_admin
+    db.commit()
+    return {"message": "ရာထူး အောင်မြင်စွာ ပြောင်းလဲပြီးပါပြီ။"}
 
 # --- 📚 Lessons Management ---
 
