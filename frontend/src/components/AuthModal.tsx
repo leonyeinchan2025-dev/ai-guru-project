@@ -18,36 +18,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
     if (!isOpen) return null;
 
-    // const handleSubmit = async (e: React.FormEvent) => {
-    //     e.preventDefault();
-    //     setLoading(true);
-
-    //     try {
-    //         if (isLogin) {
-    //             // Login Logic
-    //             const response = await api.post(`/login?email=${email}&password=${password}`);
-    //             alert("Login အောင်မြင်ပါသည်!");
-
-    //             // User Data ကို LocalStorage တွင် သိမ်းခြင်း (Login တည်မြဲစေရန်)
-    //             localStorage.setItem("user", JSON.stringify(response.data));
-
-    //             // အောင်မြင်ပါက သင်ခန်းစာစာမျက်နှာသို့ သွားရန် သို့မဟုတ် Modal ပိတ်ရန်
-    //             onClose();
-    //             window.location.href = '/lessons';// UI update ဖြစ်စေရန်
-    //         } else {
-    //             // Register Logic
-    //             await api.post(`/register?fullname=${fullname}&email=${email}&password=${password}`);
-    //             alert("Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။");
-    //             setIsLogin(true); // Login Form ဘက်သို့ ပြန်ပြောင်းပေးခြင်း
-    //         }
-    //     } catch (error: any) {
-    //         // Error Handling
-    //         const errorMsg = error.response?.data?.detail || "တစ်ခုခုမှားယွင်းနေပါသည်။";
-    //         alert(errorMsg);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -73,7 +43,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                     password: password
                 });
 
-                alert("Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။");
+                // alert("Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။");
+                alert("Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။\n\nလိုအပ်လျှင် ဆက်သွယ်ရန် Hot Line (Admin) Call and Viber: +959444445546");
                 setIsLogin(true);
             }
         } catch (error: any) {
@@ -161,7 +132,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
                         {!isLogin && (
                             <div className="bg-blue-50 p-3 rounded-lg border border-blue-100 text-[11px] text-blue-700 leading-relaxed">
-                                ℹ️ မှတ်ချက်။ ။ အကောင့်ဖန်တီးပြီးပါက <b>Admin မှ အတည်ပြု (Approve) ပေးပြီးမှသာ</b> သင်ခန်းစာများကို လေ့လာနိုင်မည် ဖြစ်ပါသည်။
+                                ℹ️ မှတ်ချက်။ ။ အကောင့်ဖန်တီးပြီးပါက <b>Admin မှ အတည်ပြု (Approve) ပေးပြီးမှသာ</b> သင်ခန်းစာများကို လေ့လာနိုင်မည် ဖြစ်ပါသည်။ ဆက်သွယ်ရန် Hot Line (Admin) Call and Viber: +959444445546
                             </div>
                         )}
 
