@@ -525,13 +525,17 @@ export default function Home() {
 
             {/* Hero Section */}
             <div id="home" className="pt-32 pb-20 px-4 max-w-7xl mx-auto scroll-mt-20 bg-gradient-to-b from-[#f0f9ff] to-white rounded-b-[3rem]">
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
+                    “AI Driving the Next Generation.”
+                </motion.p>
                 <div className="md:grid md:grid-cols-2 md:gap-16 md:items-center">
                     <div className="md:text-left text-center">
                         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
                             အနာဂတ်ကို <span className="text-blue-600">AI</span> ဖြင့် တည်ဆောက်ပါ
-                        </motion.h1>
+                        </motion.h1> <br />
                         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
-                            AI GURU မှကြိုဆိုပါတယ်။ ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။
+                            AI GURU မှကြိုဆိုပါတယ်။ <br /> ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br /> Social Media / Online Market များ နှင့် ကိုယ်ပိုင်လုပ်ငန်းများအတွက်
+                            <b> Commercial Advertisement များ၊ ကြော်ငြာ Content များ နှင့် Web App/ Mobile App များ </b>ကိုလည်း ဈေးနှုန်းချိုသာစွာဖြင့် ဝန်ဆောင်မှုပေးနေပါသည်။
                         </motion.p>
                         {!user && (
                             <motion.button onClick={() => setIsAuthModalOpen(true)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-xl">
@@ -556,6 +560,9 @@ export default function Home() {
 
             {/* About Section */}
             <div id="about" className="py-24 bg-[#f8fafc] border-y border-slate-100 scroll-mt-20">
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
+                    “Learn AI. Shape the Future.”
+                </motion.p>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="md:flex items-center gap-16">
                         <div className="md:w-1/2 mb-10 md:mb-0">
@@ -575,10 +582,16 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
+                    တီထွင်ကြံဆ၊ နည်းလမ်းရ၏၊ အခက်အခဲမရှိ လက်တွဲလို့ အောင်မြင်ကြပါစို့! 🚀
+                </motion.p>
             </div>
 
             {/* AI Fields Section */}
             <div id="fields" className="bg-[#f5f3ff] py-24 border-b border-indigo-50 scroll-mt-20">
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
+                    “From Curiosity to Intelligence.”
+                </motion.p>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">AI နယ်ပယ်များ</h2>
@@ -612,6 +625,9 @@ export default function Home() {
 
             {/* 🌟 Roadmap Section (UI/UX Upgraded with Path Design) 🌟 */}
             <div id="roadmap" className="relative py-24 bg-slate-50 scroll-mt-20 overflow-hidden">
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
+                    “Unlock the Power of Artificial Intelligence.”
+                </motion.p>
                 {/* 1. Background Pattern (Roadmap ဆန်ဆန် အစက်ကလေးများ နောက်ခံ) */}
                 <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#3b82f6 2px, transparent 2px)', backgroundSize: '30px 30px' }}></div>
 
