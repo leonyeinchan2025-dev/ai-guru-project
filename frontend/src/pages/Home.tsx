@@ -523,16 +523,15 @@ export default function Home() {
                 </AnimatePresence>
             </nav>
 
-            {/* Hero Section */}
-            <div id="home" className="pt-32 pb-20 px-4 max-w-7xl mx-auto scroll-mt-20 bg-gradient-to-b from-[#f0f9ff] to-white rounded-b-[3rem]">
-
+            {/* 🌟 1. Hero Section 🌟 */}
+            <div id="home" className="pt-32 pb-16 md:pb-20 px-4 max-w-7xl mx-auto scroll-mt-20 bg-gradient-to-b from-[#f0f9ff] to-white rounded-b-[3rem]">
                 <div className="md:grid md:grid-cols-2 md:gap-16 md:items-center">
                     <div className="md:text-left text-center">
                         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
                             အနာဂတ်ကို <span className="text-blue-600">AI</span> ဖြင့် တည်ဆောက်ပါ
-                        </motion.h1> <br />
+                        </motion.h1>
                         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
-                            AI GURU မှကြိုဆိုပါတယ်။ <br /> ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br /> Social Media / Online Market များ နှင့် ကိုယ်ပိုင်လုပ်ငန်းများအတွက်
+                            AI GURU မှကြိုဆိုပါတယ်။ <br className="hidden md:block" /> ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br className="hidden md:block" /> <br /> Social Media / Online Market များ နှင့် ကိုယ်ပိုင်လုပ်ငန်းများအတွက်
                             <b> Commercial Advertisement များ၊ ကြော်ငြာ Content များ နှင့် Web App/ Mobile App များ </b>ကိုလည်း ဈေးနှုန်းချိုသာစွာဖြင့် ဝန်ဆောင်မှုပေးနေပါသည်။
                         </motion.p>
                         {!user && (
@@ -556,13 +555,9 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* About Section */}
-            <div id="about" className="py-24 bg-[#f8fafc] border-y border-slate-100 scroll-mt-20">
-
+            {/* 🌟 2. About Section 🌟 */}
+            <div id="about" className="py-16 md:py-20 bg-[#f8fafc] border-y border-slate-100 scroll-mt-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
-                        <center>“Learn AI. Shape the Future.”</center>
-                    </motion.p>
                     <div className="md:flex items-center gap-16">
                         <div className="md:w-1/2 mb-10 md:mb-0">
                             <motion.img
@@ -570,71 +565,43 @@ export default function Home() {
                                 src={aboutIllustration} alt="AI Concept" className="w-full rounded-3xl shadow-xl border-[6px] border-white"
                             />
                         </div>
-                        <div className="md:w-1/2">
+                        <div className="md:w-1/2 text-center md:text-left">
+                            {/* ✨ Badge အသစ်ကို ဤနေရာတွင် ထည့်သွင်းထားပါသည် */}
+                            <motion.div
+                                initial={{ opacity: 0, y: -10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.1 }}
+                                className="inline-block px-4 py-1.5 rounded-full bg-blue-100/50 border border-blue-200 text-blue-700 text-sm font-bold tracking-widest uppercase mb-4 shadow-sm"
+                            >
+                                ✨ Learn AI. Shape the Future.
+                            </motion.div>
+
                             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">AI ဆိုတာ ဘာလဲ?</h2>
-                            <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                            <p className="text-lg text-slate-600 leading-relaxed mb-6 text-left">
                                 <b>Artificial Intelligence (AI)</b> ဆိုသည်မှာ ကွန်ပျူတာစနစ်များကို လူသားများကဲ့သို့ တွေးခေါ်၊ ဆုံးဖြတ်၊ သင်ယူနိုင်စွမ်းရှိစေရန် ဖန်တီးထားသော နည်းပညာဖြစ်ပါသည်။
                             </p>
-                            <p className="text-lg text-slate-600 leading-relaxed">
+                            <p className="text-lg text-slate-600 leading-relaxed text-left">
                                 ယနေ့ခေတ်တွင် AI သည် ဆေးဘက်ဆိုင်ရာ၊ ပညာရေး၊ စီးပွားရေးနှင့် နေ့စဉ်ဘဝ လုပ်ငန်းဆောင်တာများစွာတွင် မရှိမဖြစ် အရေးပါသော အခန်းကဏ္ဍမှ ပါဝင်လျက်ရှိသည်။ AI GURU သည် ထိုနည်းပညာများကို မြန်မာလူငယ်များ လွယ်ကူလျင်မြန်စွာ လေ့လာနိုင်ရန် ရည်ရွယ်ဖန်တီးထားခြင်း ဖြစ်ပါသည်။
                             </p>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            {/* AI Fields Section
-            <div id="fields" className="bg-[#f5f3ff] py-24 border-b border-indigo-50 scroll-mt-20">
-
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
-                        <center>“From Curiosity to Intelligence.”</center>
-                    </motion.p>
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">AI နယ်ပယ်များ</h2>
-                        <p className="text-lg text-slate-600">လေ့လာနိုင်မည့် အဓိက Artificial Intelligence နယ်ပယ်ကြီး (၄) ခု</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {aiFields.map((field, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: index % 2 === 0 ? 40 : -40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-white group"
-                            >
-                                <div className="h-40 overflow-hidden relative">
-                                    <img src={field.img} alt={field.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">{field.title}</h3>
-                                    <p className="text-slate-600 text-sm leading-relaxed">{field.desc}</p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </div> */}
-
-            {/* AI Fields Section */}
+            {/* 🌟 3. AI Fields Section (ယခင် ပြင်ဆင်ပြီးသားအတိုင်း) 🌟 */}
             <div id="fields" className="bg-[#f5f3ff] py-16 md:py-20 border-b border-indigo-50 scroll-mt-20">
-
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                    {/* Header Section (Spacing ကို လျှော့ချပြီး စာသားကို ပေါင်းထည့်ထားပါသည်) */}
                     <div className="text-center mb-12">
                         <motion.div
                             initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
                             className="inline-block px-4 py-1.5 rounded-full bg-blue-100/50 border border-blue-200 text-blue-700 text-sm font-bold tracking-widest uppercase mb-4 shadow-sm"
                         >
                             ✨ From Curiosity to Intelligence
                         </motion.div>
-
                         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">AI နယ်ပယ်များ</h2>
                         <p className="text-lg text-slate-600">လေ့လာနိုင်မည့် အဓိက Artificial Intelligence နယ်ပယ်ကြီး (၄) ခု</p>
                     </div>
@@ -662,32 +629,37 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* 🌟 Roadmap Section (UI/UX Upgraded with Path Design) 🌟 */}
-            <div id="roadmap" className="relative py-24 bg-slate-50 scroll-mt-20 overflow-hidden">
-
-                {/* 1. Background Pattern (Roadmap ဆန်ဆန် အစက်ကလေးများ နောက်ခံ) */}
+            {/* 🌟 4. Roadmap Section (UI/UX Upgraded) 🌟 */}
+            <div id="roadmap" className="relative py-16 md:py-20 bg-slate-50 scroll-mt-20 overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#3b82f6 2px, transparent 2px)', backgroundSize: '30px 30px' }}></div>
-                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
-                    <center>“Unlock the Power of Artificial Intelligence.”</center>
-                </motion.p>
+
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div className="text-center mb-16 md:mb-20">
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-wide">Roadmap</h2>
+
+                    {/* Header Section */}
+                    <div className="text-center mb-16">
+                        {/* ✨ Badge အသစ်ကို ဤနေရာတွင် ထည့်သွင်းထားပါသည် */}
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="inline-block px-4 py-1.5 rounded-full bg-blue-100/50 border border-blue-200 text-blue-700 text-sm font-bold tracking-widest uppercase mb-4 shadow-sm"
+                        >
+                            ✨ Unlock the Power of Artificial Intelligence
+                        </motion.div>
+
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-wide">Roadmap</h2>
                         <p className="text-lg text-slate-500 font-medium">အဆင့်ဆင့် လေ့လာရမည့် လမ်းညွှန်မြေပုံ</p>
                     </div>
 
                     <div className="max-w-5xl mx-auto relative">
-                        {/* 2. The Connecting Road / Path Line (အလယ်က ဖြတ်သွားမည့် လမ်းကြောင်းမျဉ်း) */}
                         <div className="absolute left-[28px] md:left-1/2 top-4 bottom-4 w-1 md:w-1.5 bg-gradient-to-b from-blue-300 via-indigo-400 to-blue-300 transform md:-translate-x-1/2 rounded-full shadow-sm opacity-70"></div>
 
-                        {/* 3. Gap ကို ကျဉ်းပေးထားခြင်း (space-y-16 အစား gap-10 ကိုပြောင်းသုံးထားပါသည်) */}
                         <div className="flex flex-col gap-10 md:gap-8">
                             {roadmapData.map((data, index) => {
                                 const isEven = index % 2 === 0;
                                 return (
                                     <div key={data.step} className={`relative flex w-full ${isEven ? 'md:justify-start' : 'md:justify-end'}`}>
-
-                                        {/* လမ်းကြောင်းပေါ်ရှိ အထစ် (Timeline Center Dot) */}
                                         <div className="absolute left-[28px] md:left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 rounded-full bg-white border-[4px] border-blue-600 shadow-md z-20"></div>
 
                                         <motion.div
@@ -697,7 +669,6 @@ export default function Home() {
                                             transition={{ duration: 0.5 }}
                                             className="relative w-[calc(100%-60px)] md:w-[45%] p-6 md:p-8 rounded-2xl bg-white shadow-md border border-slate-100 hover:border-blue-300 hover:shadow-xl transition-all duration-300 ml-[60px] md:ml-0"
                                         >
-                                            {/* Box ၏ ဘယ်ဘက်အပေါ်ထောင့်ရှိ နံပါတ် Badge */}
                                             <div className="absolute -top-5 -left-5 md:-top-6 md:-left-6 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 border-[4px] border-white shadow-lg z-20">
                                                 <span className="text-white font-black text-base md:text-lg">{data.step}</span>
                                             </div>
@@ -712,6 +683,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+
 
             {/* Footer Section */}
             <footer id="contact" className="bg-slate-800 pt-16 pb-8 border-t border-slate-700 text-center">
