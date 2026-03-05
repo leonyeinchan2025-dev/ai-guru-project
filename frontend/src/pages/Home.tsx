@@ -584,7 +584,7 @@ export default function Home() {
 
             </div>
 
-            {/* AI Fields Section */}
+            {/* AI Fields Section
             <div id="fields" className="bg-[#f5f3ff] py-24 border-b border-indigo-50 scroll-mt-20">
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -617,9 +617,50 @@ export default function Home() {
                         ))}
                     </div>
                 </div>
+            </div> */}
+
+            {/* AI Fields Section */}
+            <div id="fields" className="bg-[#f5f3ff] py-16 md:py-20 border-b border-indigo-50 scroll-mt-20">
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                    {/* Header Section (Spacing ကို လျှော့ချပြီး စာသားကို ပေါင်းထည့်ထားပါသည်) */}
+                    <div className="text-center mb-12">
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="inline-block px-4 py-1.5 rounded-full bg-blue-100/50 border border-blue-200 text-blue-700 text-sm font-bold tracking-widest uppercase mb-4 shadow-sm"
+                        >
+                            ✨ From Curiosity to Intelligence
+                        </motion.div>
+
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">AI နယ်ပယ်များ</h2>
+                        <p className="text-lg text-slate-600">လေ့လာနိုင်မည့် အဓိက Artificial Intelligence နယ်ပယ်ကြီး (၄) ခု</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {aiFields.map((field, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: index % 2 === 0 ? 40 : -40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: index * 0.1 }}
+                                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-white group"
+                            >
+                                <div className="h-40 overflow-hidden relative">
+                                    <img src={field.img} alt={field.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                </div>
+                                <div className="p-6">
+                                    <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">{field.title}</h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed">{field.desc}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
             </div>
-
-
 
             {/* 🌟 Roadmap Section (UI/UX Upgraded with Path Design) 🌟 */}
             <div id="roadmap" className="relative py-24 bg-slate-50 scroll-mt-20 overflow-hidden">
