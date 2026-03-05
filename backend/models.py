@@ -12,6 +12,10 @@ class User(Base):
     is_approved = Column(Boolean, default=False) # Admin က True ပေးမှ Login ရမည်
     is_admin = Column(Boolean, default=False)
 
+    # # 🌟 အသစ် ထပ်တိုးမည့် အကွက်များ 🌟
+    # is_email_verified = Column(Boolean, default=False)  # Email အစစ်ဟုတ်မဟုတ်
+    # verification_token = Column(String, nullable=True)  # Email ပို့မည့် လျှို့ဝှက်ကုဒ်
+
 # Lesson Model တွင် file_url အသစ်ထည့်ပါမည် 👇
 class Lesson(Base):
     __tablename__ = "lessons"

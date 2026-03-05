@@ -1,3 +1,10 @@
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
+from pydantic import BaseModel
+
+# ခုနက Google မှ ရလာသော Client ID ကို ဤနေရာတွင် ထည့်ပါ
+GOOGLE_CLIENT_ID = "768463165065-2uc4qbiv82rricq9s1vdms3ek5mcn11j.apps.googleusercontent.com"
+
 from fastapi import FastAPI, Depends, HTTPException, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -221,213 +228,56 @@ def force_admin(email: str, db: Session = Depends(get_db)):
         return {"message": f"{email} ကို Admin အဖြစ် သတ်မှတ်ပြီးပါပြီ။"}
     return {"error": "User ရှာမတွေ့ပါ။"}
 
-# # backend/main.py
+class GoogleToken(BaseModel):
+    token: str
 
-# from fastapi import FastAPI, Depends, HTTPException, File, UploadFile, Form
-# from fastapi.middleware.cors import CORSMiddleware
-# from fastapi.staticfiles import StaticFiles
-# from sqlalchemy.orm import Session
-# from sqlalchemy import create_engine
-# from sqlalchemy.orm import sessionmaker
-# from sqlalchemy.ext.declarative import declarative_base
-# import os
-# import shutil
-# import models, schemas
-# from database import engine, get_db
+@app.post("/google-login")
+def google_login(token_data: GoogleToken, db: Session = Depends(get_db)):
+    try:
+        # Google မှ လာသော Token မှန်/မမှန် စစ်ဆေးခြင်း
+        idinfo = id_token.verify_oauth2_token(
+            token_data.token, 
+            google_requests.Request(), 
+            GOOGLE_CLIENT_ID
+        )
 
-# # --- 🌟 1. Database URL ဖြေရှင်းခြင်း 🌟 ---
-# SQLALCHEMY_DATABASE_URL = os.getenv(
-#     "DATABASE_URL", 
-#     "postgresql://leonyein:0qhFVHMIqh8Fh7wxUiPlCZixe5R5JQEM@dpg-d6im26cr85hc7381cd10-a/aigurudb" # သင့်မူလ localhost လင့်ခ်
-# )
+        email = idinfo['email']
+        name = idinfo.get('name', 'Google User')
 
-# if SQLALCHEMY_DATABASE_URL and SQLALCHEMY_DATABASE_URL.startswith("postgres://"):
-#     SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgres://", "postgresql://", 1)
+        # Database ထဲတွင် ထို Email ဖြင့် User ရှိမရှိ စစ်ဆေးခြင်း
+        user = db.query(models.User).filter(models.User.email == email).first()
 
-# engine = create_engine(SQLALCHEMY_DATABASE_URL)
-# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-# Base = declarative_base()
+        if not user:
+            # 🌟 အကောင့် မရှိသေးလျှင် အသစ် ဖွင့်ပေးမည် (Google မှမို့ Email Verify ဖြစ်ပြီးသားဟု သတ်မှတ်မည်)
+            new_user = models.User(
+                fullname=name,
+                email=email,
+                password="GOOGLE_LOGIN_NO_PASSWORD", # Google မှ ဝင်သူများ Password မလိုပါ
+                is_approved=False,       # Admin က Approve လုပ်မှသာ ဝင်ခွင့်ရမည်
+                is_admin=False,
+                is_email_verified=True   # Google မှ အာမခံထားသဖြင့် True တန်းပေးပါမည်
+            )
+            db.add(new_user)
+            db.commit()
+            db.refresh(new_user)
+            raise HTTPException(status_code=403, detail="အကောင့်အသစ် ဖန်တီးပြီးပါပြီ။ Admin ၏ အတည်ပြုချက် (Approve) ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။")
 
-# models.Base.metadata.create_all(bind=engine)
+        else:
+            # 🌟 အကောင့် ရှိပြီးသား ဖြစ်လျှင်
+            if not user.is_approved:
+                raise HTTPException(status_code=403, detail="သင့်အကောင့်မှာ Admin အတည်ပြုချက် မရရှိသေးပါ။")
+            
+            # Approve ဖြစ်ပြီးသားဆိုလျှင် Login ဝင်ခွင့်ပြုမည်
+            return {
+                "message": "Login အောင်မြင်ပါသည်။",
+                "user": {
+                    "user_id": user.id,
+                    "fullname": user.fullname,
+                    "email": user.email,
+                    "is_admin": user.is_admin
+                }
+            }
 
-# app = FastAPI()
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"], 
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
-# os.makedirs("uploads", exist_ok=True)
-# app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
-
-# @app.get("/")
-# def root():
-#     return {"message": "AI GURU Backend is running!"}
-
-# # --- Register & Login ---
-# # @app.post("/register")
-# # def register_user(fullname: str, email: str, password: str, db: Session = Depends(get_db)):
-# #     db_user = db.query(models.User).filter(models.User.email == email).first()
-# #     if db_user:
-# #         raise HTTPException(status_code=400, detail="Email already registered")
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Google အကောင့် ချိတ်ဆက်မှု မှားယွင်းနေပါသည်။")
     
-# #     new_user = models.User(fullname=fullname, email=email, password=password)
-# #     db.add(new_user)
-# #     db.commit()
-# #     return {"message": "Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို စောင့်ဆိုင်းပေးပါ။"}
-
-# @app.post("/register")
-# def register_user(fullname: str, email: str, password: str, db: Session = Depends(get_db)):
-#     new_user = models.User(fullname=fullname, email=email, password=password, is_approved=True, is_admin=True) # အားလုံးကို True ပေးထားသည်
-#     db.add(new_user)
-#     db.commit()
-#     return {"message": "Admin အကောင့် ဆောက်ပြီးပါပြီ"}
-
-# @app.post("/login")
-# def login_user(email: str, password: str, db: Session = Depends(get_db)):
-#     user = db.query(models.User).filter(models.User.email == email).first()
-#     if not user or user.password != password:
-#         raise HTTPException(status_code=401, detail="Email သို့မဟုတ် Password မှားယွင်းနေပါသည်။")
-#     # if user.is_approved is not True:
-#         # raise HTTPException(status_code=403, detail="သင်၏အကောင့်မှာ Admin အတည်ပြုချက် မရရှိသေးပါ။")
-    
-#     return {
-#         "message": "Login အောင်မြင်ပါသည်", 
-#         "user_id": user.id, 
-#         "fullname": user.fullname,
-#         "is_admin": user.is_admin
-#     }
-
-# # --- Admin Controls ---
-# @app.put("/admin/approve/{user_id}")
-# def approve_user(user_id: int, db: Session = Depends(get_db)):
-#     user = db.query(models.User).filter(models.User.id == user_id).first()
-#     if not user:
-#         raise HTTPException(status_code=404, detail="User ရှာမတွေ့ပါ။")
-#     user.is_approved = True
-#     db.commit()
-#     return {"message": f"User {user.fullname} ကို အတည်ပြုပြီးပါပြီ။"}
-
-# @app.get("/admin/users")
-# def get_all_users(db: Session = Depends(get_db)):
-#     return db.query(models.User).all()
-
-# @app.delete("/admin/users/{user_id}")
-# def delete_user(user_id: int, db: Session = Depends(get_db)):
-#     user = db.query(models.User).filter(models.User.id == user_id).first()
-#     if not user:
-#         raise HTTPException(status_code=404, detail="User ရှာမတွေ့ပါ။")
-#     db.delete(user)
-#     db.commit()
-#     return {"message": "User အား အောင်မြင်စွာ ဖျက်ပစ်လိုက်ပါပြီ။"}
-
-# # --- 🌟 2. Upload API: Localhost အစား Relative Path ဖြင့် သိမ်းခြင်း 🌟 ---
-# @app.post("/admin/upload-lesson")
-# def create_lesson_with_file(
-#     title: str = Form(...),
-#     content: str = Form(...),
-#     category: str = Form("General"),
-#     file: UploadFile = File(None), 
-#     db: Session = Depends(get_db)
-# ):
-#     file_url = None
-#     if file and file.filename:
-#         safe_filename = file.filename.replace(" ", "_")
-#         file_path = f"uploads/{safe_filename}"
-#         try:
-#             with open(file_path, "wb") as buffer:
-#                 shutil.copyfileobj(file.file, buffer)
-#             # ⚠️ ဒီနေရာကို ပြင်ထားပါသည်: http://127.0.0.1... မဟုတ်တော့ပါ
-#             file_url = f"/uploads/{safe_filename}"
-#         except Exception as e:
-#             raise HTTPException(status_code=500, detail=f"ဖိုင်သိမ်းဆည်းရာတွင် အမှားအယွင်းရှိပါသည်။: {str(e)}")
-
-#     new_lesson = models.Lesson(title=title, content=content, category=category, file_url=file_url)
-#     db.add(new_lesson)
-#     db.commit()
-#     db.refresh(new_lesson)
-#     return {"message": "သင်ခန်းစာကို ဖိုင်နှင့်တကွ အောင်မြင်စွာ တင်ပြီးပါပြီ။", "data": new_lesson}
-
-# # --- 🌟 3. Edit API: Localhost အစား Relative Path ဖြင့် ပြင်ခြင်း 🌟 ---
-# @app.put("/admin/lessons/{lesson_id}")
-# def update_lesson(
-#     lesson_id: int,
-#     title: str = Form(...),
-#     content: str = Form(...),
-#     category: str = Form("General"),
-#     file: UploadFile = File(None),
-#     db: Session = Depends(get_db)
-# ):
-#     lesson = db.query(models.Lesson).filter(models.Lesson.id == lesson_id).first()
-#     if not lesson:
-#         raise HTTPException(status_code=404, detail="သင်ခန်းစာ ရှာမတွေ့ပါ။")
-
-#     lesson.title = title
-#     lesson.content = content
-#     lesson.category = category
-
-#     if file and file.filename:
-#         safe_filename = file.filename.replace(" ", "_")
-#         file_path = f"uploads/{safe_filename}"
-#         with open(file_path, "wb") as buffer:
-#             shutil.copyfileobj(file.file, buffer)
-#         # ⚠️ ဒီနေရာကို ပြင်ထားပါသည်
-#         lesson.file_url = f"/uploads/{safe_filename}"
-
-#     db.commit()
-#     db.refresh(lesson)
-#     return {"message": "သင်ခန်းစာ အောင်မြင်စွာ ပြင်ဆင်ပြီးပါပြီ။", "data": lesson}
-
-# # --- Lessons Read/Delete ---
-# @app.get("/lessons")
-# def get_lessons(db: Session = Depends(get_db)):
-#     return db.query(models.Lesson).all()
-
-# # 🌟 ဤအောက်ပိုင်းမှစ၍ အောက်ဆုံးအထိ သေချာစွာ အစားထိုးပါ 🌟
-# @app.get("/lessons/{lesson_id}")
-# def get_lesson(lesson_id: int, db: Session = Depends(get_db)):
-#     lesson = db.query(models.Lesson).filter(models.Lesson.id == lesson_id).first()
-#     if not lesson:
-#         raise HTTPException(status_code=404, detail="သင်ခန်းစာ ရှာမတွေ့ပါ။")
-#     return lesson
-
-# @app.delete("/admin/lessons/{lesson_id}")
-# def delete_lesson(lesson_id: int, db: Session = Depends(get_db)):
-#     lesson = db.query(models.Lesson).filter(models.Lesson.id == lesson_id).first()
-#     if not lesson:
-#         raise HTTPException(status_code=404, detail="သင်ခန်းစာ ရှာမတွေ့ပါ။")
-#     db.delete(lesson)
-#     db.commit()
-#     return {"message": "သင်ခန်းစာအား ဖျက်ပစ်လိုက်ပါပြီ။"}
-
-# # --- Progress Tracking ---
-# @app.post("/progress/complete")
-# def complete_lesson(user_id: int, lesson_id: int, db: Session = Depends(get_db)):
-#     existing = db.query(models.Progress).filter(
-#         models.Progress.user_id == user_id, 
-#         models.Progress.lesson_id == lesson_id
-#     ).first()
-    
-#     if not existing:
-#         new_progress = models.Progress(user_id=user_id, lesson_id=lesson_id)
-#         db.add(new_progress)
-#         db.commit()
-#     return {"message": "သင်ခန်းစာ ပြီးဆုံးကြောင်း မှတ်သားပြီးပါပြီ။"}
-
-# @app.get("/progress/{user_id}")
-# def get_user_progress(user_id: int, db: Session = Depends(get_db)):
-#     completed_lessons = db.query(models.Progress).filter(models.Progress.user_id == user_id).all()
-#     return [p.lesson_id for p in completed_lessons]
-
-# @app.get("/force-admin")
-# def force_admin(email: str, db: Session = Depends(get_db)):
-#     user = db.query(models.User).filter(models.User.email == email).first()
-#     if user:
-#         user.is_admin = True
-#         user.is_approved = True
-#         db.commit()
-#         return {"message": f"{email} is now Admin!"}
-#     return {"error": "User not found"}

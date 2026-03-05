@@ -1,4 +1,7 @@
 // src/components/AuthModal.tsx
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+
+const GOOGLE_CLIENT_ID = "768463165065-2uc4qbiv82rricq9s1vdms3ek5mcn11j.apps.googleusercontent.com"; // Backend တွင် ထည့်ခဲ့သော ID အတိုင်းဖြစ်ရမည်
 import React, { useState } from 'react';
 import api from '../api'; // api.ts ကို ခေါ်သုံးပါ
 
@@ -55,6 +58,21 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             setLoading(false);
         }
     };
+    const handleGoogleSuccess = async (credentialResponse: any) => {
+        try {
+            const res = await api.post('/google-login', { token: credentialResponse.credential });
+            alert("✅ Google ဖြင့် ဝင်ရောက်ခြင်း အောင်မြင်ပါသည်။");
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+            window.location.reload();
+        } catch (error: any) {
+            // Admin အတည်ပြုချက် စောင့်ရမည့် မက်ဆေ့ချ်များ ဤနေရာတွင် ပေါ်ပါမည်
+            alert(error.response?.data?.detail || "Google ဖြင့် ဝင်ရောက်ရာတွင် အမှားအယွင်း ရှိပါသည်။");
+            if (error.response?.status === 403) {
+                onClose(); // Modal ကို ပိတ်ပေးမည်
+            }
+        }
+    };
+
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden relative">
@@ -144,6 +162,23 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                             {loading ? 'ခေတ္တစောင့်ပါ...' : (isLogin ? 'ဝင်ရောက်မည်' : 'အကောင့်ဖန်တီးမည်')}
                         </button>
                     </form>
+                    {/* --- Google Login Button --- */}
+                    <div className="mt-6 border-t border-slate-200 pt-6">
+                        <p className="text-center text-sm text-slate-500 mb-4 font-medium">သို့မဟုတ် အောက်ပါဖြင့် ဝင်ရောက်ပါ</p>
+                        <div className="flex justify-center">
+                            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+                                <GoogleLogin
+                                    onSuccess={handleGoogleSuccess}
+                                    onError={() => alert("Google အကောင့် ချိတ်ဆက်ခြင်း ကျရှုံးပါသည်။")}
+                                    useOneTap
+                                    theme="outline"
+                                    text="continue_with"
+                                    shape="pill"
+                                />
+                            </GoogleOAuthProvider>
+                        </div>
+                    </div>
+                    {/* --------------------------- */}
                 </div>
             </div>
         </div>
