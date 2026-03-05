@@ -417,6 +417,8 @@ export default function Home() {
                             <a href="#about" className="text-slate-700 font-semibold hover:text-blue-600 transition">About</a>
                             <a href="#fields" className="text-slate-700 font-semibold hover:text-blue-600 transition">AI Fields</a>
                             <a href="#roadmap" className="text-slate-700 font-semibold hover:text-blue-600 transition">Roadmap</a>
+                            {/* အသစ်ထပ်တိုးထားသော Contact Us */}
+                            <a href="#contact" className="text-slate-600 hover:text-blue-600 font-semibold transition">Contact Us</a>
                             <a href="/lessons" onClick={handleLessonClick} className="text-slate-700 font-semibold hover:text-blue-600 transition">သင်ခန်းစာများ</a>
                         </div>
 
@@ -486,6 +488,9 @@ export default function Home() {
                                     </a>
                                     <a href="#roadmap" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all">
                                         🗺️ <span>Roadmap</span>
+                                    </a>
+                                    <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all">
+                                        📞 <span>Contact Us</span>
                                     </a>
                                     <div className="my-1 border-b border-slate-200"></div> {/* Divider */}
                                     <a href="/lessons" onClick={(e) => { handleLessonClick(e); setIsMobileMenuOpen(false); }} className="flex items-center justify-center gap-3 bg-blue-100 border border-blue-200 text-blue-800 font-extrabold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-200 active:scale-95 transition-all">
@@ -603,39 +608,8 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Roadmap Section
-            <div id="roadmap" className="py-24 bg-white scroll-mt-20 overflow-hidden">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-20">
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-wide">Roadmap</h2>
-                        <p className="text-lg text-slate-500">အဆင့်ဆင့် လေ့လာရမည့် လမ်းညွှန်</p>
-                    </div>
 
-                    <div className="max-w-5xl mx-auto space-y-16">
-                        {roadmapData.map((data, index) => {
-                            const isEven = index % 2 === 0;
-                            return (
-                                <div key={data.step} className={`flex w-full ${isEven ? 'justify-start' : 'justify-end'}`}>
-                                    <motion.div
-                                        initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.5 }}
-                                        className="relative w-full md:w-5/12 p-8 mt-6 rounded-2xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 hover:border-blue-300 hover:shadow-2xl transition-all duration-300 mx-4 md:mx-0"
-                                    >
-                                        <div className="absolute -top-6 -left-6 flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 border-[4px] border-white shadow-lg z-20">
-                                            <span className="text-white font-black text-lg">{data.step}</span>
-                                        </div>
 
-                                        <h3 className="text-xl font-bold text-slate-800 mb-3 mt-2">{data.title}</h3>
-                                        <p className="text-slate-500 text-sm leading-relaxed">{data.desc}</p>
-                                    </motion.div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-            </div> */}
             {/* 🌟 Roadmap Section (UI/UX Upgraded with Path Design) 🌟 */}
             <div id="roadmap" className="relative py-24 bg-slate-50 scroll-mt-20 overflow-hidden">
                 {/* 1. Background Pattern (Roadmap ဆန်ဆန် အစက်ကလေးများ နောက်ခံ) */}
@@ -685,7 +659,7 @@ export default function Home() {
             </div>
 
             {/* Footer Section */}
-            <footer className="bg-slate-800 pt-16 pb-8 border-t border-slate-700 text-center">
+            <footer id="contact" className="bg-slate-800 pt-16 pb-8 border-t border-slate-700 text-center">
                 <div className="max-w-4xl mx-auto px-4">
                     <div className="flex justify-center items-center gap-3 mb-6">
                         <img src={logo} alt="AI GURU Logo" className="w-12 h-12 rounded-full border border-slate-600 bg-white object-cover" />
@@ -694,7 +668,7 @@ export default function Home() {
                         </span>
                     </div>
                     <p className="text-slate-300 text-sm md:text-base mb-10">
-                        လိုအပ်လျှင် ဆက်သွယ်ရန် Hot Line (Admin) Call and Viber: +959444445546
+                        ဆက်သွယ်ရန် Hot Line (Admin) Call and Viber: +959444445546 <br /> Email - leonyeinchan2025@gmail.com
                     </p>
                     <p className="text-slate-300 text-sm md:text-base mb-10">
                         AI Technology Learning - AI နည်းပညာအား မြန်မာဘာသာဖြင့် လွယ်ကူစွာ လေ့လာနိုင်သည်
@@ -710,10 +684,15 @@ export default function Home() {
                         <a href="https://www.tiktok.com/@leonyein9?_r=1&_t=ZS-94LhT4oMsxr" target="_blank" rel="noopener noreferrer" className="border border-slate-600 text-slate-300 px-8 py-2.5 rounded-full text-sm font-medium hover:bg-slate-700 hover:border-cyan-400 hover:text-cyan-400 transition-all">
                             TikTok
                         </a>
+                        <a href="https://www.instagram.com/leonyein9/" target="_blank" rel="noopener noreferrer" className="border border-slate-600 text-slate-300 px-8 py-2.5 rounded-full text-sm font-medium hover:bg-slate-700 hover:border-cyan-400 hover:text-cyan-400 transition-all">
+                            Instagram
+                        </a>
                     </div>
 
                     <div className="text-slate-400 text-sm border-t border-slate-700/80 pt-8">
-                        <p>AI GURU - Created by <span className="text-blue-400 font-semibold">Leo Nyein Chan</span></p>
+                        <p className="text-sm text-slate-500 font-medium">
+                            &copy; {new Date().getFullYear()} AI GURU Myanmar. All rights reserved.
+                        </p> <br /> <p>Created by <span className="text-blue-400 font-semibold">Leo Nyein Chan</span></p>
                     </div>
                 </div>
             </footer>
