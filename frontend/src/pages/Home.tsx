@@ -769,6 +769,13 @@ export default function Home() {
             </footer>
 
             {isAuthModalOpen && <AuthModal isOpen={true} onClose={() => setIsAuthModalOpen(false)} />}
+
+            {/* 🌟 အခြား Code များ၏ အောက်ဆုံးနားတွင် ဤ Modal ကို ထည့်ပေးရပါမည် 🌟 */}
+            <SampleLessonsModal
+                isOpen={isSampleModalOpen}
+                onClose={() => setIsSampleModalOpen(false)}
+            />
+
         </div>
     );
 }
