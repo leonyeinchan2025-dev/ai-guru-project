@@ -352,6 +352,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AuthModal from '../components/AuthModal';
+import SampleLessonsModal from '../components/SampleLessonsModal'; // 🌟 ဤစာကြောင်း ထပ်ထည့်ပါ
+
 
 const logo = '/logo.png';
 const studyIllustration = 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80';
@@ -369,6 +371,7 @@ export default function Home() {
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const [user, setUser] = useState<any>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isSampleModalOpen, setIsSampleModalOpen] = useState(false); // 🌟 ဤ State အသစ် ထပ်ထည့်ပါ
 
     useEffect(() => {
         const userString = localStorage.getItem('user');
@@ -531,6 +534,46 @@ export default function Home() {
                             အနာဂတ်ကို <span className="text-blue-600">AI</span> ဖြင့် တည်ဆောက်ပါ
                         </motion.h1>
                         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
+                            AI GURU မှကြိုဆိုပါတယ်။ <br className="hidden md:block" /> ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br className="hidden md:block" /> <br /> အခြေခံ AI သင်ခန်းစာများအား <span className="text-yellow-400"> ပညာဒါန </span> အခမဲ့ လေ့လာနိုင်ပါသည်။
+                        </motion.p>
+
+                        {/* 🌟 ခလုတ် (၂) ခု ယှဉ်လျက် ပေါ်စေရန် Flex Box ဖြင့် ထုပ်ထားပါသည် 🌟 */}
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                            {!user && (
+                                <motion.button onClick={() => setIsAuthModalOpen(true)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-xl">
+                                    ယခုပဲ စတင်လေ့လာလိုက်ပါ →
+                                </motion.button>
+                            )}
+                            {user && (
+                                <motion.a href="/lessons" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-block bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-xl text-center">
+                                    သင်ခန်းစာများသို့ ဆက်သွားမည် →
+                                </motion.a>
+                            )}
+
+                            {/* 🌟 အသစ်ထပ်တိုးလိုက်သော သင်ခန်းစာနမူနာများ ခလုတ် 🌟 */}
+                            <motion.button onClick={() => setIsSampleModalOpen(true)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="bg-white text-blue-700 border-2 border-blue-100 px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-50 hover:border-blue-200 transition shadow-lg hover:shadow-xl">
+                                လေ့လာစရာ သင်ခန်းစာနမူနာများ 📖
+                            </motion.button>
+                        </div>
+
+                    </div>
+                    <div className="md:mt-0 mt-16 text-center">
+                        <motion.img
+                            src={studyIllustration} alt="Robot studying AI"
+                            className="md:w-full md:max-w-xl md:h-auto md:max-h-full h-80 max-h-96 mx-auto rounded-3xl object-contain shadow-2xl border-2 border-white"
+                            initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3, duration: 0.6 }}
+                        />
+                    </div>
+                </div>
+            </div>
+            {/* 🌟 1. Hero Section 🌟
+            <div id="home" className="pt-32 pb-16 md:pb-20 px-4 max-w-7xl mx-auto scroll-mt-20 bg-gradient-to-b from-[#f0f9ff] to-white rounded-b-[3rem]">
+                <div className="md:grid md:grid-cols-2 md:gap-16 md:items-center">
+                    <div className="md:text-left text-center">
+                        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
+                            အနာဂတ်ကို <span className="text-blue-600">AI</span> ဖြင့် တည်ဆောက်ပါ
+                        </motion.h1>
+                        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
                             AI GURU မှကြိုဆိုပါတယ်။ <br className="hidden md:block" /> ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br className="hidden md:block" /> <br /> Social Media / Online Market များ နှင့် ကိုယ်ပိုင်လုပ်ငန်းများအတွက်
                             <b> Commercial Advertisement များ၊ ကြော်ငြာ Content များ နှင့် Web App/ Mobile App များ </b>ကိုလည်း ဈေးနှုန်းချိုသာစွာဖြင့် ဝန်ဆောင်မှုပေးနေပါသည်။
                         </motion.p>
@@ -553,7 +596,7 @@ export default function Home() {
                         />
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* 🌟 2. About Section 🌟 */}
             <div id="about" className="py-16 md:py-20 bg-[#f8fafc] border-y border-slate-100 scroll-mt-20">
@@ -698,7 +741,8 @@ export default function Home() {
                         ဆက်သွယ်ရန် Hot Line (Admin) Call and Viber: +959444445546 <br /> Email - leonyeinchan2025@gmail.com
                     </p>
                     <p className="text-slate-300 text-sm md:text-base mb-10">
-                        AI Technology Learning - AI နည်းပညာအား မြန်မာဘာသာဖြင့် လွယ်ကူစွာ လေ့လာနိုင်သည်
+                        AI Technology Learning - AI နည်းပညာအား မြန်မာဘာသာဖြင့် လွယ်ကူစွာ လေ့လာနိုင်သည် <br className="hidden md:block" /> <br /> Social Media / Online Market များအတွက် ကြော်ငြာ Content များ နှင့် ကိုယ်ပိုင်လုပ်ငန်းများအတွက်
+                        <b> Web App/ Mobile App များ </b>ကိုလည်း ဈေးနှုန်းချိုသာစွာဖြင့် ဝန်ဆောင်မှုပေးနေပါသည်။
                     </p>
 
                     <div className="flex flex-wrap justify-center gap-4 mb-16">
