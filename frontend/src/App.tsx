@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Lessons from './pages/lessons';
 import AdminDashboard from './pages/AdminDashboard'; // 👈 Import လုပ်ပါ
 import LessonDetail from './pages/LessonDetail'; // 👈 Import လုပ်ပါ
+import LessonPreview from './pages/LessonPreview';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Routes>
         {/* URL အလွတ် (/) ဆိုလျှင် Home ကိုပြမည် */}
         <Route path="/" element={<Home />} />
-
+        <Route path="/preview/:id" element={<LessonPreview />} />
         {/* /lessons ဆိုလျှင် Lessons Page ကိုပြမည် */}
         <Route path="/lessons" element={<Lessons />} />
         {/* Admin Dashboard လမ်းကြောင်းသစ် 👇 */}

@@ -1,48 +1,65 @@
-// import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 interface SampleLessonsModalProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-const sampleLessons = [
+// 🌟 ၁။ TypeScript အတွက် Type ကို အတိအကျ ကြေညာပေးခြင်း
+export interface SampleLesson {
+    id: string;
+    title: string;
+    desc: string;
+    img: string;
+}
+
+// 🌟 ၂။ Array ကို SampleLesson[] အဖြစ် အတိအကျ သတ်မှတ်ပေးခြင်း
+export const sampleLessons: SampleLesson[] = [
     {
+        id: "basic-python",
         title: "Basic Python",
         desc: "AI နည်းပညာများ၏ အခြေခံအုတ်မြစ်ဖြစ်သော Python ကို အခြေခံမှစ၍ လေ့လာရန်။",
         img: "https://images.unsplash.com/photo-1526379095098-d400fd0bfce8?q=80&w=500&auto=format&fit=crop"
     },
     {
+        id: "prompt-engineering",
         title: "Prompt Engineering",
         desc: "AI ထံမှ အကောင်းဆုံးနှင့် အတိကျဆုံး အဖြေများရရှိအောင် Prompt ရေးသားနည်းများ။",
         img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=500&auto=format&fit=crop"
     },
     {
+        id: "notebook-lm",
         title: "NotebookLM အသုံးပြုနည်း",
         desc: "Google ၏ NotebookLM ကို အသုံးပြု၍ မိမိ၏ စာရွက်စာတမ်း၊ Data များကို လေ့လာဆန်းစစ်နည်း။",
         img: "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?q=80&w=500&auto=format&fit=crop"
     },
     {
+        id: "ai-practical",
         title: "AI လက်တွေ့အသုံးချနည်းများ",
         desc: "နေ့စဉ်ဘဝနှင့် လုပ်ငန်းခွင် အခက်အခဲများကို ဖြေရှင်းရန် AI ကို ထိရောက်စွာ အသုံးပြုနည်းများ။",
         img: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=500&auto=format&fit=crop"
     },
     {
-        title: "Vite ဖြင့် Website ရေးနည်း",
+        id: "ai-vibe",
+        title: "Vibe Code ဖြင့် Website ရေးနည်း",
         desc: "React, Tailwind နှင့် Vite ကိုအသုံးပြု၍ အလွန်မြန်ဆန်သော ခေတ်မီ Website များ ရေးဆွဲနည်း။",
         img: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=500&auto=format&fit=crop"
     },
     {
+        id: "ai-agent",
         title: "ကိုယ်ပိုင် AI Agent ဖန်တီးနည်း",
         desc: "မိမိလုပ်ငန်းအတွက် အလိုအလျောက် အလုပ်လုပ်ပေးမည့် ကိုယ်ပိုင် AI Assistant ဖန်တီးနည်း။",
         img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=500&auto=format&fit=crop"
     },
     {
+        id: "ai-gen-social",
         title: "Gen AI for Social Media",
         desc: "Content, ပုံ, နှင့် ဗီဒီယိုများကို AI ဖြင့် အလွယ်တကူ ဖန်တီး၍ Social Media တွင် အသုံးပြုနည်း။",
         img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=500&auto=format&fit=crop"
     },
     {
+        id: "ai-tools-websites",
         title: "AI Tools & Websites",
         desc: "နေ့စဉ်သုံး အကောင်းဆုံး AI Tools များနှင့် မဖြစ်မနေ သိထားသင့်သော Websites များအကြောင်း။",
         img: "https://images.unsplash.com/photo-1684469613149-5da70923e421?q=80&w=500&auto=format&fit=crop"
@@ -50,7 +67,15 @@ const sampleLessons = [
 ];
 
 export default function SampleLessonsModal({ isOpen, onClose }: SampleLessonsModalProps) {
+    const navigate = useNavigate();
+
     if (!isOpen) return null;
+
+    // 🌟 ၃။ Box ကို နှိပ်လိုက်လျှင် အလုပ်လုပ်မည့် Function ကို ဖန်တီးပေးခြင်း
+    const handleLessonClick = (lessonId: string) => {
+        onClose(); // Modal ကို အရင်ပိတ်မည်
+        navigate(`/preview/${lessonId}`); // Lesson အသေးစိတ် Page သို့ သွားမည်
+    };
 
     return (
         <AnimatePresence>
@@ -90,7 +115,8 @@ export default function SampleLessonsModal({ isOpen, onClose }: SampleLessonsMod
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }}
                                     key={index}
-                                    className="bg-white rounded-xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                                    onClick={() => handleLessonClick(lesson.id)} // 🌟 ယခုအခါ အနီပြတော့မည် မဟုတ်ပါ
+                                    className="bg-white rounded-xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
                                 >
                                     <div className="h-40 overflow-hidden relative">
                                         <div className="absolute inset-0 bg-blue-900/20 group-hover:bg-transparent transition-colors z-10"></div>

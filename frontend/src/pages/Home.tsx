@@ -532,16 +532,16 @@ export default function Home() {
                     <div className="md:text-left text-center">
                         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
                             အနာဂတ်ကို <span className="text-blue-600">AI</span> ဖြင့် တည်ဆောက်ပါ
-                        </motion.h1>
+                        </motion.h1> <br /><br /><br />
                         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
-                            AI GURU မှကြိုဆိုပါတယ်။ <br className="hidden md:block" /> ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br className="hidden md:block" /> <br /> အခြေခံ AI သင်ခန်းစာများအား <span className="text-yellow-400"> ပညာဒါန </span> အခမဲ့ လေ့လာနိုင်ပါသည်။
+                            AI GURU မှကြိုဆိုပါတယ်။ <br /><br className="hidden md:block" /> ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br className="hidden md:block" /> <br /> အခြေခံ AI သင်ခန်းစာများအား <span className="text-yellow-600"> <b>ပညာဒါန </b></span> အခမဲ့ လေ့လာနိုင်ပါသည်။
                         </motion.p>
 
                         {/* 🌟 ခလုတ် (၂) ခု ယှဉ်လျက် ပေါ်စေရန် Flex Box ဖြင့် ထုပ်ထားပါသည် 🌟 */}
                         <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                             {!user && (
                                 <motion.button onClick={() => setIsAuthModalOpen(true)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-xl">
-                                    ယခုပဲ စတင်လေ့လာလိုက်ပါ →
+                                    စာရင်းသွင်း၍ ယခုပဲ လေ့လာလိုက်ပါ →
                                 </motion.button>
                             )}
                             {user && (
@@ -552,7 +552,7 @@ export default function Home() {
 
                             {/* 🌟 အသစ်ထပ်တိုးလိုက်သော သင်ခန်းစာနမူနာများ ခလုတ် 🌟 */}
                             <motion.button onClick={() => setIsSampleModalOpen(true)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="bg-white text-blue-700 border-2 border-blue-100 px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-50 hover:border-blue-200 transition shadow-lg hover:shadow-xl">
-                                လေ့လာစရာ သင်ခန်းစာနမူနာများ 📖
+                                အခြေခံ AI သင်ခန်းစာများ 📖
                             </motion.button>
                         </div>
 
