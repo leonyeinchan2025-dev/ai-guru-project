@@ -83,7 +83,8 @@ export default function LessonPreview() {
 
                         {/* 🌟 ပုံအသစ် ထည့်နည်း 🌟 */}
                         <img
-                            src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop"
+                            // src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop"
+                            src="/src/assets/amara3.gif"
                             alt="Python Code"
                             className="w-full rounded-2xl shadow-md mb-8 border border-slate-200"
                         />
@@ -473,7 +474,7 @@ export default function LessonPreview() {
 
                         {/* 🌟 ပုံအသစ် ထည့်နည်း 🌟 */}
                         <img
-                            src="hhttps://images.unsplash.com/photo-1684469613149-5da70923e421?q=80&w=500&auto=format&fit=crop"
+                            src="/src/assets/amara1.jpg"
                             alt="ai-tools-websites"
                             className="w-full rounded-2xl shadow-md mb-8 border border-slate-200"
                         />

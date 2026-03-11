@@ -209,18 +209,28 @@ export default function Home() {
 
                     </div>
 
-                    <div className="md:mt-0 mt-16 text-center">
-                        <motion.video
-                            src={myPromoVideo} /* 🌟 Local ဖိုင် မသုံးပါက "https://.../video.mp4" ဟု တိုက်ရိုက်ထည့်နိုင်သည် */
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="md:w-full md:max-w-xl md:h-auto md:max-h-full h-80 max-h-96 mx-auto rounded-3xl object-cover shadow-2xl border-[6px] border-white"
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
+
+                    {/* 🌟 ပြင်ဆင်ထားသော Hero Section Video (Portrait / 9:16 ပုံစံ) 🌟 */}
+                    <div className="md:mt-0 mt-16 flex justify-center">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, x: 50 }}
+                            animate={{ opacity: 1, scale: 1, x: 0 }}
                             transition={{ delay: 0.3, duration: 0.6 }}
-                        />
+                            /* 🌟 ဖုန်းစခရင် အရွယ်အစားခန့်သာ ရှိစေရန် max-w-[280px] နှင့် md:max-w-[320px] ဖြင့် ကန့်သတ်ထားပါသည် */
+                            className="w-full max-w-[280px] md:max-w-[320px] p-2 md:p-3 bg-white rounded-[2.5rem] shadow-2xl border border-blue-50 mx-auto"
+                        >
+                            {/* 🌟 aspect-[9/16] ကို အသုံးပြု၍ ဒေါင်လိုက် အချိုးအစား ဖန်တီးထားပါသည် 🌟 */}
+                            <div className="relative w-full rounded-[1.8rem] overflow-hidden aspect-[9/16] bg-slate-900 shadow-inner">
+                                <video
+                                    src={myPromoVideo}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                />
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
             </div>
@@ -412,7 +422,7 @@ export default function Home() {
                     src={footerPortraitTransparent}
                     alt="AI GURU Myanmar Representative Left"
 
-                    className="absolute left-6 top-[10%] h-[450px] w-auto opacity-70 pointer-events-none"
+                    className="absolute left-6 top-[10%] h-[450px] w-auto opacity-70 pointer-events-none scale-x-[-1]"
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 0.7, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
@@ -424,7 +434,7 @@ export default function Home() {
                     src={footerPortraitTransparent}
                     alt="AI GURU Myanmar Representative Right"
 
-                    className="absolute right-6 top-[10%] h-[450px] w-auto opacity-70 pointer-events-none scale-x-[-1]"
+                    className="absolute right-6 top-[10%] h-[450px] w-auto opacity-70 pointer-events-none scale-x-[0]"
                     initial={{ opacity: 0, x: 50, scaleX: -1 }}
                     whileInView={{ opacity: 0.7, x: 0, scaleX: -1 }}
                     viewport={{ once: true, margin: "-100px" }}
