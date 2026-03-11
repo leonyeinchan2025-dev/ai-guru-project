@@ -353,7 +353,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AuthModal from '../components/AuthModal';
 import SampleLessonsModal from '../components/SampleLessonsModal'; // 🌟 ဤစာကြောင်း ထပ်ထည့်ပါ
-
+import footerPortraitTransparent from '../assets/amara1.png'; // သင့်ပုံနာမည်ပြောင်းပေးပါ
 
 const logo = '/logo.png';
 const studyIllustration = 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80';
@@ -541,7 +541,7 @@ export default function Home() {
                         <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                             {!user && (
                                 <motion.button onClick={() => setIsAuthModalOpen(true)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-xl">
-                                    စာရင်းသွင်း၍ ယခုပဲ လေ့လာလိုက်ပါ →
+                                    စာရင်းသွင်း၍ ယခုပဲ လေ့လာလိုက်ပါ
                                 </motion.button>
                             )}
                             {user && (
@@ -557,11 +557,25 @@ export default function Home() {
                         </div>
 
                     </div>
-                    <div className="md:mt-0 mt-16 text-center">
+                    {/* <div className="md:mt-0 mt-16 text-center">
                         <motion.img
                             src={studyIllustration} alt="Robot studying AI"
                             className="md:w-full md:max-w-xl md:h-auto md:max-h-full h-80 max-h-96 mx-auto rounded-3xl object-contain shadow-2xl border-2 border-white"
                             initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3, duration: 0.6 }}
+                        />
+                    </div> */}
+                    <div className="md:mt-0 mt-16 text-center">
+                        <motion.video
+                            /* 🌟 AI & Future Tech နှင့် သက်ဆိုင်သော Online Video Link ကို ထည့်ထားပါသည် */
+                            src="https://videos.pexels.com/video-files/3129977/3129977-hd_1920_1080_30fps.mp4"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="md:w-full md:max-w-xl md:h-auto md:max-h-full h-80 max-h-96 mx-auto rounded-3xl object-cover shadow-2xl border-[6px] border-white"
+                            initial={{ opacity: 0, scale: 0.9, x: 50 }}
+                            animate={{ opacity: 1, scale: 1, x: 0 }}
+                            transition={{ delay: 0.3, duration: 0.6 }}
                         />
                     </div>
                 </div>
@@ -728,7 +742,7 @@ export default function Home() {
             </div>
 
 
-            {/* Footer Section */}
+            {/* Footer Section
             <footer id="contact" className="bg-slate-800 pt-16 pb-8 border-t border-slate-700 text-center">
                 <div className="max-w-4xl mx-auto px-4">
                     <div className="flex justify-center items-center gap-3 mb-6">
@@ -766,8 +780,71 @@ export default function Home() {
                         </p> <br /> <p>Created by <span className="text-blue-400 font-semibold">Leo Nyein Chan</span></p>
                     </div>
                 </div>
-            </footer>
+            </footer> */}
+            {/* 🌟 Footer Section (Symmetrically Framed with Representative Portraits) 🌟 */}
+            <footer id="contact" className="bg-slate-800 pt-16 pb-8 border-t border-slate-700 text-center relative overflow-hidden">
 
+                {/* 🖼️ Left Portrait (Looking Right) */}
+                <motion.img
+                    src={footerPortraitTransparent}
+                    alt="AI GURU Myanmar Representative Left"
+                    className="absolute left-6 top-1/2 -translate-y-1/2 h-[320px] w-auto opacity-70 pointer-events-none"
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 0.7, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                />
+
+                {/* 🖼️ Right Portrait (Looking Left, Flipped Symmetrically) */}
+                <motion.img
+                    src={footerPortraitTransparent}
+                    alt="AI GURU Myanmar Representative Right"
+                    className="absolute right-6 top-1/2 -translate-y-1/2 h-[320px] w-auto opacity-70 pointer-events-none scale-x-[-1]"
+                    initial={{ opacity: 0, x: 50, scaleX: -1 }}
+                    whileInView={{ opacity: 0.7, x: 0, scaleX: -1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                />
+
+                <div className="max-w-4xl mx-auto px-4 z-10 relative">
+                    <div className="flex justify-center items-center gap-3 mb-6">
+                        <img src={logo} alt="AI GURU Logo" className="w-12 h-12 rounded-full border border-slate-600 bg-white object-cover" />
+                        <span className="text-3xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300">
+                            AI GURU
+                        </span>
+                    </div>
+
+                    <p className="text-slate-300 text-sm md:text-base mb-10">
+                        ဆက်သွယ်ရန် Hot Line (Admin) Call and Viber: +959444445546 <br /> Email - leonyeinchan2025@gmail.com
+                    </p>
+
+                    <p className="text-slate-300 text-sm md:text-base mb-10">
+                        AI Technology Learning - AI နည်းပညာအား မြန်မာဘာသာဖြင့် လွယ်ကူစွာ လေ့လာနိုင်သည် <br className="hidden md:block" /> <br /> Social Media / Online Market များအတွက် ကြော်ငြာ Content များ နှင့် ကိုယ်ပိုင်လုပ်ငန်းများအတွက်
+                        <b> Web App/ Mobile App များ </b>ကိုလည်း ဈေးနှုန်းချိုသာစွာဖြင့် ဝန်ဆောင်မှုပေးနေပါသည်။
+                    </p>
+
+                    <div className="flex flex-wrap justify-center gap-4 mb-16">
+                        <a href="https://www.facebook.com/aigurumm" target="_blank" rel="noopener noreferrer" className="border border-slate-600 text-slate-300 px-8 py-2.5 rounded-full text-sm font-medium hover:bg-slate-700 hover:border-blue-400 hover:text-blue-400 transition-all">
+                            Facebook
+                        </a>
+                        <a href="https://www.youtube.com/@leoonlinetech" target="_blank" rel="noopener noreferrer" className="border border-slate-600 text-slate-300 px-8 py-2.5 rounded-full text-sm font-medium hover:bg-slate-700 hover:border-red-400 hover:text-red-400 transition-all">
+                            YouTube
+                        </a>
+                        <a href="https://www.tiktok.com/@leonyein9?_r=1&_t=ZS-94LhT4oMsxr" target="_blank" rel="noopener noreferrer" className="border border-slate-600 text-slate-300 px-8 py-2.5 rounded-full text-sm font-medium hover:bg-slate-700 hover:border-cyan-400 hover:text-cyan-400 transition-all">
+                            TikTok
+                        </a>
+                        <a href="https://www.instagram.com/leonyein9/" target="_blank" rel="noopener noreferrer" className="border border-slate-600 text-slate-300 px-8 py-2.5 rounded-full text-sm font-medium hover:bg-slate-700 hover:border-cyan-400 hover:text-cyan-400 transition-all">
+                            Instagram
+                        </a>
+                    </div>
+
+                    <div className="text-slate-400 text-sm border-t border-slate-700/80 pt-8 z-10 relative">
+                        <p className="text-sm text-slate-500 font-medium">
+                            &copy; {new Date().getFullYear()} AI GURU Myanmar. All rights reserved.
+                        </p> <br /> <p>Created by <span className="text-blue-400 font-semibold">Leo Nyein Chan</span></p>
+                    </div>
+                </div>
+            </footer>
             {isAuthModalOpen && <AuthModal isOpen={true} onClose={() => setIsAuthModalOpen(false)} />}
 
             {/* 🌟 အခြား Code များ၏ အောက်ဆုံးနားတွင် ဤ Modal ကို ထည့်ပေးရပါမည် 🌟 */}
