@@ -359,7 +359,7 @@ const logo = '/logo.png';
 import myPromoVideo from '../assets/robot.mp4'; // သင့် video နာမည်ပြောင်းပေးပါ
 import myPromoVideo1 from '../assets/ai.mp4'; // သင့် video နာမည်ပြောင်းပေးပါ
 // const studyIllustration = 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80';
-const aboutIllustration = 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80';
+// const aboutIllustration = 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80';
 
 const roadmapData = [
     { step: '01', title: 'Math for AI', desc: 'AI အတွက် လိုအပ်သော သင်္ချာ အခြေခံများ' },
