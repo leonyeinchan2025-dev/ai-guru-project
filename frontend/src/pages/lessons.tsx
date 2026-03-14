@@ -79,51 +79,54 @@ export default function Lessons() {
         <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
 
             {/* Navbar */}
-            {/* 🌟 Lessons Page ၏ Navigation Bar (Menu အားလုံးပါဝင်သည်) 🌟 */}
             {/* 🌟 Lessons Page Navigation Bar (Mobile & Desktop Responsive) 🌟 */}
-            {/* 🌟 Lessons Page Navigation Bar (Mobile & Desktop Responsive) 🌟 */}
+            {/* 🌟 Lessons Page Navigation Bar (Mobile Responsive UI) 🌟 */}
             <nav className="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-slate-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center h-20">
+                <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+                    {/* min-h-[5rem] နှင့် py-2 ကိုသုံး၍ အပေါ်အောက် နေရာကျယ်ကျယ် ပေးထားပါသည် */}
+                    <div className="flex justify-between items-center min-h-[5rem] py-2">
 
-                        {/* 🌟 Logo (Home သို့ ပြန်သွားရန်) 🌟 */}
-                        <a href="/#home" className="flex items-center gap-2 md:gap-3 cursor-pointer z-50">
-                            <img src="/logo.png" alt="AI GURU Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full border border-blue-100 shadow-sm object-cover" />
-                            <div className="text-2xl md:text-3xl font-extrabold text-blue-600 tracking-tight">AI GURU</div>
-                        </a>
-
-                        {/* 🌟 ညာဘက်အခြမ်း (Home Link | Profile | Menu Button) 🌟 */}
-                        <div className="flex items-center gap-2 md:gap-3 z-50">
-
-                            {/* ၁။ Home Link */}
-                            <a href="/#home" className="flex items-center gap-1.5 text-sm md:text-base font-bold text-slate-500 hover:text-blue-600 pr-2.5 md:pr-4 border-r-2 border-slate-200 transition-colors">
-                                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                                </svg>
-                                <span className="hidden sm:inline">Home</span>
+                        {/* 🌟 ဘယ်ဘက်အခြမ်း (Logo + AI GURU + Home Icon - အလျားလိုက်) 🌟 */}
+                        <div className="flex items-center gap-2 sm:gap-3 z-50">
+                            <a href="/#home" className="flex items-center gap-1.5 sm:gap-2 cursor-pointer">
+                                <img src="/logo.png" alt="AI GURU Logo" className="h-9 w-9 md:h-11 md:w-11 rounded-full border border-blue-100 shadow-sm object-cover" />
+                                <div className="text-xl md:text-2xl font-black text-blue-600 tracking-tight">AI GURU</div>
                             </a>
 
-                            {/* ၂။ Profile Badge */}
+                            {/* Home Icon (ဖုန်းတွင် နေရာမကျပ်စေရန် 'Home' စာသားကို hidden md:inline ဖြင့် ဖျောက်ထားပါသည်) */}
+                            <a href="/#home" title="ပင်မစာမျက်နှာသို့" className="flex items-center gap-1.5 text-slate-500 hover:text-blue-600 pl-2 sm:pl-3 border-l-2 border-slate-200 transition-colors ml-1">
+                                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                </svg>
+                                <span className="hidden md:inline font-bold text-sm">Home</span>
+                            </a>
+                        </div>
+
+                        {/* 🌟 ညာဘက်အခြမ်း (Profile အပေါ် / Menu အောက် - ဒေါင်လိုက် flex-col) 🌟 */}
+                        {/* flex-col နှင့် items-end ကိုသုံး၍ အပေါ်/အောက် ညာဘက်ကပ်နေစေပါသည် */}
+                        <div className="flex flex-col items-end gap-1.5 z-50">
+
+                            {/* ၁။ Profile Badge (အပေါ်) */}
                             {user && (
-                                <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 py-1.5 px-3 md:px-4 rounded-full shadow-sm">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 py-1 px-2.5 rounded-full shadow-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                                     </svg>
-                                    <span className="text-xs sm:text-sm md:text-base font-bold text-slate-700 max-w-[80px] sm:max-w-[150px] truncate">
+                                    <span className="text-[11px] sm:text-xs font-bold text-slate-700 max-w-[70px] sm:max-w-[120px] truncate">
                                         {user.fullname || 'User'}
                                     </span>
                                 </div>
                             )}
 
-                            {/* ၃။ Menu Button (ချက်ချင်း Logout မထွက်ဘဲ Menu ကို ဖွင့်ပါမည်) */}
+                            {/* ၂။ Menu Button (အောက်) */}
                             <button
                                 onClick={() => setIsMobileMenuOpen(true)}
-                                className="flex items-center gap-0.5 text-slate-700 p-1.5 bg-white border border-slate-200 rounded-lg shadow-sm active:bg-slate-100 transition hover:bg-slate-50 ml-1"
+                                className="flex items-center justify-center gap-1 text-slate-700 py-1 px-2.5 bg-white border border-slate-200 rounded-lg shadow-sm active:bg-slate-100 transition hover:bg-slate-50"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-blue-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                                 </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
                                 </svg>
                             </button>
