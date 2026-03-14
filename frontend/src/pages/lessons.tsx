@@ -1,149 +1,3 @@
-// // src/pages/Lessons.tsx
-// import React, { useEffect, useState } from 'react';
-// import { motion } from 'framer-motion';
-// import api from '../api';
-
-// interface Lesson {
-//     id: number;
-//     title: string;
-//     content: string;
-//     category: string;
-// }
-
-// // လှပသော AI/ML ပုံများ (Database တွင် ပုံမပါသေးသဖြင့် ဤနေရာမှ ဖြည့်စွက်ပေးထားပါသည်)
-// const fallbackImages = [
-//     "https://images.unsplash.com/photo-1527474305487-b87b222841cc?auto=format&fit=crop&w=800&q=80", // AI Brain
-//     "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=800&q=80", // Tech Code
-//     "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80", // Microchip
-//     "https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=800&q=80", // Robot Hand
-//     "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80", // Data Visualization
-// ];
-
-// export default function Lessons() {
-//     const [lessons, setLessons] = useState<Lesson[]>([]);
-//     const [loading, setLoading] = useState(true);
-
-//     const userString = localStorage.getItem('user');
-//     const user = userString ? JSON.parse(userString) : null;
-
-//     useEffect(() => {
-//         if (!user) {
-//             window.location.href = '/';
-//             return;
-//         }
-
-//         const fetchLessons = async () => {
-//             try {
-//                 const response = await api.get('/lessons', {
-//                     params: { user_id: user.user_id }
-//                 });
-//                 setLessons(response.data);
-//             } catch (err) {
-//                 console.error("Error fetching lessons", err);
-//             } finally {
-//                 setLoading(false);
-//             }
-//         };
-
-//         fetchLessons();
-//     }, [user]);
-
-//     const handleLogout = () => {
-//         localStorage.removeItem('user');
-//         window.location.href = '/';
-//     };
-
-//     if (!user) return null;
-
-//     return (
-//         <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-
-//             {/* 🌟 Full Navigation Bar 🌟 */}
-//             <nav className="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-40 border-b border-slate-100">
-//                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-//                     <div className="flex justify-between items-center h-20">
-//                         {/* Logo */}
-//                         <div className="text-3xl font-extrabold text-blue-600 tracking-tight cursor-pointer" onClick={() => window.location.href = '/'}>
-//                             AI GURU
-//                         </div>
-
-//                         {/* Desktop Menu (Home သို့ ပြန်သွားမည့် Link များ) */}
-//                         <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-//                             <a href="/" className="text-slate-700 font-semibold hover:text-blue-600 transition">Home</a>
-//                             <a href="/#about" className="text-slate-700 font-semibold hover:text-blue-600 transition">About</a>
-//                             <a href="/#fields" className="text-slate-700 font-semibold hover:text-blue-600 transition">AI Fields</a>
-//                             <a href="/#roadmap" className="text-slate-700 font-semibold hover:text-blue-600 transition">Roadmap</a>
-//                         </div>
-
-//                         {/* User Info & Logout */}
-//                         <div className="flex items-center gap-4">
-//                             <span className="hidden md:inline-block font-medium text-slate-700">မင်္ဂလာပါ, <span className="text-blue-600">{user.fullname}</span> 🌟</span>
-//                             <button onClick={handleLogout} className="bg-red-50 text-red-600 px-5 py-2 rounded-full hover:bg-red-100 transition font-medium text-sm border border-red-100">
-//                                 ထွက်မည် (Logout)
-//                             </button>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </nav>
-
-//             {/* 📚 Lessons Header */}
-//             <div className="pt-32 pb-10 px-4 text-center max-w-3xl mx-auto">
-//                 <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4">သင်ခန်းစာများ</h1>
-//                 <p className="text-lg text-slate-500">AI နည်းပညာများကို အဆင့်ဆင့် လေ့လာနိုင်ရန် စီစဉ်ပေးထားပါသည်။</p>
-//             </div>
-
-//             {/* 🃏 Lessons Cards Section */}
-//             <div className="max-w-7xl mx-auto px-4 pb-24">
-//                 {loading ? (
-//                     <div className="flex justify-center items-center py-20">
-//                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-//                     </div>
-//                 ) : (
-//                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//                         {lessons.map((lesson, index) => (
-//                             <motion.div
-//                                 key={lesson.id}
-//                                 initial={{ opacity: 0, y: 30 }}
-//                                 animate={{ opacity: 1, y: 0 }}
-//                                 transition={{ duration: 0.5, delay: index * 0.1 }}
-//                                 className="bg-white rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col group"
-//                             >
-//                                 {/* ပုံ (Image) */}
-//                                 <div className="h-48 overflow-hidden relative">
-//                                     <img
-//                                         src={fallbackImages[index % fallbackImages.length]}
-//                                         alt={lesson.title}
-//                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-//                                     />
-//                                     <div className="absolute top-4 left-4">
-//                                         <span className="bg-white/90 backdrop-blur-sm text-blue-700 px-3 py-1 rounded-full text-xs font-bold shadow-sm">
-//                                             {lesson.category}
-//                                         </span>
-//                                     </div>
-//                                 </div>
-
-//                                 {/* စာသား (Content) */}
-//                                 <div className="p-6 flex flex-col flex-grow">
-//                                     <h2 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
-//                                         {lesson.title}
-//                                     </h2>
-//                                     <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
-//                                         {lesson.content}
-//                                     </p>
-//                                     <button className="mt-auto w-full bg-slate-50 text-blue-600 font-semibold py-3 rounded-xl hover:bg-blue-600 hover:text-white transition-colors border border-blue-100">
-//                                         လေ့လာမည် →
-//                                     </button>
-//                                 </div>
-//                             </motion.div>
-//                         ))}
-//                     </div>
-//                 )}
-//             </div>
-
-//         </div>
-//     );
-// }
-
 // src/pages/Lessons.tsx
 // import React, { useEffect, useState } from 'react';
 import { useState, useEffect } from 'react';
@@ -224,31 +78,56 @@ export default function Lessons() {
 
             {/* Navbar */}
             {/* 🌟 Lessons Page ၏ Navigation Bar (Menu အားလုံးပါဝင်သည်) 🌟 */}
+            {/* 🌟 Lessons Page Navigation Bar (Mobile & Desktop Responsive) 🌟 */}
             <nav className="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-slate-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
-                        {/* Logo */}
-                        <a href="/" className="flex items-center gap-3 cursor-pointer">
+
+                        {/* 🌟 Logo (Home သို့ ပြန်သွားရန်) 🌟 */}
+                        <a href="/#home" className="flex items-center gap-2 md:gap-3 cursor-pointer z-50">
+                            {/* မှတ်ချက်: logo လမ်းကြောင်း မှားနေပါက "/logo.png" သို့မဟုတ် မိမိ import ထားသော logo ကို ပြန်ပြောင်းပါ */}
                             <img src="/logo.png" alt="AI GURU Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full border border-blue-100 shadow-sm object-cover" />
                             <div className="text-2xl md:text-3xl font-extrabold text-blue-600 tracking-tight">AI GURU</div>
                         </a>
 
-                        {/* Desktop Links */}
-                        <div className="hidden md:flex items-center space-x-5 lg:space-x-8">
-                            <a href="/" className="text-slate-700 font-semibold hover:text-blue-600 transition">Home</a>
-                            <a href="/#about" className="text-slate-700 font-semibold hover:text-blue-600 transition">About</a>
-                            <a href="/#fields" className="text-slate-700 font-semibold hover:text-blue-600 transition">AI Fields</a>
-                            <a href="/#roadmap" className="text-slate-700 font-semibold hover:text-blue-600 transition">Roadmap</a>
-                            <a href="/lessons" className="text-blue-600 font-bold hover:underline transition">သင်ခန်းစာများ</a>
-                        </div>
+                        {/* 🌟 ညာဘက်အခြမ်း (Home Link | Profile | Logout Menu) 🌟 */}
+                        <div className="flex items-center gap-2 md:gap-3 z-50">
 
-                        {/* User Profile & Logout */}
-                        <div className="flex items-center gap-4">
-                            <span className="hidden lg:inline-block font-medium text-slate-700">မင်္ဂလာပါ, <span className="text-blue-600">{user.fullname}</span></span>
-                            {user.is_admin && <a href="/admin" className="hidden md:inline-block text-sm bg-purple-100 text-purple-700 px-3 py-1.5 rounded-full font-bold hover:bg-purple-200 transition">Admin Panel</a>}
-                            <button onClick={handleLogout} className="bg-red-50 text-red-600 px-5 py-2 rounded-full hover:bg-red-100 transition font-medium text-sm border border-red-100">
-                                ထွက်မည်
+                            {/* ၁။ Home Link (Hero Section သို့ ပြန်သွားရန်) */}
+                            <a href="/#home" className="flex items-center gap-1.5 text-sm md:text-base font-bold text-slate-500 hover:text-blue-600 pr-2.5 md:pr-4 border-r-2 border-slate-200 transition-colors">
+                                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                </svg>
+                                <span className="hidden sm:inline">Home</span>
+                            </a>
+
+                            {/* ၂။ Profile Badge (ဒုတိယပုံထဲကအတိုင်း လူခေါင်းပုံ + Username) */}
+                            {user && (
+                                <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 py-1.5 px-3 md:px-4 rounded-full shadow-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                    </svg>
+                                    {/* ဖုန်းတွင် နာမည်ရှည်ပါက ဖြတ်ပြမည် (truncate) */}
+                                    <span className="text-xs sm:text-sm md:text-base font-bold text-slate-700 max-w-[80px] sm:max-w-[150px] truncate">
+                                        {user.fullname || 'User'}
+                                    </span>
+                                </div>
+                            )}
+
+                            {/* ၃။ Menu / Logout Button ('ထွက်မည်' စာသားအစား ၃ ချောင်းပုံ နှင့် မြှားလေးများ) */}
+                            <button
+                                onClick={handleLogout}
+                                title="အကောင့်မှ ထွက်မည် (Logout)"
+                                className="flex items-center gap-0.5 text-slate-700 p-1.5 bg-white border border-slate-200 rounded-lg shadow-sm active:bg-slate-100 transition hover:bg-red-50 hover:border-red-200 hover:text-red-600 ml-1"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500 group-hover:text-red-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
                             </button>
+
                         </div>
                     </div>
                 </div>

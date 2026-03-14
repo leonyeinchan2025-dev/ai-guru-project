@@ -56,7 +56,6 @@ export default function Home() {
         <div className="min-h-screen font-sans scroll-smooth overflow-x-hidden">
 
             {/* Navigation Bar */}
-            {/* Navigation Bar */}
             <nav className="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-slate-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
