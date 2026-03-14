@@ -1,7 +1,8 @@
 // src/pages/Lessons.tsx
 // import React, { useEffect, useState } from 'react';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import api from '../api';
 
 interface Lesson {
@@ -17,6 +18,7 @@ const fallbackImages = [
     "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
 ];
+const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 export default function Lessons() {
     const [lessons, setLessons] = useState<Lesson[]>([]);
@@ -79,21 +81,21 @@ export default function Lessons() {
             {/* Navbar */}
             {/* 🌟 Lessons Page ၏ Navigation Bar (Menu အားလုံးပါဝင်သည်) 🌟 */}
             {/* 🌟 Lessons Page Navigation Bar (Mobile & Desktop Responsive) 🌟 */}
+            {/* 🌟 Lessons Page Navigation Bar (Mobile & Desktop Responsive) 🌟 */}
             <nav className="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-slate-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
 
                         {/* 🌟 Logo (Home သို့ ပြန်သွားရန်) 🌟 */}
                         <a href="/#home" className="flex items-center gap-2 md:gap-3 cursor-pointer z-50">
-                            {/* မှတ်ချက်: logo လမ်းကြောင်း မှားနေပါက "/logo.png" သို့မဟုတ် မိမိ import ထားသော logo ကို ပြန်ပြောင်းပါ */}
                             <img src="/logo.png" alt="AI GURU Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full border border-blue-100 shadow-sm object-cover" />
                             <div className="text-2xl md:text-3xl font-extrabold text-blue-600 tracking-tight">AI GURU</div>
                         </a>
 
-                        {/* 🌟 ညာဘက်အခြမ်း (Home Link | Profile | Logout Menu) 🌟 */}
+                        {/* 🌟 ညာဘက်အခြမ်း (Home Link | Profile | Menu Button) 🌟 */}
                         <div className="flex items-center gap-2 md:gap-3 z-50">
 
-                            {/* ၁။ Home Link (Hero Section သို့ ပြန်သွားရန်) */}
+                            {/* ၁။ Home Link */}
                             <a href="/#home" className="flex items-center gap-1.5 text-sm md:text-base font-bold text-slate-500 hover:text-blue-600 pr-2.5 md:pr-4 border-r-2 border-slate-200 transition-colors">
                                 <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -101,26 +103,24 @@ export default function Lessons() {
                                 <span className="hidden sm:inline">Home</span>
                             </a>
 
-                            {/* ၂။ Profile Badge (ဒုတိယပုံထဲကအတိုင်း လူခေါင်းပုံ + Username) */}
+                            {/* ၂။ Profile Badge */}
                             {user && (
                                 <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 py-1.5 px-3 md:px-4 rounded-full shadow-sm">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                                     </svg>
-                                    {/* ဖုန်းတွင် နာမည်ရှည်ပါက ဖြတ်ပြမည် (truncate) */}
                                     <span className="text-xs sm:text-sm md:text-base font-bold text-slate-700 max-w-[80px] sm:max-w-[150px] truncate">
                                         {user.fullname || 'User'}
                                     </span>
                                 </div>
                             )}
 
-                            {/* ၃။ Menu / Logout Button ('ထွက်မည်' စာသားအစား ၃ ချောင်းပုံ နှင့် မြှားလေးများ) */}
+                            {/* ၃။ Menu Button (ချက်ချင်း Logout မထွက်ဘဲ Menu ကို ဖွင့်ပါမည်) */}
                             <button
-                                onClick={handleLogout}
-                                title="အကောင့်မှ ထွက်မည် (Logout)"
-                                className="flex items-center gap-0.5 text-slate-700 p-1.5 bg-white border border-slate-200 rounded-lg shadow-sm active:bg-slate-100 transition hover:bg-red-50 hover:border-red-200 hover:text-red-600 ml-1"
+                                onClick={() => setIsMobileMenuOpen(true)}
+                                className="flex items-center gap-0.5 text-slate-700 p-1.5 bg-white border border-slate-200 rounded-lg shadow-sm active:bg-slate-100 transition hover:bg-slate-50 ml-1"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500 group-hover:text-red-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                                 </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -131,6 +131,78 @@ export default function Lessons() {
                         </div>
                     </div>
                 </div>
+
+                {/* 🌟 ၄။ Mobile Sidebar Menu (Menu နှိပ်လိုက်မှ ပေါ်လာမည့် အပိုင်း) 🌟 */}
+                <AnimatePresence>
+                    {isMobileMenuOpen && (
+                        <>
+                            {/* Backdrop */}
+                            <motion.div
+                                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] cursor-pointer"
+                            />
+
+                            {/* Sidebar */}
+                            <motion.div
+                                initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                                className="fixed top-0 right-0 h-[100dvh] w-[85%] max-w-sm bg-[#f8fafc] shadow-2xl z-[70] flex flex-col rounded-l-3xl overflow-hidden"
+                            >
+                                {/* Header (Logo & Close Button) */}
+                                <div className="flex justify-between items-center p-5 bg-white border-b border-slate-100 shrink-0 shadow-sm z-10">
+                                    <div className="flex items-center gap-3">
+                                        <img src="/logo.png" alt="Logo" className="w-10 h-10 rounded-full border border-blue-100 shadow-sm object-cover" />
+                                        <span className="text-xl font-extrabold text-blue-700 tracking-wide">AI GURU</span>
+                                    </div>
+                                    <button
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="p-2 rounded-full bg-slate-50 text-slate-500 border border-slate-200 hover:bg-red-50 hover:text-red-600 transition-colors active:scale-90"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                {/* Menu Links (Home Page မှ Link များအတိုင်း) */}
+                                <div className="flex flex-col p-5 flex-1 overflow-y-auto">
+                                    <a href="/#home" className="flex items-center gap-4 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-3.5 rounded-2xl shadow-sm mb-3 hover:border-blue-300 transition-colors">
+                                        <span className="text-xl">🏠</span> <span>Home</span>
+                                    </a>
+                                    <a href="/#about" className="flex items-center gap-4 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-3.5 rounded-2xl shadow-sm mb-3 hover:border-blue-300 transition-colors">
+                                        <span className="text-xl">📖</span> <span>About</span>
+                                    </a>
+                                    <a href="/#fields" className="flex items-center gap-4 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-3.5 rounded-2xl shadow-sm mb-3 hover:border-blue-300 transition-colors">
+                                        <span className="text-xl">🤖</span> <span>AI Fields</span>
+                                    </a>
+                                    <a href="/#roadmap" className="flex items-center gap-4 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-3.5 rounded-2xl shadow-sm mb-3 hover:border-blue-300 transition-colors">
+                                        <span className="text-xl">🗺️</span> <span>Roadmap</span>
+                                    </a>
+                                    <a href="/#contact" className="flex items-center gap-4 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-3.5 rounded-2xl shadow-sm mb-6 hover:border-blue-300 transition-colors">
+                                        <span className="text-xl">📞</span> <span>Contact Us</span>
+                                    </a>
+                                </div>
+
+                                {/* Bottom Logout Section */}
+                                <div className="p-5 bg-white border-t border-slate-100 shrink-0 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+                                    {user && (
+                                        <div className="flex flex-col gap-3">
+                                            {user.is_admin && (
+                                                <a href="/admin" className="flex items-center justify-center gap-2 bg-purple-100 text-purple-700 border border-purple-200 font-bold px-4 py-3.5 rounded-2xl shadow-sm active:scale-95 transition-all">
+                                                    ⚙️ Admin Panel
+                                                </a>
+                                            )}
+                                            {/* 🌟 ဤနေရာမှ နှိပ်မှသာ Logout ထွက်မည် 🌟 */}
+                                            <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 font-bold px-4 py-4 rounded-2xl border border-red-100 shadow-sm active:scale-95 transition-all hover:bg-red-100">
+                                                🚪 ထွက်မည် (Logout)
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
             </nav>
 
             <div className="pt-32 pb-10 px-4 text-center max-w-3xl mx-auto">
