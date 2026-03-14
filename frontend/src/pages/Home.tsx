@@ -56,27 +56,40 @@ export default function Home() {
         <div className="min-h-screen font-sans scroll-smooth overflow-x-hidden">
 
             {/* Navigation Bar */}
+            {/* Navigation Bar */}
             <nav className="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-slate-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
-                        {/* Logo */}
-                        <a href="#home" className="flex items-center gap-3 cursor-pointer z-50">
-                            <img src={logo} alt="AI GURU Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full border border-blue-100 shadow-sm object-cover" />
-                            <div className="text-2xl md:text-3xl font-extrabold text-blue-600 tracking-tight">AI GURU</div>
-                        </a>
 
-                        {/* Desktop Links */}
+                        {/* 🌟 ၁။ Logo & Mobile Home Link Section 🌟 */}
+                        <div className="flex items-center gap-2 md:gap-3 z-50">
+                            <a href="#home" className="flex items-center gap-2 md:gap-3 cursor-pointer">
+                                <img src={logo} alt="AI GURU Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full border border-blue-100 shadow-sm object-cover" />
+                                <div className="text-2xl md:text-3xl font-extrabold text-blue-600 tracking-tight">AI GURU</div>
+                            </a>
+
+                            {/* 📱 Mobile တွင် Login ဝင်ပြီးပါက AI GURU ဘေး၌ Home (Hero Section သို့) Link ပြရန် */}
+                            {user && (
+                                <a href="#home" className="md:hidden flex items-center gap-1 text-sm font-bold text-slate-500 hover:text-blue-600 ml-1 pl-2 border-l-2 border-slate-200">
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                    </svg>
+                                    Home
+                                </a>
+                            )}
+                        </div>
+
+                        {/* 💻 Desktop Links (ဖုန်းတွင် ပျောက်နေမည်) */}
                         <div className="hidden md:flex items-center space-x-5 lg:space-x-8">
                             <a href="#home" className="text-slate-700 font-semibold hover:text-blue-600 transition">Home</a>
                             <a href="#about" className="text-slate-700 font-semibold hover:text-blue-600 transition">About</a>
                             <a href="#fields" className="text-slate-700 font-semibold hover:text-blue-600 transition">AI Fields</a>
                             <a href="#roadmap" className="text-slate-700 font-semibold hover:text-blue-600 transition">Roadmap</a>
-                            {/* အသစ်ထပ်တိုးထားသော Contact Us */}
                             <a href="#contact" className="text-slate-600 hover:text-blue-600 font-semibold transition">Contact Us</a>
                             <a href="/lessons" onClick={handleLessonClick} className="text-slate-700 font-semibold hover:text-blue-600 transition">သင်ခန်းစာများ</a>
                         </div>
 
-                        {/* Desktop Auth */}
+                        {/* 💻 Desktop Auth (ဖုန်းတွင် ပျောက်နေမည်) */}
                         <div className="hidden md:flex items-center gap-4">
                             {user ? (
                                 <>
@@ -89,84 +102,107 @@ export default function Home() {
                             )}
                         </div>
 
-                        {/* Mobile Menu Toggle Button */}
-                        <button className="md:hidden text-3xl text-slate-700 z-50 p-2" onClick={() => setIsMobileMenuOpen(true)}>
-                            ☰
-                        </button>
+                        {/* 🌟 ၂။ Mobile Right Section (Profile + Hamburger Menu with Arrows) 🌟 */}
+                        <div className="md:hidden flex items-center gap-2 z-50">
+
+                            {/* 📱 Mobile တွင် Login ဝင်ပြီးပါက ညာဘက်၌ လူခေါင်းပုံနှင့် Username ပြရန် */}
+                            {user && (
+                                <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 py-1.5 px-3 rounded-full shadow-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                    </svg>
+                                    <span className="text-xs font-bold text-slate-700 max-w-[70px] truncate">{user.fullname}</span>
+                                </div>
+                            )}
+
+                            {/* 📱 Mobile Menu Toggle Button (၃ ချောင်းပုံ နှင့် မြှားလေးများ) */}
+                            <button
+                                className="flex items-center gap-0.5 text-slate-700 p-1.5 bg-white border border-slate-200 rounded-lg shadow-sm active:bg-slate-100 transition"
+                                onClick={() => setIsMobileMenuOpen(true)}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-
-                {/* 🌟 📱 Mobile Sidebar Menu (Wide, Full Height & No Scroll Needed) 🌟 */}
+                {/* 🌟 ၃။ Mobile Sidebar Menu (ဒုတိယပုံအတိုင်း အတိအကျ ပြင်ဆင်ထားသော UI) 🌟 */}
                 <AnimatePresence>
                     {isMobileMenuOpen && (
                         <>
-                            {/* ၁။ Backdrop */}
+                            {/* Backdrop */}
                             <motion.div
                                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] md:hidden cursor-pointer"
                             />
 
-                            {/* ၂။ Sidebar အစစ် (w-[90%] ဖြင့် ပိုကျယ်စေပြီး h-[100dvh] ဖြင့် အောက်ခြေထိ ရှည်စေပါသည်) */}
+                            {/* Sidebar (ဘယ်ဘက်တွင် ထောင့်လုံးထားပါသည်) */}
                             <motion.div
                                 initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                                className="fixed top-0 right-0 h-[100dvh] w-[90%] max-w-sm bg-slate-50 shadow-2xl z-[70] flex flex-col md:hidden"
+                                className="fixed top-0 right-0 h-[100dvh] w-[85%] max-w-sm bg-[#f8fafc] shadow-2xl z-[70] flex flex-col md:hidden rounded-l-3xl overflow-hidden"
                             >
-                                {/* Header Section */}
-                                <div className="flex justify-between items-center p-4 border-b border-slate-200 bg-white shrink-0">
-                                    <div className="flex items-center gap-2">
-                                        <img src={logo} alt="Logo" className="w-8 h-8 rounded-full border border-blue-100" />
-                                        <span className="text-lg font-extrabold text-blue-700 tracking-wide">AI GURU</span>
+                                {/* Header (Logo & Close Button) */}
+                                <div className="flex justify-between items-center p-5 bg-white border-b border-slate-100 shrink-0 shadow-sm z-10">
+                                    <div className="flex items-center gap-3">
+                                        <img src={logo} alt="Logo" className="w-10 h-10 rounded-full border border-blue-100 shadow-sm object-cover" />
+                                        <span className="text-xl font-extrabold text-blue-700 tracking-wide">AI GURU</span>
                                     </div>
                                     <button
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className="p-1.5 rounded-full bg-slate-100 text-slate-600 hover:bg-red-100 hover:text-red-600 transition-colors active:scale-90"
+                                        className="p-2 rounded-full bg-slate-50 text-slate-500 border border-slate-200 hover:bg-red-50 hover:text-red-600 transition-colors active:scale-90"
                                     >
+                                        {/* အထွက်မြှားလေး (Close) */}
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
                                         </svg>
                                     </button>
                                 </div>
 
-                                {/* Menu Links Section (Scroll မလိုအောင် Gap နှင့် Padding များကို ကျဉ်းပေးထားပါသည်) */}
-                                <div className="flex flex-col gap-2 p-4 flex-1">
-                                    <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all">
-                                        🏠 <span>Home</span>
+                                {/* Menu Links (Card ပုံစံ လှပသော List) */}
+                                <div className="flex flex-col p-5 flex-1 overflow-y-auto">
+                                    <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-3.5 rounded-2xl shadow-sm mb-3 hover:border-blue-300 transition-colors">
+                                        <span className="text-xl">🏠</span> <span>Home</span>
                                     </a>
-                                    <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all">
-                                        📖 <span>About</span>
+                                    <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-3.5 rounded-2xl shadow-sm mb-3 hover:border-blue-300 transition-colors">
+                                        <span className="text-xl">📖</span> <span>About</span>
                                     </a>
-                                    <a href="#fields" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all">
-                                        🤖 <span>AI Fields</span>
+                                    <a href="#fields" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-3.5 rounded-2xl shadow-sm mb-3 hover:border-blue-300 transition-colors">
+                                        <span className="text-xl">🤖</span> <span>AI Fields</span>
                                     </a>
-                                    <a href="#roadmap" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all">
-                                        🗺️ <span>Roadmap</span>
+                                    <a href="#roadmap" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-3.5 rounded-2xl shadow-sm mb-3 hover:border-blue-300 transition-colors">
+                                        <span className="text-xl">🗺️</span> <span>Roadmap</span>
                                     </a>
-                                    <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all">
-                                        📞 <span>Contact Us</span>
+                                    <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-3.5 rounded-2xl shadow-sm mb-6 hover:border-blue-300 transition-colors">
+                                        <span className="text-xl">📞</span> <span>Contact Us</span>
                                     </a>
-                                    <div className="my-1 border-b border-slate-200"></div> {/* Divider */}
-                                    <a href="/lessons" onClick={(e) => { handleLessonClick(e); setIsMobileMenuOpen(false); }} className="flex items-center justify-center gap-3 bg-blue-100 border border-blue-200 text-blue-800 font-extrabold px-4 py-3 rounded-xl shadow-sm hover:bg-blue-200 active:scale-95 transition-all">
+
+                                    {/* Lessons Button (Blue Tint) */}
+                                    <a href="/lessons" onClick={(e) => { handleLessonClick(e); setIsMobileMenuOpen(false); }} className="flex items-center justify-center gap-3 bg-blue-100 border border-blue-200 text-blue-800 font-extrabold px-5 py-4 rounded-2xl shadow-sm mb-2 active:scale-95 transition-all">
                                         📚 <span>သင်ခန်းစာများ</span>
                                     </a>
                                 </div>
 
-                                {/* Auth Section */}
-                                <div className="p-4 bg-white border-t border-slate-200 shrink-0">
+                                {/* Bottom Auth / Logout Section (အောက်ခြေတွင် ကပ်နေမည်) */}
+                                <div className="p-5 bg-white border-t border-slate-100 shrink-0 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
                                     {user ? (
-                                        <div className="flex flex-col gap-2">
+                                        <div className="flex flex-col gap-3">
                                             {user.is_admin && (
-                                                <a href="/admin" className="flex items-center justify-center gap-2 bg-purple-600 text-white font-bold px-4 py-3 rounded-xl shadow-md hover:bg-purple-700 active:scale-95 transition-all">
+                                                <a href="/admin" className="flex items-center justify-center gap-2 bg-purple-100 text-purple-700 border border-purple-200 font-bold px-4 py-3.5 rounded-2xl shadow-sm active:scale-95 transition-all">
                                                     ⚙️ Admin Panel
                                                 </a>
                                             )}
-                                            <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 font-bold px-4 py-3 rounded-xl border border-red-200 shadow-sm hover:bg-red-100 active:scale-95 transition-all">
+                                            <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 font-bold px-4 py-4 rounded-2xl border border-red-100 shadow-sm active:scale-95 transition-all hover:bg-red-100">
                                                 🚪 ထွက်မည် (Logout)
                                             </button>
                                         </div>
                                     ) : (
-                                        <button onClick={() => { setIsAuthModalOpen(true); setIsMobileMenuOpen(false); }} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold px-4 py-3 rounded-xl shadow-md hover:shadow-lg active:scale-95 transition-all">
+                                        <button onClick={() => { setIsAuthModalOpen(true); setIsMobileMenuOpen(false); }} className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-bold px-4 py-4 rounded-2xl shadow-md active:scale-95 transition-all hover:bg-blue-700">
                                             🔑 အကောင့် ဝင်ရောက်မည်
                                         </button>
                                     )}
@@ -183,9 +219,9 @@ export default function Home() {
                     <div className="md:text-left text-center">
                         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
                             အနာဂတ်ကို <span className="text-blue-600">AI</span> ဖြင့် တည်ဆောက်ပါ
-                        </motion.h1> <br /><br /><br />
+                        </motion.h1> <br /><br />
                         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
-                            AI GURU မှကြိုဆိုပါတယ်။ <br /><br className="hidden md:block" /> ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br className="hidden md:block" /> <br /> အခြေခံ AI သင်ခန်းစာများအား <span className="text-yellow-600"> <b>ပညာဒါန </b></span> အခမဲ့ လေ့လာနိုင်ပါသည်။
+                            AI GURU မှကြိုဆိုပါတယ်။ <br /><br className="hidden md:block" /> <br />ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br className="hidden md:block" /> <br /> အခြေခံ AI သင်ခန်းစာများအား <span className="text-yellow-600"> <b>ပညာဒါန </b></span> အခမဲ့ လေ့လာနိုင်ပါသည်။
                         </motion.p>
 
                         {/* 🌟 ခလုတ် (၂) ခု ယှဉ်လျက် ပေါ်စေရန် Flex Box ဖြင့် ထုပ်ထားပါသည် 🌟 */}
@@ -417,7 +453,7 @@ export default function Home() {
             <footer id="contact" className="bg-slate-800 pt-16 pb-8 border-t border-slate-700 text-center relative overflow-hidden">
 
 
-                {/* 🖼️ Left Portrait (Looking Right/Inwards) */}
+                {/* 🖼️ Left Portrait (Looking Right/Inwards)
                 <motion.img
                     src={footerPortraitTransparent}
                     alt="AI GURU Myanmar Representative Left"
@@ -427,9 +463,9 @@ export default function Home() {
                     whileInView={{ opacity: 0.7, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                />
+                /> */}
 
-                {/* 🖼️ Right Portrait (Looking Left/Inwards, Flipped Symmetrically) */}
+                {/* 🖼️ Right Portrait (Looking Left/Inwards, Flipped Symmetrically)
                 <motion.img
                     src={footerPortraitTransparent}
                     alt="AI GURU Myanmar Representative Right"
@@ -437,6 +473,30 @@ export default function Home() {
                     className="absolute right-6 top-[10%] h-[450px] w-auto opacity-70 pointer-events-none scale-x-[0]"
                     initial={{ opacity: 0, x: 50, scaleX: -1 }}
                     whileInView={{ opacity: 0.7, x: 0, scaleX: -1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                /> */}
+
+                {/* 🖼️ Left Portrait (Looking Right/Inwards) */}
+                {/* 📱 ဖုန်းတွင် h-[280px] ဖြင့် သေးထားပြီး၊ မူရင်းပုံကို အတွင်းလှည့်ရန် scaleX: -1 ပြုလုပ်ထားပါသည် */}
+                <motion.img
+                    src={footerPortraitTransparent}
+                    alt="AI GURU Myanmar Representative Left"
+                    className="absolute -left-10 md:left-6 top-[20%] md:top-[10%] h-[280px] md:h-[450px] w-auto opacity-30 md:opacity-70 pointer-events-none z-0"
+                    initial={{ opacity: 0, x: -50, scaleX: -1 }}
+                    whileInView={{ opacity: 0.7, x: 0, scaleX: -1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                />
+
+                {/* 🖼️ Right Portrait (Looking Left/Inwards) */}
+                {/* 📱 ဖုန်းတွင် hidden md:block ဖြင့် ဖျောက်ထားပြီး၊ မူရင်းပုံအတိုင်း အတွင်းလှည့်ရန် scaleX: 1 ထားပါသည် */}
+                <motion.img
+                    src={footerPortraitTransparent}
+                    alt="AI GURU Myanmar Representative Right"
+                    className="hidden md:block absolute right-6 top-[10%] h-[450px] w-auto opacity-70 pointer-events-none z-0"
+                    initial={{ opacity: 0, x: 50, scaleX: 1 }}
+                    whileInView={{ opacity: 0.7, x: 0, scaleX: 1 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                 />
