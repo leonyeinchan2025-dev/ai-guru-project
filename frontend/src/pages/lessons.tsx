@@ -18,9 +18,9 @@ const fallbackImages = [
     "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
 ];
-const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 export default function Lessons() {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [lessons, setLessons] = useState<Lesson[]>([]);
     const [completedIds, setCompletedIds] = useState<number[]>([]); // 🌟 ပြီးထားသော ID များ
     const [loading, setLoading] = useState(true);
