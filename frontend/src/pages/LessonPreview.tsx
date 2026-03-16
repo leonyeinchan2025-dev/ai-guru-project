@@ -18,6 +18,25 @@ export default function LessonPreview() {
                 // case "intermediate-python":
                 return (
                     <div className="animate-fade-in">
+                        <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">၁။ Python ဆိုတာ ဘာလဲ?</h2>
+                        <p className="mb-6">
+                            Python သည် ရိုးရှင်းပြီး ဖတ်ရလွယ်ကူသော Programming Language တစ်ခုဖြစ်ပါသည်။ အထူးသဖြင့် Artificial Intelligence (AI) နှင့် Machine Learning (ML) နယ်ပယ်များတွင် အသုံးအများဆုံး ဖြစ်သည်။
+                        </p>
+
+                        {/* 🌟 ပုံအသစ် ထည့်နည်း 🌟 */}
+                        <img
+                            src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop"
+                            // src="/src/assets/amara3.gif"
+                            alt="Python Code"
+                            className="w-full rounded-2xl shadow-md mb-8 border border-slate-200"
+                        />
+
+                        <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">၂။ ဘာကြောင့် Python ကို လေ့လာသင့်သလဲ?</h2>
+                        <ul className="list-disc ml-6 mb-6 space-y-3">
+                            <li>Syntax များသည် အင်္ဂလိပ်စာကဲ့သို့ ရိုးရှင်းသောကြောင့် စတင်လေ့လာသူများအတွက် အလွန်လွယ်ကူခြင်း။</li>
+                            <li>TensorFlow, PyTorch, Pandas ကဲ့သို့သော အင်အားကြီး AI Library များစွာ ရှိခြင်း။</li>
+                            <li>ကမ္ဘာတစ်ဝှမ်းတွင် Developer Community အလွန်ကြီးမားခြင်း။</li>
+                        </ul>
                         {/* 🌟 ခေါင်းစဉ်နှင့် မိတ်ဆက် 🌟 */}
                         <h1 className="text-3xl font-extrabold text-blue-600 mb-6 flex items-center gap-3">
                             <span>🚀</span> အလယ်အလတ်အဆင့် Python သင်ခန်းစာ
@@ -40,10 +59,9 @@ export default function LessonPreview() {
                                 <pre>
                                     <code>
                                         {`def greet(name):
-    print(f"မင်္ဂလာပါ, {name}!")
-
-greet("Mg Mg")  # Output: မင်္ဂလာပါ, Mg Mg!
-greet("Aung Aung")  # Output: မင်္ဂလာပါ, Aung Aung!`}
+                                            print(f"မင်္ဂလာပါ, {name}!")
+                                            greet("Mg Mg")  # Output: မင်္ဂလာပါ, Mg Mg!
+                                            greet("Aung Aung")  # Output: မင်္ဂလာပါ, Aung Aung!`}
                                     </code>
                                 </pre>
                             </div>
@@ -133,29 +151,7 @@ except ZeroDivisionError:
 
                     </div>
                 );
-            // return (
-            //     <div>
-            //         <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">၁။ Python ဆိုတာ ဘာလဲ?</h2>
-            //         <p className="mb-6">
-            //             Python သည် ရိုးရှင်းပြီး ဖတ်ရလွယ်ကူသော Programming Language တစ်ခုဖြစ်ပါသည်။ အထူးသဖြင့် Artificial Intelligence (AI) နှင့် Machine Learning (ML) နယ်ပယ်များတွင် အသုံးအများဆုံး ဖြစ်သည်။
-            //         </p>
 
-            //         {/* 🌟 ပုံအသစ် ထည့်နည်း 🌟 */}
-            //         <img
-            //             src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop"
-            //             // src="/src/assets/amara3.gif"
-            //             alt="Python Code"
-            //             className="w-full rounded-2xl shadow-md mb-8 border border-slate-200"
-            //         />
-
-            //         <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">၂။ ဘာကြောင့် Python ကို လေ့လာသင့်သလဲ?</h2>
-            //         <ul className="list-disc ml-6 mb-6 space-y-3">
-            //             <li>Syntax များသည် အင်္ဂလိပ်စာကဲ့သို့ ရိုးရှင်းသောကြောင့် စတင်လေ့လာသူများအတွက် အလွန်လွယ်ကူခြင်း။</li>
-            //             <li>TensorFlow, PyTorch, Pandas ကဲ့သို့သော အင်အားကြီး AI Library များစွာ ရှိခြင်း။</li>
-            //             <li>ကမ္ဘာတစ်ဝှမ်းတွင် Developer Community အလွန်ကြီးမားခြင်း။</li>
-            //         </ul>
-            //     </div>
-            // );
 
             case "prompt-engineering":
                 return (
@@ -445,55 +441,55 @@ except ZeroDivisionError:
                         <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Gemini Gem ဖြင့် သီးသန့် AI Scope ထုတ်၍ AI ကို ညွှန်ကြားနည်း</h2>
                         <p className="mb-6">
                             Gemini Gem သုံးပြီး AI ကို ကိုယ့်လက်ထောက်အဖြစ် သေချာခိုင်းကြမယ်။
-                            ခေတ်သစ်နည်းပညာတွေကြောင့် မမြင်ဖူးတာ၊ မကြားဖူးတာတွေ အံဩဘနန်း ကြုံတွေ့နေရတယ်။  (အထူးသဖြင့် AI ဆိုတဲ့ ဝေါဟာရတခု) က အတော် မောင်းနှင်ပေးနေတာကို အားလုံးအသိ။
+                            <br /> ခေတ်သစ်နည်းပညာတွေကြောင့် မမြင်ဖူးတာ၊ မကြားဖူးတာတွေ အံဩဘနန်း ကြုံတွေ့နေရတယ်။  (အထူးသဖြင့် AI ဆိုတဲ့ ဝေါဟာရတခု) က အတော် မောင်းနှင်ပေးနေတာကို အားလုံးအသိ။
                             အခု‌ဆို ကလစ်လေးတချက်နဲ့ Medium Application လေးတွေ၊ အလတ်စား Web App, Website တွေ ဖန်တီးနိုင်လာတာကို မြင်နေရတယ်။ Vibe Codeing ပေါ့။ ကိုယ့်ဘက်က Idea and Concept လေးတွေ ၊ လိုချင်တာလေးတွေ AI ကို ပေးပြီး ခိုင်းယုံ ပါပဲ။ (နောက်နှစ်တွေများဆို ဘယ်လိုတွေတောင်လာဦးမယ်မသိ) အကြီးစားပရောဂျက်တွေ လုပ်ငန်းကြီးတွေအတွက်တော့ AI က Support ပေါ့။
                             အခုဆောင်းပါးမှာတော့ လက်ရှိကာလ အတော် အသုံးဝင်နေတဲ့ Gemini Gem 💎 AI လေးကို မျှဝေပေးချင်ပါတယ်။
                             လက်ထောက်တယောက်လို ခိုင်းထားချင်ရင် ...
-                            Gems ( https://gemini.google.com/gems) <br /><br />
+                            <br /> Gems - https://gemini.google.com/gems  <br /><br />
                             Role Based Model Assistant တဖြစ်လည်း AI ကို ဘယ်လို ကျွမ်းကျင်သူအဖြစ် နေစေချင်သလဲ သတ်မှတ်ပါ (ဥပမာ - အတွေ့အကြုံရှိသော အထက်တန်းကျောင်း ဆရာအဖြစ် နေပါ)။
                             Google Gemini ရဲ့ "Gems" ဆိုတာ သင့်ရဲ့ နေ့စဉ်လုပ်ငန်းဆောင်တာတွေကို ပိုမိုမြန်ဆန်လွယ်ကူစေဖို့ ဖန်တီးထားတဲ့ ကိုယ်ပိုင် စိတ်ကြိုက် AI လက်ထောက်များ (Customized AI Assistants) ဖြစ်ပါတယ်။ အလုပ်တစ်ခုတည်းအတွက် Prompt တွေကို အခါခါ ထပ်ရိုက်နေစရာမလိုဘဲ၊ သင်လိုချင်တဲ့ ပုံစံ၊ လေသံ၊ စည်းမျဉ်းတွေကို တစ်ခါတည်း သတ်မှတ်ပေးထားလို့ရတဲ့ စနစ်ဖြစ်ပါတယ်။
                             Gems တွေကို ထိထိရောက်ရောက် အသုံးချနိုင်ဖို့ အောက်ပါအတိုင်း အဆင့်ဆင့် လုပ်ဆောင်နိုင်ပါတယ်။ <br /> <br />
                             ၁။ Gem တစ်ခုကို ဘယ်လို ဖန်တီးမလဲ? <br />
-                            Gem Manager သို့သွားပါ: Gemini ဝဘ်ဆိုက် (gemini.google.com) ရဲ့ ဘယ်ဘက်အစွန်မှာရှိတဲ့ "Gem manager" (သို့မဟုတ် "Explore Gems") ကို နှိပ်ပါ။
-                            Gem အသစ်ဖန်တီးပါ: "+ New Gem" ဆိုတဲ့ ခလုတ်ကို နှိပ်ပါ။ <br />
-                            အမည်ပေးပါ (Name): သင့် Gem ရဲ့ လုပ်ဆောင်ချက်ကို ရှင်းလင်းစွာ သိနိုင်မယ့် နာမည်တစ်ခု ပေးပါ (ဥပမာ - "Marketing Expert" သို့မဟုတ် "Recipe Expert")။
-                            ညွှန်ကြားချက်များ ရေးသားပါ (Instructions): ဒါဟာ အရေးအကြီးဆုံး အပိုင်းဖြစ်ပါတယ်။ အကောင်းဆုံး ညွှန်ကြားချက်တစ်ခုဖြစ်ဖို့ အောက်ပါ အချက် (၄) ချက် ပါဝင်သင့်ပါတယ်:
-                            Persona (ဇာတ်ကောင်): AI ကို ဘယ်လို ကျွမ်းကျင်သူအဖြစ် နေစေချင်သလဲ သတ်မှတ်ပါ (Role Base Model)
-                            Task (တာဝန်): ဘာကို လုပ်ဆောင်ပေးရမလဲဆိုတာကို တိကျစွာပြောပြပါ (ဥပမာ - ကျောင်းသားများအတွက် သင်ခန်းစာ အစီအစဉ်များ ဖန်တီးပေးပါ)။
-                            Context (အခြေအနေ/နောက်ခံ): လုပ်ဆောင်ရမယ့် ဘောင်နဲ့ အချက်အလက်တွေကို ပေးပါ။
-                            Format (ပုံစံ): အဖြေကို ဘယ်လိုပုံစံနဲ့ လိုချင်သလဲ သတ်မှတ်ပါ (ဥပမာ - အချက်အလက်များကို Bullet Point ဖြင့် ပြပါ၊ ဇယားဖြင့်ပြပါ)။
-                            ဖိုင်များ ထည့်သွင်းပါ (Knowledge): သင့်လုပ်ငန်းရဲ့ သတင်းအချက်အလက်တွေ၊ စည်းမျဉ်းတွေ ပါဝင်တဲ့ Google Docs, PDFs, စာရင်းဇယား စတဲ့ ဖိုင် ၁၀ ခုအထိကို Gem ထဲမှာ သီးသန့် ထည့်သွင်း (Upload) ပေးထားနိုင်ပါတယ်။
-                            စမ်းသပ်ပြီး သိမ်းဆည်းပါ (Preview & Save): ညာဘက်ခြမ်းမှာရှိတဲ့ Preview နေရာမှာ စမ်းသပ်မေးမြန်းကြည့်ပါ။ အဖြေက ကိုယ်လိုချင်တဲ့အတိုင်း ဖြစ်ပြီဆိုရင် အပေါ်ထောင့်က "Save" ကို နှိပ်လိုက်ပါ။
+                            <br />Gem Manager သို့သွားပါ: Gemini ဝဘ်ဆိုက် (gemini.google.com) ရဲ့ ဘယ်ဘက်အစွန်မှာရှိတဲ့ "Gem manager" (သို့မဟုတ် "Explore Gems") ကို နှိပ်ပါ။
+                            <br />Gem အသစ်ဖန်တီးပါ: "+ New Gem" ဆိုတဲ့ ခလုတ်ကို နှိပ်ပါ။ <br />
+                            <br />အမည်ပေးပါ (Name): သင့် Gem ရဲ့ လုပ်ဆောင်ချက်ကို ရှင်းလင်းစွာ သိနိုင်မယ့် နာမည်တစ်ခု ပေးပါ (ဥပမာ - "Marketing Expert" သို့မဟုတ် "Recipe Expert")။
+                            <br />ညွှန်ကြားချက်များ ရေးသားပါ (Instructions): ဒါဟာ အရေးအကြီးဆုံး အပိုင်းဖြစ်ပါတယ်။ အကောင်းဆုံး ညွှန်ကြားချက်တစ်ခုဖြစ်ဖို့ အောက်ပါ အချက် (၄) ချက် ပါဝင်သင့်ပါတယ်:
+                            <br />Persona (ဇာတ်ကောင်): AI ကို ဘယ်လို ကျွမ်းကျင်သူအဖြစ် နေစေချင်သလဲ သတ်မှတ်ပါ (Role Base Model)
+                            <br />Task (တာဝန်): ဘာကို လုပ်ဆောင်ပေးရမလဲဆိုတာကို တိကျစွာပြောပြပါ (ဥပမာ - ကျောင်းသားများအတွက် သင်ခန်းစာ အစီအစဉ်များ ဖန်တီးပေးပါ)။
+                            <br />Context (အခြေအနေ/နောက်ခံ): လုပ်ဆောင်ရမယ့် ဘောင်နဲ့ အချက်အလက်တွေကို ပေးပါ။
+                            <br />Format (ပုံစံ): အဖြေကို ဘယ်လိုပုံစံနဲ့ လိုချင်သလဲ သတ်မှတ်ပါ (ဥပမာ - အချက်အလက်များကို Bullet Point ဖြင့် ပြပါ၊ ဇယားဖြင့်ပြပါ)။
+                            <br />ဖိုင်များ ထည့်သွင်းပါ (Knowledge): သင့်လုပ်ငန်းရဲ့ သတင်းအချက်အလက်တွေ၊ စည်းမျဉ်းတွေ ပါဝင်တဲ့ Google Docs, PDFs, စာရင်းဇယား စတဲ့ ဖိုင် ၁၀ ခုအထိကို Gem ထဲမှာ သီးသန့် ထည့်သွင်း (Upload) ပေးထားနိုင်ပါတယ်။
+                            <br />စမ်းသပ်ပြီး သိမ်းဆည်းပါ (Preview & Save): ညာဘက်ခြမ်းမှာရှိတဲ့ Preview နေရာမှာ စမ်းသပ်မေးမြန်းကြည့်ပါ။ အဖြေက ကိုယ်လိုချင်တဲ့အတိုင်း ဖြစ်ပြီဆိုရင် အပေါ်ထောင့်က "Save" ကို နှိပ်လိုက်ပါ။
                             <br /><br />၂။ Gems ကို အကျိုးရှိရှိ အသုံးချနိုင်မယ့် နည်းလမ်းကောင်းများ <br />
                             Gemini ကိုယ်တိုင်ကို ညွှန်ကြားချက် ရေးခိုင်းပါ: ညွှန်ကြားချက် (Instructions) ကို သေသေချာချာ ဘယ်လိုရေးရမလဲ မသိရင် မှော်တုတ်တံ (Magic wand သို့မဟုတ် ခဲတံပုံစံ) လေးကို နှိပ်ပြီး Gemini ကို သေသပ်ကျနတဲ့ ညွှန်ကြားချက်တွေ ပြင်ဆင်ရေးသားခိုင်းလို့ ရပါတယ်။
                             အဆင်သင့်ရှိသော Gems များကို အသုံးပြုပါ: အစကနေ ကိုယ်တိုင်မရေးချင်ရင် Google က အဆင်သင့်ပေးထားတဲ့ Gems တွေ (ဥပမာ - Learning coach, Coding partner, Writing editor, Brainstormer) ကို မိတ္တူကူး (Make a copy) ပြီး ကိုယ့်စိတ်ကြိုက် နည်းနည်းပြင်သုံးလို့ ရပါတယ်။
                             အလုပ်တစ်ခုတည်း ထပ်ခါတလဲလဲ လုပ်ရတာတွေကို လျှော့ချပါ: ရှည်လျားတဲ့ ဆောင်းပါးတွေကို အမြဲတမ်း အနှစ်ချုပ်ခိုင်းတာ၊ ဆိုရှယ်မီဒီယာ ပို့စ်တွေ ရေးခိုင်းတာ မျိုးတွေအတွက် ရည်ရွယ်ချက်တစ်ခုစီတိုင်းအတွက် Gem တစ်ခုစီ သီးသန့်ထားရှိပါ။
-                            <br /> ၃။ လက်တွေ့အသုံးချနိုင်သော ဥပမာများ <br />
+                            <br /><br /> ၃။ လက်တွေ့အသုံးချနိုင်သော ဥပမာများ <br />
                             စာသင်ခန်းအတွက်: ကျောင်းသားများအတွက် ဆွဲဆောင်မှုရှိတဲ့ သင်ခန်းစာ အစီအစဉ် (Lesson plan) တွေရေးဆွဲဖို့နဲ့ မေးခွန်းတွေ ထုတ်ပေးဖို့ "Teacher Gem" ဖန်တီးပါ။
-                            စီးပွားရေးအတွက်: ကိုယ့်ကုမ္ပဏီရဲ့ Brand Guidelines နဲ့ ပစ်မှတ်ထားတဲ့ ဖောက်သည် အချက်အလက် (Knowledge files) တွေကို အခြေခံပြီး ကြော်ငြာစာသားတွေ ရေးပေးမယ့် "Marketing Expert Gem" ဖန်တီးပါ။
-                            ကိုယ်ပိုင် အသုံးချရန်: အိမ်မှာရှိတဲ့ ပါဝင်ပစ္စည်းတွေကို ပြောပြလိုက်တာနဲ့ ဟင်းချက်နည်းတွေ အကြံပေးမယ့် "Recipe Expert Gem" ဖန်တီးထားနိုင်ပါတယ်။
-                            ပိုပြီး ရှင်းလင်းသွားအောင် နယ်ပယ်အသီးသီးအတွက် လက်တွေ့ သုံးလို့ရမယ့် Gem ညွှန်ကြားချက် (Instructions) နမူနာ (၃) ခု ကို ပြပေးပါမယ်- <br />
-                            ဥပမာ (၁) - ဆိုရှယ်မီဒီယာ Content ရေးပေးမယ့် Gem (Marketing)
+                            <br />စီးပွားရေးအတွက်: ကိုယ့်ကုမ္ပဏီရဲ့ Brand Guidelines နဲ့ ပစ်မှတ်ထားတဲ့ ဖောက်သည် အချက်အလက် (Knowledge files) တွေကို အခြေခံပြီး ကြော်ငြာစာသားတွေ ရေးပေးမယ့် "Marketing Expert Gem" ဖန်တီးပါ။
+                            <br />ကိုယ်ပိုင် အသုံးချရန်: အိမ်မှာရှိတဲ့ ပါဝင်ပစ္စည်းတွေကို ပြောပြလိုက်တာနဲ့ ဟင်းချက်နည်းတွေ အကြံပေးမယ့် "Recipe Expert Gem" ဖန်တီးထားနိုင်ပါတယ်။
+                            <br />ပိုပြီး ရှင်းလင်းသွားအောင် နယ်ပယ်အသီးသီးအတွက် လက်တွေ့ သုံးလို့ရမယ့် Gem ညွှန်ကြားချက် (Instructions) နမူနာ (၃) ခု ကို ပြပေးပါမယ်- <br />
+                            <br />ဥပမာ (၁) - ဆိုရှယ်မီဒီယာ Content ရေးပေးမယ့် Gem (Marketing)
                             Name: Facebook Content Writer
                             Instructions: မင်းက အတွေ့အကြုံ (၅) နှစ်ရှိတဲ့ ပရော်ဖက်ရှင်နယ် Digital Marketer တစ်ယောက် ဖြစ်တယ်။ ငါက ကုန်ပစ္စည်း ဒါမှမဟုတ် ဝန်ဆောင်မှုတစ်ခုအကြောင်း ပြောပြလိုက်တာနဲ့၊ အဲဒီအကြောင်းကို Facebook ပေါ်မှာ တင်ဖို့ ဆွဲဆောင်မှုရှိတဲ့ ကြော်ငြာစာသား (Content) တစ်ခု ရေးပေးရမယ်။ စာဖတ်သူတွေ စိတ်ဝင်စားအောင် အစအချီ ကောင်းကောင်းသုံးပါ။ သင့်တော်တဲ့ Emoji တွေ ထည့်ပေးပါ။ စာပိုဒ်တွေကို ဖတ်ရလွယ်အောင် ခွဲရေးပေးပြီး နောက်ဆုံးမှာ ဝယ်ယူချင်အောင် ဆွဲဆောင်တဲ့ စာသား (Call to Action) နဲ့ သက်ဆိုင်ရာ Hashtags တွေ မဖြစ်မနေ ထည့်ပေးပါ။
-                            <br />ဥပမာ (၂) - အင်္ဂလိပ်စာ ပြင်ဆင်ပေးမယ့် Gem (Language & Education)
+                            <br /><br />ဥပမာ (၂) - အင်္ဂလိပ်စာ ပြင်ဆင်ပေးမယ့် Gem (Language & Education)
                             Name: English Grammar & Tone Editor
                             Instructions: မင်းက အင်္ဂလိပ်စာ ကျွမ်းကျင်တဲ့ Native Speaker တစ်ယောက် ဖြစ်တယ်။ ငါက အင်္ဂလိပ်စာသားတွေ ပေးပို့လိုက်တိုင်း၊ အဲဒီစာသားရဲ့ သဒ္ဒါ (Grammar) နဲ့ စာလုံးပေါင်း အမှားတွေကို ပြင်ပေးရမယ်။ ပြီးရင် အဲဒီစာသားကို (၁) ရုံးသုံး Professional ပုံစံ၊ (၂) သူငယ်ချင်းတွေနဲ့ ပြောတဲ့ Casual ပုံစံ ဆိုပြီး ပုံစံ (၂) မျိုးနဲ့ ပြန်လည် ရေးသားပေးပါ။ ဘာတွေ ပြင်လိုက်တယ် ဆိုတာကိုပါ အောက်ဆုံးမှာ မြန်မာလို အတိုချုပ် ရှင်းပြပေးပါ။
                             <br />ဥပမာ (၃) - Code တွေကို စစ်ဆေးပေးမယ့် Gem (Programming)
-                            Name: Python Code Reviewer
+                            <br />Name: Python Code Reviewer
                             Instructions: မင်းက Senior Python Developer တစ်ယောက် ဖြစ်တယ်။ ငါရေးထားတဲ့ Python Code တွေကို ပေးပို့လိုက်တိုင်း၊ အဲဒီ Code တွေမှာ Error ပါ/မပါ စစ်ဆေးပေးရမယ်။ ပိုပြီး မြန်ဆန်ကောင်းမွန်တဲ့ Code ဖြစ်အောင် ဘယ်လို ပြင်ရေးသင့်တယ်ဆိုတာကို အကြံပြုပေးပါ။ ပြင်ဆင်ထားတဲ့ Code အသစ်ကို Comment တွေနဲ့တကွ သေသေချာချာ ရေးပြပေးရမယ်။
-                            br 💎 Gem အကြောင်းလေးတော့ပြီးပါပြီ  👏
+                            <br />💎 Gem အကြောင်းလေးတော့ပြီးပါပြီ  👏
                         </p>
 
                         <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">𝐂𝐡𝐚𝐭𝐆𝐏𝐓 ၏ 𝐀𝐈𝐏𝐑𝐌 ကို အသုံးပြုနည်း</h2>
                         <p className="mb-6">
                             𝐂𝐡𝐚𝐭𝐆𝐏𝐓 ၏ 𝐀𝐈𝐏𝐑𝐌 <br /><br />
                             𝐀𝐈𝐏𝐑𝐌  (𝐀𝐫𝐭𝐢𝐟𝐢𝐜𝐢𝐚𝐥 𝐈𝐧𝐭𝐞𝐥𝐥𝐢𝐠𝐞𝐧𝐜𝐞 𝐏𝐫𝐨𝐦𝐩𝐭𝐬 𝐟𝐨𝐫 𝐑𝐚𝐧𝐤𝐢𝐧𝐠 & 𝐌𝐚𝐫𝐤𝐞𝐭𝐢𝐧𝐠) ဆိုတာ #𝐂𝐡𝐚𝐭𝐆𝐏𝐓 အသုံးပြုသူတွေအတွက် အလွန်အသုံးဝင်တဲ့ Browser Extension** တစ်ခုဖြစ်ပါတယ်။
-                            ရိုးရိုးရှင်းရှင်း ပြောရရင်တော့ 𝐂𝐡𝐚𝐭𝐆𝐏𝐓 မှာ ကိုယ်လိုချင်တဲ့ အဖြေရဖို့အတွက် ခိုင်းစေညွှန်ကြားချက် (𝐏𝐫𝐨𝐦𝐩𝐭𝐬) တွေကို ကိုယ်တိုင် စဉ်းစားပြီး အရှည်ကြီး ရိုက်ထည့်နေစရာ မလိုဘဲ၊ သူများတွေ ရေးပြီးသား အဆင်သင့် 𝗣𝗿𝗼𝗺𝗽𝘁 𝗧𝗲𝗺𝗽𝗹𝗮𝘁𝗲 တွေကို ယူသုံးလို့ရအောင် ကူညီပေးတဲ့ Tool တစ်ခုပါ။
-                            #𝐀𝐈𝐏𝐑𝐌 ရဲ့ အဓိက လုပ်ဆောင်ချက်တွေနဲ့ အားသာချက်တွေကို အောက်ပါအတိုင်း ခွဲခြားမှတ်သားနိုင်ပါတယ်- <br />
-                            ၁။ 𝙋𝙧𝙤𝙢𝙥𝙩 𝙇𝙞𝙗𝙧𝙖𝙧𝙮 (အဆင်သင့် Prompt များ) <br />
-                            AIPRM ကို Install လုပ်လိုက်တာနဲ့ ChatGPT ရဲ့ မျက်နှာပြင်မှာ Prompt ပေါင်းထောင်ချီပါဝင်တဲ့ Dashboard တစ်ခု ပေါ်လာပါလိမ့်မယ်။ အဲဒီအထဲမှာ အောက်ပါကဏ္ဍတွေအတွက် အဆင်သင့် Prompt တွေ ပါဝင်ပါတယ်- <br />
-                            📌SEO (Search Engine Optimization): Google မှာ ရှာဖွေမှု ထိပ်ဆုံးရောက်အောင် ဆောင်းပါးရေးနည်း။
+                            <br />ရိုးရိုးရှင်းရှင်း ပြောရရင်တော့ 𝐂𝐡𝐚𝐭𝐆𝐏𝐓 မှာ ကိုယ်လိုချင်တဲ့ အဖြေရဖို့အတွက် ခိုင်းစေညွှန်ကြားချက် (𝐏𝐫𝐨𝐦𝐩𝐭𝐬) တွေကို ကိုယ်တိုင် စဉ်းစားပြီး အရှည်ကြီး ရိုက်ထည့်နေစရာ မလိုဘဲ၊ သူများတွေ ရေးပြီးသား အဆင်သင့် 𝗣𝗿𝗼𝗺𝗽𝘁 𝗧𝗲𝗺𝗽𝗹𝗮𝘁𝗲 တွေကို ယူသုံးလို့ရအောင် ကူညီပေးတဲ့ Tool တစ်ခုပါ။
+                            <br />#𝐀𝐈𝐏𝐑𝐌 ရဲ့ အဓိက လုပ်ဆောင်ချက်တွေနဲ့ အားသာချက်တွေကို အောက်ပါအတိုင်း ခွဲခြားမှတ်သားနိုင်ပါတယ်- <br />
+                            <br /> ၁။ 𝙋𝙧𝙤𝙢𝙥𝙩 𝙇𝙞𝙗𝙧𝙖𝙧𝙮 (အဆင်သင့် Prompt များ) <br />
+                            <br />AIPRM ကို Install လုပ်လိုက်တာနဲ့ ChatGPT ရဲ့ မျက်နှာပြင်မှာ Prompt ပေါင်းထောင်ချီပါဝင်တဲ့ Dashboard တစ်ခု ပေါ်လာပါလိမ့်မယ်။ အဲဒီအထဲမှာ အောက်ပါကဏ္ဍတွေအတွက် အဆင်သင့် Prompt တွေ ပါဝင်ပါတယ်- <br />
+                            <br />📌SEO (Search Engine Optimization): Google မှာ ရှာဖွေမှု ထိပ်ဆုံးရောက်အောင် ဆောင်းပါးရေးနည်း။
                             📌Marketing:** ကြော်ငြာစာသားများ၊ Social Media Post များ ရေးသားခြင်း။
                             📌Copywriting: ဆွဲဆောင်မှုရှိတဲ့ စာသားများ ရေးသားခြင်း။
                             📌Coding: ပရိုဂရမ် ကုဒ်များ ရေးသားခြင်း။
@@ -505,7 +501,7 @@ except ZeroDivisionError:
                             📌Tone - Emotional (စိတ်ခံစားမှုပါသော)၊ Professional (ကျွမ်းကျင်ပညာရှင်ဆန်သော)၊ Friendly (ရင်းနှီးသော) စသဖြင့် ရွေးချယ်နိုင်ပါတယ်။
                             📌 Style - Academic (ပညာရပ်ဆိုင်ရာ)၊ Creative (ဖန်တီးမှုဆန်သော) စသဖြင့် သတ်မှတ်နိုင်ပါတယ်။
                             ----- <br />
-                            ဘယ်သူတွေ သုံးသင့်လဲ။ ? <br />
+                            <br />ဘယ်သူတွေ သုံးသင့်လဲ။ ? <br />
                             📌Content Writer များ
                             📌 Digital Marketer များ
                             📌 SEO သမားများ
@@ -519,11 +515,11 @@ except ZeroDivisionError:
                             𝐑𝐨𝐥𝐞-𝐛𝐚𝐬𝐞𝐝 𝐏𝐫𝐨𝐦𝐩𝐭 (𝐀𝐈 အား သရုပ်ပြ/တာဝန်တစ်ခု သတ်မှတ်ကာ ခိုင်းစေတဲ့ 𝐏𝐫𝐨𝐦𝐩𝐭) <br /> <br />
                             𝐏𝐫𝐨𝐦𝐩𝐭 –  I want you to act as an advertiser. You will create a campaign to promote a product or service of your choice. You will choose a target audience, develop key messages and slogans, select the media channels for promotion, and decide on any additional activities needed to reach your goals. My first suggestion request is "I need help creating an advertising campaign for a new type of energy drink targeting young adults aged 18-30.”
                             <br /> အထက်ပါ 𝐏𝐫𝐨𝐦𝐩𝐭 သည်  နံပါတ် 𝟕.  𝐑𝐨𝐥𝐞-𝐛𝐚𝐬𝐞𝐝 𝐏𝐫𝐨𝐦𝐩𝐭 (𝐀𝐈 အား သရုပ်ပြ/တာဝန်တစ်ခု သတ်မှတ်ကာ ခိုင်းစေတဲ့ 𝐏𝐫𝐨𝐦𝐩𝐭) အမျိုးအစားဖြစ်ပြီး၊ ထို 𝐏𝐫𝐨𝐦𝐩𝐭 အား 𝐂𝐡𝐚𝐭𝐆𝐏𝐓 / 𝐆𝐞𝐦𝐢𝐧𝐢 / 𝐃𝐞𝐞𝐩𝐒𝐞𝐞𝐤 .. 𝐀𝐈 𝐖𝐞𝐛𝐬𝐢𝐭𝐞 တခုတွင် ရိုက်ထည့်ပြီး စေခိုင်းကြည့်ပါမည်။  (ရရှိလာသော ရလဒ်အဖြေအား ကွန်မန့်တွင် ဖော်ပြထားပါသည်။ )
-                            ယခုပို့စ်သည် နမူနာ 𝐏𝐫𝐨𝐦𝐩𝐭  ဖြစ်ပြီး ၎င်းနေရာတွင်  𝐑𝐨𝐥𝐞 များ အစားထိုးပြီး အဖြေရှာကြည့်ပါ။  <br />ဉပမာ -  I want you to act as a motivational coach. လှုံ့ဆော်မှု နည်းပြဆရာအဖြစ်( ဆရာလင်းသိုက်ညွန့် တို့ကဲ့သို့) လုပ်ဆောင်ပါ...။
+                            <br />ယခုပို့စ်သည် နမူနာ 𝐏𝐫𝐨𝐦𝐩𝐭  ဖြစ်ပြီး ၎င်းနေရာတွင်  𝐑𝐨𝐥𝐞 များ အစားထိုးပြီး အဖြေရှာကြည့်ပါ။  <br />ဉပမာ -  I want you to act as a motivational coach. လှုံ့ဆော်မှု နည်းပြဆရာအဖြစ်( ဆရာလင်းသိုက်ညွန့် တို့ကဲ့သို့) လုပ်ဆောင်ပါ...။
                             <br /> 𝐀𝐈 အား မေးခွန်းတွေမေးသောအခါ ဖြစ်စေ၊ လိုချင်တာတခု ထုတ်ခိုင်းသည့်အခါဖြစ်စေ တိကျမှန်ကန်ပြည့်စုံသည့် ရလဒ်ထွက်လာဖို့အတွက် 𝐏𝐫𝐨𝐦𝐩𝐭  ရေးတတ်ဖို့ (ခိုင်းစေတတ်ဖို့) သည် အရေးကြီးပါသည်။
-                            ကျွန်တော်ရေးသားပြုစုလျက်ရှိသော  𝐏𝐫𝐨𝐦𝐩𝐭 𝐄𝐧𝐠𝐢𝐧𝐞𝐞𝐫𝐢𝐧𝐠  စာအုပ်မှ ကောက်နှုတ်ချက် တခုဖြစ်ပါသည်။ စာအုပ်လည်း မကြာမီထွက်ရှိမည်ဖြစ်ပါသည်။ <br />
-                            ❝ 𝐏𝐫𝐨𝐦𝐩𝐭 𝐄𝐧𝐠𝐢𝐧𝐞𝐞𝐫𝐢𝐧𝐠  ဆိုတာနဲ့ ပုံထုတ်ရန်၊ ဗီဒီယိုဖန်တီးရန်သက်သက်ဟု မယူဆဘဲ မိမိတို့ လူမှုစီးပွားဘဝ၊ ပညာရေးသုတေသန၊ ကျန်းမာရေးဂရုစိုက်မှုနှင့် နေ့စဉ်ကြုံတွေ့ရသော ပုစ္ဆာ/ပြဿနာများကို အမှန်ကန်/ အတိကျဆုံး အဖြေရရှိနိုင်ရန် တွေး‌တောကြံဆပြီး ဖန်တီးနိုင်ရန် ရည်ရွယ်ပါသည်။ ❞
-                            AI GURU
+                            <br /> ကျွန်တော်ရေးသားပြုစုလျက်ရှိသော  𝐏𝐫𝐨𝐦𝐩𝐭 𝐄𝐧𝐠𝐢𝐧𝐞𝐞𝐫𝐢𝐧𝐠  စာအုပ်မှ ကောက်နှုတ်ချက် တခုဖြစ်ပါသည်။ စာအုပ်လည်း မကြာမီထွက်ရှိမည်ဖြစ်ပါသည်။ <br />
+                            <br /><br />❝ 𝐏𝐫𝐨𝐦𝐩𝐭 𝐄𝐧𝐠𝐢𝐧𝐞𝐞𝐫𝐢𝐧𝐠  ဆိုတာနဲ့ ပုံထုတ်ရန်၊ ဗီဒီယိုဖန်တီးရန်သက်သက်ဟု မယူဆဘဲ မိမိတို့ လူမှုစီးပွားဘဝ၊ ပညာရေးသုတေသန၊ ကျန်းမာရေးဂရုစိုက်မှုနှင့် နေ့စဉ်ကြုံတွေ့ရသော ပုစ္ဆာ/ပြဿနာများကို အမှန်ကန်/ အတိကျဆုံး အဖြေရရှိနိုင်ရန် တွေး‌တောကြံဆပြီး ဖန်တီးနိုင်ရန် ရည်ရွယ်ပါသည်။ ❞
+                            <br /> AI GURU
                         </p>
 
                     </div>
@@ -623,20 +619,20 @@ except ZeroDivisionError:
 
                             <br /><br />## AI Agent ဆိုသည်မှာဘာလဲ
 
-                            <br />AI Agent ဆိုသည်မှာ Artificial Intelligence ကို အသုံးပြု၍ သတ်မှတ်ထားသော အလုပ်များကို **အလိုအလျောက် စဉ်းစား၍ ဆုံးဖြတ်ကာ လုပ်ဆငငငငငငငငငငငငငငငငငငငငငငငငငငငငငငငငငငငဈ
+                            <br />AI Agent ဆိုသည်မှာ Artificial Intelligence ကို အသုံးပြု၍ သတ်မှတ်ထားသော အလုပ်များကို **အလိုအလျောက် စဉ်းစား၍ ဆုံးဖြတ်ကာ လုပ်ဆောင်ပေးနိုင်သော** စက်တစ်ခုဖြစ်သည်။ <br />AI Agent များကို သတ်မှတ်ထားသော လုပ်ဆောင်ချက်များအရ အလုပ်လုပ်ပေးရန် ဖန်တီးထားပြီး၊ အချိန်နှင့်အမျှ ပိုမိုတိုးတက်လာသည်။ AI Agent များကို အမျိုးမျိုးသော နယ်ပယ်များတွင် အသုံးပြုနိုင်သည်။
 
                             <br />ဥပမာအားဖြင့်
 
-                            <li>* Customer မေးခွန်းများကို ဖြေကြားပေးသည့် Chatbot
+                            <ol><li>* Customer မေးခွန်းများကို ဖြေကြားပေးသည့် Chatbot
                                 * Email များကို စစ်ဆေး၍ အရေးကြီးသောစာများကို ရွေးပေးသည့် AI
                                 * Website များမှ အချက်အလက်များကို စုဆောင်းပေးသည့် Automation System
-                                တို့ကို AI Agent များအဖြစ် တွေ့နိုင်သည်။</li>
+                                တို့ကို AI Agent များအဖြစ် တွေ့နိုင်သည်။</li></ol>
 
                             <br /> ## AI Agent တည်ဆောက်ရန် လိုအပ်သည့် အခြေခံများ <br />
 
                             ကိုယ်ပိုင် AI Agent တစ်ခု ဖန်တီးရန် အောက်ပါအချက်များကို သိရှိထားရန် လိုအပ်သည်။ <br />
 
-                            <ol><li>Programming Language</li><li>AI Model</li><li>Agent Framework</li></ol> ပထမအချက်မှာ **Programming Language** ဖြစ်သည်။ အများဆုံးအသုံးပြုသော ဘာသာစကားမှာ Python ဖြစ်ပြီး AI နှင့် Machine Learning project များအတွက် အလွန်လຽယີກສູ່ အသຯຶກນຳໃຊ້ໄດ້။
+                            <ol><li>Programming Language</li><li>AI Model</li><li>Agent Framework</li></ol> ပထမအချက်မှာ **Programming Language** ဖြစ်သည်။ အများဆုံးအသုံးပြုသော ဘာသာစကားမှာ Python ဖြစ်ပြီး AI နှင့် Machine Learning project များအတွက် အလွန်ဆုံးရွေးချယ်မှုဖြစ်သည်။ Python သည် AI library များစွာ (ဥပမာ - TensorFlow, PyTorch, OpenAI API) ကို ပံ့ပိုးပေးသော ဘာသာစကားဖြစ်သည်။
 
                             <br />ဒုတိယအချက်မှာ **AI Model** ဖြစ်သည်။ ယနေ့ခေတ်တွင် AI Model များစွာ ရှိပြီး developer များသည် မိမိလိုအပ်ချက်အရ အသုံးပြုနိုင်သည်။ ဥပမာအားဖြင့် OpenAI မှ GPT model များ၊ Google မှ Gemini model များ၊ နှင့် Meta မှ LLaMA model များကို အသုံးပြုနိုင်သည်။
 
@@ -644,32 +640,32 @@ except ZeroDivisionError:
 
                             <br /><br />## အရိုးရှင်းဆုံး AI Agent ဖန်တီးနည်း
 
-                            <br />AI Agent တစ်ခုကို အရိုးရှင်းဆုံးပုံစံဖြင့် ဖန်တီးလိုပါက Python ကို အသုံးပြု၍ အောက်ပါအဆင့်များအတိုင်း လုပ်ဆောင်နိုင်သည်။
+                            <br /><br />AI Agent တစ်ခုကို အရိုးရှင်းဆုံးပုံစံဖြင့် ဖန်တီးလိုပါက Python ကို အသုံးပြု၍ အောက်ပါအဆင့်များအတိုင်း လုပ်ဆောင်နိုင်သည်။
 
                             <br />ပထမအဆင့်အနေဖြင့် Computer တွင် Python ကို install ပြုလုပ်ရမည်။ ထို့နောက် AI Agent တည်ဆောက်ရန် လိုအပ်သော library များကို install ပြုလုပ်ရမည်။
 
-                            ```
+                            <br />```
                             pip install openai langchain
                             ```
-
+                            <br />
                             ထို့နောက် Python code အနည်းငယ် ရေးသား၍ AI Agent ကို စတင်အသုံးပြုနိုင်သည်။
 
-                            ```
+                            ``` <br />
                             from langchain.agents import initialize_agent
-                            from langchain.llms import OpenAI
+                            <br />from langchain.llms import OpenAI
 
-                            llm = OpenAI(api_key="YOUR_API_KEY")
+                            <br />llm = OpenAI(api_key="YOUR_API_KEY")
 
-                            agent = initialize_agent([], llm, agent="zero-shot-react-description")
+                            <br /> agent = initialize_agent([], llm, agent="zero-shot-react-description")
 
-                            agent.run("What is the capital of Japan?")
-                            ```
+                            <br /> agent.run("What is the capital of Japan?")
+                            ```<br />
 
-                            ဤ code သည် မေးခွန်းတစ်ခုကို AI Model ထံ ပို့ပြီး အဖြေကို ပြန်ထုတ်ပေးနိုင်သော ရိုးရှင်းသည့် AI Agent တစ်ခုဖြစ်သည်။
+                            <br />ဤ code သည် မေးခွန်းတစ်ခုကို AI Model ထံ ပို့ပြီး အဖြေကို ပြန်ထုတ်ပေးနိုင်သော ရိုးရှင်းသည့် AI Agent တစ်ခုဖြစ်သည်။
 
-                            ## AI Agent များ၏ အသုံးဝင်မှု
+                            <br /><br />## AI Agent များ၏ အသုံးဝင်မှု
 
-                            AI Agent များကို အမျိုးမျိုးသော နယ်ပယ်များတွင် အသုံးပြုနိုင်သည်။ ဥပမာအားဖြင့်
+                            <br />AI Agent များကို အမျိုးမျိုးသော နယ်ပယ်များတွင် အသုံးပြုနိုင်သည်။ <br /> <br />ဥပမာအားဖြင့်
 
                             <ol><li>Customer service chatbot များ</li><li>Data analysis automation</li><li>Email management system</li><li>Website data collection tools</li><li>Translation assistant</li></ol>
                             <br />စီးပွားရေးလုပ်ငန်းများအတွက် AI Agent များသည် အချိန်နှင့် လုပ်အားကို လျှော့ချပေးပြီး ထိရောက်မှုကို တိုးတက်စေသည်။
@@ -686,18 +682,180 @@ except ZeroDivisionError:
 
                     </div>
                 );
+
             case "ai-gen-social":
                 return (
-                    <div>
-                        <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Generative AI for Social Media</h2>
+                    <div className="animate-fade-in space-y-8">
+                        {/* 🌟 ခေါင်းစဉ်နှင့် မိတ်ဆက် 🌟 */}
+                        <h1 className="text-3xl font-extrabold text-sky-600 mb-6 flex items-center gap-3">
+                            <span>📱</span> Social Media အတွက် Generative AI (GenAI)
+                        </h1>
+                        <p className="text-slate-700 leading-relaxed text-lg mb-8">
+                            ဒီဂျစ်တယ်ခေတ်တွင် Social Media သည် လူမှုဆက်သွယ်ရေး၊ စီးပွားရေးကြော်ငြာနှင့် အချက်အလက်မျှဝေခြင်းများအတွက် အလွန်အရေးပါသော Platform တစ်ခုဖြစ်လာသည်။ Generative AI သည် Social Media content creation နှင့် marketing လုပ်ငန်းများကို အခြေခံကျကျ ပြောင်းလဲပေးနေသော အရေးကြီးသော နည်းပညာတစ်ခုဖြစ်သည်။
+                        </p>
 
+                        {/* 🌟 ပထမပုံ (Reference Image) 🌟 */}
+                        <div className="relative mb-10 group">
+                            <img
+                                src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop"
+                                alt="AI Gen Social Media Engagement"
+                                className="w-full h-72 object-cover rounded-2xl shadow-md border border-slate-200 transition-transform duration-300 group-hover:scale-[1.02]"
+                            />
+                            <div className="absolute bottom-4 left-4 bg-black/70 text-white px-4 py-1.5 rounded-full text-sm backdrop-blur-sm flex items-center gap-2">
+                                <span>🌐</span> Automated Engagement & Creation
+                            </div>
+                        </div>
 
-                        {/* 🌟 ပုံအသစ် ထည့်နည်း 🌟 */}
-                        <img
-                            src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=500&auto=format&fit=crop"
-                            alt="ai-gen-social"
-                            className="w-full rounded-2xl shadow-md mb-8 border border-slate-200"
-                        />
+                        {/* 🌟 ၁။ Generative AI ဆိုသည်မှာဘာလဲ 🌟 */}
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                                <span>💡</span> ၁။ Generative AI ဆိုသည်မှာ ဘာလဲ?
+                            </h2>
+                            <div className="bg-sky-50 border-l-4 border-sky-500 p-6 rounded-r-2xl mb-6 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 opacity-10 text-6xl transform translate-x-4 -translate-y-2">"</div>
+                                <p className="italic text-sky-900 text-lg relative z-10">
+                                    Generative AI သည် ရှိပြီးသား data များကို လေ့လာသင်ယူပြီး အသစ်သော content (စာသား၊ ပုံရိပ်၊ အသံနှင့် Video) များကို အလိုအလျောက် ဖန်တီးပေးနိုင်သည့် Artificial Intelligence နည်းပညာဖြစ်သည်..."
+                                </p>
+                            </div>
+                            <p className="text-slate-700 mb-4">
+                                ယနေ့ခေတ်တွင် Social Media content creator များ၊ Marketing professional များနှင့် စီးပွားရေးလုပ်ငန်းများသည် GenAI ကို အသုံးပြု၍ Post စာသားများ၊ Design များ၊ Video များနှင့် Marketing idea များကို ဖန်တီးကြသည်။
+                            </p>
+                            <div className="flex gap-4 mb-4 font-mono text-sm bg-slate-900 text-sky-300 p-4 rounded-xl">
+                                <span>$ Prompt: "Facebook post caption for a new cafe opening"</span>
+                            </div>
+                        </div>
+
+                        {/* 🌟 Visual Content Generation Image 🌟 */}
+                        <div className="relative mb-10 group">
+                            <img
+                                src="https://images.unsplash.com/photo-1681329606836-84d2890664e1?q=80&w=800&auto=format&fit=crop"
+                                alt="AI Text to Image Generation Example"
+                                className="w-full h-64 object-cover rounded-2xl shadow-md border border-slate-200 transition-transform duration-300 group-hover:scale-[1.02]"
+                            />
+                            <div className="absolute top-4 right-4 bg-white/70 text-sky-900 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm flex items-center gap-1.5">
+                                <span>🖼️</span> DALL-E / Midjourney Example
+                            </div>
+                        </div>
+
+                        {/* 🌟 ၂။ Social Media Platform များတွင် GenAI ကို အသုံးပြုပုံ 🌟 */}
+                        <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-6 flex items-center gap-2">
+                            <span>🛠️</span> ၂။ Social Media Platform များတွင် GenAI ကို အသုံးပြုပုံ
+                        </h2>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:-translate-y-1 hover:shadow-md transition-all">
+                                <div className="bg-amber-100 w-12 h-12 flex items-center justify-center rounded-full text-amber-600 text-2xl mb-4">✍️</div>
+                                <h3 className="font-bold text-slate-800 text-lg mb-2">Text Content Creation</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                                    Facebook, Instagram, LinkedIn သို့မဟုတ် X (Twitter) တို့အတွက် Caption များ၊ Thread များ၊ blog posts နှင့် content ideas များကို မြန်ဆန်စွာ ဖန်တီးပေးသည်။
+                                </p>
+                                <p className="text-xs text-amber-700 italic border border-amber-200 bg-amber-50 p-2 rounded">
+                                    "ရုံးဖွင့်ရက်တွေမှာ လန်းဆန်းသွားဖို့ ကျွန်တော်တို့ cafe ရဲ့ Espresso အသစ်ကို လာမြည်းစမ်းကြည့်ပါ! #NewCafe #CoffeeLover"
+                                </p>
+                            </div>
+
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:-translate-y-1 hover:shadow-md transition-all">
+                                <div className="bg-emerald-100 w-12 h-12 flex items-center justify-center rounded-full text-emerald-600 text-2xl mb-4">🖼️</div>
+                                <h3 className="font-bold text-slate-800 text-lg mb-2">Visual Content (Image)</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                                    Text-to-Image tools များကို အသုံးပြု၍ Social Media post များအတွက် ပိုစတာ၊ Illustration၊ product showcases နှင့် banner များကို အချိန်တိုအတွင်း ဖန်တီးနိုင်သည်။
+                                </p>
+                                <p className="text-xs text-emerald-700 italic border border-emerald-200 bg-emerald-50 p-2 rounded">
+                                    "စိမ်းလန်းတဲ့ တောအုပ်နောက်ခံမှာ ရောင်စုံဖျော်ရည် ပုလင်းတစ်ပုလင်း။ #AIImage #VisualMarketing"
+                                </p>
+                            </div>
+
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:-translate-y-1 hover:shadow-md transition-all">
+                                <div className="bg-rose-100 w-12 h-12 flex items-center justify-center rounded-full text-rose-600 text-2xl mb-4">🎬</div>
+                                <h3 className="font-bold text-slate-800 text-lg mb-2">Video Content</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                                    Short videos များ၊ Reels များနှင့် TikTok များအတွက် script ရေးသားခြင်း၊ subtitle ထည့်ခြင်းနှင့် video effects များ ဖန်တီးပေးနိုင်သည်။
+                                </p>
+                                <p className="text-xs text-rose-700 italic border border-rose-200 bg-rose-50 p-2 rounded">
+                                    "30-second TikTok script for demonstrating a new kitchen gadget."
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* 🌟 နှိုင်းယှဉ်ချက် ဇယား (Table) 🌟 */}
+                        <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <span>⚖️</span> ၃။ ရိုးရာ Content Creation နှင့် GenAI နှိုင်းယှဉ်ချက်
+                        </h2>
+                        <div className="overflow-x-auto mb-10 shadow-sm rounded-xl border border-slate-200">
+                            <table className="w-full text-left bg-white">
+                                <thead className="bg-slate-100 text-slate-800">
+                                    <tr>
+                                        <th className="px-6 py-4 font-semibold w-1/4">Content အမျိုးအစား</th>
+                                        <th className="px-6 py-4 font-semibold w-1/3">ရိုးရာ Content Creation (Manual)</th>
+                                        <th className="px-6 py-4 font-semibold text-sky-700">🤖 Generative AI (GenAI)</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-slate-100 text-slate-700">
+                                    <tr className="hover:bg-slate-50">
+                                        <td className="px-6 py-4 font-medium text-slate-900">Captions & Posts</td>
+                                        <td className="px-6 py-4 text-sm">နာရီပေါင်းများစွာ Idea စဉ်းစားပြီး ကိုယ်တိုင်ရေးသားရသည်။</td>
+                                        <td className="px-6 py-4 text-sm bg-sky-50/30">စက္ကန့်ပိုင်းအတွင်း တိကျပြီး Creative ဖြစ်သော Caption များကို ဖန်တီးပေးသည်။</td>
+                                    </tr>
+                                    <tr className="hover:bg-slate-50">
+                                        <td className="px-6 py-4 font-medium text-slate-900">Image Creation</td>
+                                        <td className="px-6 py-4 text-sm">Graphic designer လိုအပ်ပြီး ရက်ပေါင်းများစွာ ကြာနိုင်သည်။</td>
+                                        <td className="px-6 py-4 text-sm bg-sky-50/30">မိနစ်ပိုင်းအတွင်း စာသားကို အခြေခံ၍ ပုံများကို ဖန်တီးပေးသည်။</td>
+                                    </tr>
+                                    <tr className="hover:bg-slate-50">
+                                        <td className="px-6 py-4 font-medium text-slate-900">Video Content</td>
+                                        <td className="px-6 py-4 text-sm">Script, filming, editing များစွာ လုပ်ဆောင်ရသည်။</td>
+                                        <td className="px-6 py-4 text-sm bg-sky-50/30">Script ရေးသားခြင်း၊ Video clips များ စုစည်းခြင်းနှင့် subtitle ထည့်ခြင်းကို အလိုအလျောက် လုပ်ဆောင်ပေးသည်။</td>
+                                    </tr>
+                                    <tr className="hover:bg-slate-50">
+                                        <td className="px-6 py-4 font-medium text-slate-900">Idea Generation</td>
+                                        <td className="px-6 py-4 text-sm">Brainstorming လုပ်ရန် အချိန်နှင့် လူအင်အား လိုအပ်သည်။</td>
+                                        <td className="px-6 py-4 text-sm bg-sky-50/30">Audience data များကို လေ့လာပြီး လူသားများ မစဉ်းစားမိနိုင်သော idea အသစ်များကို ဖန်တီးပေးသည်။</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {/* 🌟 ၄။ Marketing အကျိုးကျေးဇူးများ (Target Audience Cards) 🌟 */}
+                        <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 mb-8">
+                            <h2 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center gap-2">
+                                <span>🎯</span> ၄။ GenAI ကို အသုံးပြုခြင်း၏ Marketing အကျိုးကျေးဇူးများ
+                            </h2>
+                            <ul className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                                <li className="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm">
+                                    <span className="text-2xl">⏳</span>
+                                    <div>
+                                        <strong className="text-slate-800">အချိန်နှင့် ကုန်ကျစရိတ် ချွေတာနိုင်ခြင်း</strong>
+                                        <p className="text-slate-600 text-sm mt-1">Content creation အချိန်ကို လျှော့ချပေးပြီး Marketing budget ကို ပိုမိုထိရောက်စွာ အသုံးပြုနိုင်သည်။</p>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm">
+                                    <span className="text-2xl">📈</span>
+                                    <div>
+                                        <strong className="text-slate-800">Content အရေအတွက် တိုးမြှင့်နိုင်ခြင်း</strong>
+                                        <p className="text-slate-600 text-sm mt-1">တစ်နေ့အတွင်း Post များစွာ ဖန်တီးနိုင်ပြီး Audience နှင့် ပိုမိုထိရောက်စွာ ဆက်သွယ်နိုင်သည်။</p>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm">
+                                    <span className="text-2xl">🎨</span>
+                                    <div>
+                                        <strong className="text-slate-800">Creative Diversity & Consistency</strong>
+                                        <p className="text-slate-600 text-sm mt-1">Idea အသစ်များကို စဉ်းစားပေးပြီး content ပုံစံမျိုးစုံဖြင့် အမြဲတစေ ဆန်းသစ်နေစေသည်။</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* 🌟 ၅။ သတိပြုရမည့် စိန်ခေါ်မှုများနှင့် ကျင့်ဝတ်ဆိုင်ရာအချက်များ 🌟 */}
+                        <div className="bg-rose-50 border-l-4 border-rose-500 p-6 rounded-r-2xl mb-8">
+                            <h2 className="text-2xl font-bold text-rose-900 mb-4 flex items-center gap-2">
+                                <span>⚠️</span> ၅။ သတိပြုရမည့် စိန်ခေါ်မှုများနှင့် ကျင့်ဝတ်ဆိုင်ရာအချက်များ
+                            </h2>
+                            <ul className="list-disc ml-6 space-y-2 text-rose-800 text-sm">
+                                <li>**အချက်အလက်မှန်ကန်မှု:** AI က ဖန်တီးသော content များကို လူတစ်ဦးက ပြန်လည် စစ်ဆေးရန် လိုအပ်သည်။</li>
+                                <li>**မူပိုင်ခွင့်နှင့် ethics:** AI ဖြင့် ဖန်တီးထားသော ပုံများနှင့် content များကို အသုံးပြုရာတွင် copyright နှင့် ethical guideline များကို လိုက်နာရန် လိုအပ်သည်။</li>
+                                <li>**Human Touch:** AI content များသည် လူသားချင်း ဆက်သွယ်မှု (emotional connect) အပိုင်းတွင် အားနည်းနိုင်သဖြင့် လူသား၏ ပါဝင်ပတ်သက်မှု ရှိနေရမည်။</li>
+                            </ul>
+                        </div>
                         <p className="mb-6">
                             Generative AI သည် Social Media အတွက် အကြောင်းအရာများကို အလိုအလျောက် ဖန်တီးပေးနိုင်သော နည်းပညာတစ်ခုဖြစ်သည်။
                             /  # Generative AI for Social Media (သင်ခန်းစာ ဆောင်းပါး) <br />
@@ -741,148 +899,385 @@ except ZeroDivisionError:
 
                             <br />Generative AI သည် Social Media content creation နှင့် marketing လုပ်ငန်းများကို ပြောင်းလဲပေးနေသော အရေးကြီးသော နည်းပညာတစ်ခုဖြစ်သည်။ Content creator များနှင့် စီးပွားရေးလုပ်ငန်းများသည် Generative AI tools များကို အသုံးပြုခြင်းအားဖြင့် မြန်ဆန်ပြီး creative ဖြစ်သော Social Media content များကို ဖန်တီးနိုင်သည်။ ထို့ကြောင့် Generative AI နည်းပညာကို လေ့လာအသုံးချခြင်းသည် အနာဂတ် Social Media marketing လောကတွင် အရေးပါသော အရည်အချင်းတစ်ခု ဖြစ်လာမည်ဖြစ်သည်။
                         </p>
+                        {/* 🌟 နိဂုံး 🌟 */}
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8">
+
+                            <p className="text-slate-700 leading-relaxed text-lg">
+                                GenAI နည်းပညာကို လေ့လာအသုံးချခြင်းသည် အနာဂတ် Social Media Marketing လောကတွင် အရေးပါသော အရည်အချင်းတစ်ခု ဖြစ်လာမည်ဖြစ်သည်။ Content creator များနှင့် စီးပွားရေးလုပ်ငန်းများသည် Generative AI tools များကို အသုံးပြုခြင်းအားဖြင့် မြန်ဆန်ပြီး creative ဖြစ်သော Social Media content များကို ဖန်တီးနိုင်သည်။
+                            </p>
+                        </div>
 
                     </div>
                 );
+
             case "ai-tools-websites":
                 return (
-                    <div>
-                        <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">AI Tools & Websites</h2>
+                    <div className="animate-fade-in space-y-8">
+                        {/* 🌟 ခေါင်းစဉ်နှင့် မိတ်ဆက် 🌟 */}
+                        <h1 className="text-3xl font-extrabold text-indigo-600 mb-6 flex items-center gap-3">
+                            <span>🧰</span> AI Tools & Websites စုစည်းမှု
+                        </h1>
 
-                        {/* 🌟 ပုံအသစ် ထည့်နည်း 🌟 */}
+                        {/* 🌟 ပုံထည့်သွင်းခြင်း 🌟 */}
                         <img
                             src="/src/assets/amara1.jpg"
-                            alt="ai-tools-websites"
-                            className="w-full rounded-2xl shadow-md mb-8 border border-slate-200"
+                            alt="AI Tools and Websites Collection"
+                            className="w-full h-auto max-h-96 object-cover rounded-2xl shadow-md mb-8 border border-slate-200"
+                            onError={(e) => {
+                                // အကယ်၍ Local ပုံမရှိခဲ့ပါက အစားထိုးပြသမည့်ပုံ
+                                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop";
+                            }}
                         />
 
-                        <p className="mb-6">
-                            AI Tools နှင့် Websites များသည် နည်းပညာလောကတွင် အလွန်အရေးပါလာသော အရာများဖြစ်သည်။ ယခုခေတ်တွင် AI ကို အသုံးပြု၍ လူသားများ၏ အလုပ်များကို အလိုအလျောက် ကူညီလုပ်ဆောင်ပေးနိုင်သည့် Tools များနှင့် Websites များစွာ ရှိလာပြီဖြစ်သည်။
+                        {/* 🌟 အမှာစာ 🌟 */}
+                        <div className="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-2xl mb-8">
+                            <p className="text-indigo-900 font-medium text-lg leading-relaxed">
+                                AI Tools နှင့် Websites များသည် နည်းပညာလောကတွင် အလွန်အရေးပါလာသော အရာများဖြစ်သည်။ ယခုခေတ်တွင် AI ကို အသုံးပြု၍ လူသားများ၏ အလုပ်များကို အလိုအလျောက် ကူညီလုပ်ဆောင်ပေးနိုင်သည့် Tools များနှင့် Websites များစွာ ရှိလာပြီဖြစ်သည်။
+                            </p>
+                            <div className="mt-4 p-4 bg-white/60 rounded-xl">
+                                <p className="text-slate-800 font-semibold mb-2">
+                                    "AI ခေတ်မှာ မြန်မာနိုင်ငံသားတိုင်း ခေတ်နောက်မကျန်စေရေး တို့အရေးပါ။ အားလုံးက လွယ်ကူနေပါပြီ။"
+                                </p>
+                                <p className="text-slate-700 text-sm">
+                                    ကျွန်တော် လက်ရှိသုံးနေတဲ့ AI Website တွေဖြစ်ပါတယ်။ ဖုန်းထဲမှာ Application အနေနဲ့ အလေးခံပြီး ထည့်မထားတော့ဘဲ ဒီ Website Link တွေကနေ တိုက်ရိုက်နှိပ်ပြီး AI Features တွေကို အလွယ်တကူ အသုံးပြုနိုင်ပါတယ်။ ရှာဖွေရလွယ်ကူစေရန် အမျိုးအစားအလိုက် ခွဲခြားပေးထားပါတယ်။
+                                </p>
+                            </div>
+                        </div>
 
-                            <br /><br /> AI ခေတ်မှာ မြန်မာနိင်ငံသားတိုင်း ခေတ်နောက်မကျန်စေရေး တို့အရေးပါ။
-                            အားလုံးက လွယ်ကူနေပါပြီ။<br />
-                            ကျွန်တော် လက်ရှိသုံးနေတဲ့ AI Website တွေဖြစ်ပါတယ်။ ဖုန်းထဲမှာ application အနေနဲ့ အလေးခံပြီး ထည့်မထားတော့ဘဲ ဒီ Website Link တွေကနေ နှိပ်ပြီး AI Features တွေ သွားလုပ်လို့ရပါတယ်။ AI နယ်ပယ်က ကျယ်ဝန်းတော့ သူ့ အမျိုးအစားအလိုက် Category တွေ ခွဲပေးထားပါတယ်။
-                            ###################### <br />
-                            Artificial Intelligence (AI Links များ)
-                            <br />သိချင်တာတွေမေးဖို့၊ ပုံတွေထုတ်ဖို့နဲ့ သုံးလို့အကောင်းဆုံး AI ChatBot အမျိုးအစား ၄ ခု
-                            <br />(1) chatGPT
-                            https://chatgpt.com/
-                            (2) Google Gemini
-                            https://gemini.google.com/app
-                            (3) Grok
-                            https://grok.com/
-                            https://x.ai/grok
-                            (4) DeepSeek
-                            https://www.deepseek.com/
-                            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                            <br /> စာလုပ်ဖို့၊ Program Coding တွေရေးဖို့၊ Powerpoint တွေ လုပ်ဖို့၊ စာတွေစစ်ဖို့၊ ဘာသာပြန်ဖို့ နဲ့
-                            ကျောင်းသားတွေအတွက် အကောင်းဆုံး AI  ၇ ခု
-                            (1) Claude AI
-                            https://claude.ai/
-                            (2) NotebookLM
-                            https://notebooklm.google/
-                            (3) Gamma
-                            https://gamma.app/
-                            (4) Grammarly
-                            https://www.grammarly.com/
-                            (5) Perplexity
-                            https://www.perplexity.ai/
-                            (6) Notion
-                            https://www.notion.com/
-                            (7) Google AI Studio
-                            https://aistudio.google.com/
-                            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                            <br /> အရည်အသွေးပြည့် ရုပ်ပုံတွေ၊ ဗီဒီယိုတွေ ထုတ်ဖို့ AI ၉ ခု
-                            (1) Leonardo AI
-                            https://leonardo.ai/
-                            (2) Midjourney AI
-                            https://www.midjourney.com/
-                            (3) RunwayML
-                            https://runwayml.com/
-                            (4) Google AI Studio
-                            https://aistudio.google.com/
-                            (5) Pixverse
-                            https://app.pixverse.ai/onboard
-                            (6) Kling AI
-                            https://app.klingai.com/global/
-                            (7) DallE-3
-                            https://openart.ai/home
-                            https://openai.com/index/dall-e-3/
-                            😎 Google Labs (Flow, Whisk, Image-Fx, Music-Fx, Music-Fx-Dj)
-                            https://labs.google/
-                            https://labs.google/fx/tools/flow
-                            https://labs.google/fx/tools/whisk
-                            https://labs.google/fx/tools/image-fx
-                            https://labs.google/fx/tools/music-fx
-                            https://labs.google/fx/tools/music-fx-dj
-                            (9) Heygen
-                            https://www.heygen.com/
-                            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                            <br />အသံပိုင်းဆိုင်ရာဖန်တီးခြင်း၊ ပြောင်းလဲခြင်း၊ ဂီတသီချင်းများဖန်တီးခြင်းများအတွက် အကောင်းဆုံး AI ၄ ခု
-                            (1) Suno (For Song)
-                            https://suno.com/home
-                            (2) ElevenLabs
-                            https://elevenlabs.io/
-                            (3) Clipchamp
-                            https://clipchamp.com/
-                            (4) Music Fx
-                            https://labs.google/fx/tools/music-fx
-                            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                            <br />ရုပ်သံတည်းဖြတ်ခြင်း၊ လိုဂိုများ ကြော်ငြာများဖန်တီးခြင်းများအတွက် အကောင်းဆုံး Website ၃ ခု
-                            (1) CapCut
-                            https://www.capcut.com/tools/online-video-editor
-                            (2) Canva
-                            https://www.canva.com/
-                            (3) Kinemaster
-                            https://www.kinemaster.com/
-                            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                            <br />ဓာတ်ပုံဟောင်းတွေ ပြန်ပြုပြင်ဖို့နဲ့ ပုံအလှတွေ ဖန်တီးဖို့ AI ၂ ခု
-                            (1) Remini
-                            https://remini.ai/try-remini
-                            (2) Myheritage
-                            https://www.myheritage.com/ai-time-machine
-                            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                            <br /><br />အခြား အသုံးဝင်သော Website များ
-                            (1) Pinterest (ပုံရှာရန်)
-                            https://www.pinterest.com/
-                            (2) Hedra (ရုပ်သံဖန်တီးရန်)
-                            https://www.hedra.com/app/home
-                            (3) Yupp AI ( AI မျိုးစုံအား တနေရာတည်းမှ သုံးရန်)
-                            https://yupp.ai/
-                            (4) Blackbox AI ( AI မျိုးစုံအား တနေရာတည်းမှ သုံးရန်)
-                            https://www.blackbox.ai/
-                            (5) Logo and watermark Remover (မူရင်း လိုဂိုနှင့် ရေစာများ ဖျက်ရန်)
-                            https://www.watermarkremover.io/
-                            (6) Looka - (Logo တွေ Design ဆွဲပြီး Brand Merchandiseထုတ်ရန်)
-                            https://looka.com/
-                            (7) Soundraw - (Royalty-free Music တွေဖန်တီး)
-                            https://soundraw.io/
-                            (😎  Veed.io -( TikTok အတွက် ဗီဒီယိုတွေတည်းဖြတ်)
-                            https://www.veed.io/
-                            (9) v0 (by Vercel) - App တွေတည်ဆောက်)
-                            https://v0.dev/
-                            (10) SurgeGraph - ( Blog တွေရေး )
-                            https://surgegraph.io/1
-                            (11) Freepik (All AI )
-                            https://www.freepik.com/
-                            (12) free AI OXAAM
-                            https://www.oxaam.com/
-                            (13) Free AI tools
-                            https://mrfreetools.com/
-                            (14) All Prompts
-                            https://www.aiwind.org/
-                            (15) AI GURU Facebook Page
-                            https://www.facebook.com/aigurumm/
-                            <br />Vibe Code Tools
-                            (1) Cursor AIVS Code အခြေခံ AI Editor (Professional ဆန်ဆန် Code ရေးရန်) www.cursor.com
-                            (2) Replit AgentBrowser ပေါ်မှာတင် App တစ်ခုလုံးကို AI နဲ့ တည်ဆောက်ရန် www.replit.com
-                            (3) Claude AIArtifacts feature ဖြင့် UI/UX များကို ချက်ချင်းစမ်းသပ်ရန် www.claude.ai
-                            <br /> AI GURU
+                        {/* 🌟 Links များကို Card များဖြင့် ခွဲခြားပြသခြင်း 🌟 */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                        </p>
+                            {/* 1. ChatBots */}
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                                <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-2">
+                                    <span>💬</span> AI ChatBots များ
+                                </h2>
+                                <p className="text-sm text-slate-500 mb-4">သိချင်တာတွေမေးဖို့၊ ပုံတွေထုတ်ဖို့နဲ့ သုံးလို့အကောင်းဆုံး</p>
+                                <ul className="space-y-3">
+                                    {[
+                                        { name: "ChatGPT", link: "https://chatgpt.com/" },
+                                        { name: "Google Gemini", link: "https://gemini.google.com/app" },
+                                        { name: "Grok", link: "https://grok.com/" },
+                                        { name: "DeepSeek", link: "https://www.deepseek.com/" }
+                                    ].map((item, idx) => (
+                                        <li key={idx}>
+                                            <a href={item.link} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-indigo-50 transition-colors border border-transparent hover:border-indigo-100">
+                                                <span className="font-semibold text-slate-700 group-hover:text-indigo-700">{item.name}</span>
+                                                <span className="text-xs text-indigo-500 font-medium">Visit ↗</span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* 2. Study & Productivity */}
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                                <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-2">
+                                    <span>📚</span> ပညာရေးနှင့် လုပ်ငန်းသုံး AI
+                                </h2>
+                                <p className="text-sm text-slate-500 mb-4">စာလုပ်ဖို့၊ Coding ရေးဖို့၊ Powerpoint လုပ်ဖို့နဲ့ ဘာသာပြန်ဖို့</p>
+                                <ul className="space-y-3">
+                                    {[
+                                        { name: "Claude AI", link: "https://claude.ai/" },
+                                        { name: "NotebookLM", link: "https://notebooklm.google/" },
+                                        { name: "Gamma", link: "https://gamma.app/" },
+                                        { name: "Grammarly", link: "https://www.grammarly.com/" },
+                                        { name: "Perplexity", link: "https://www.perplexity.ai/" },
+                                        { name: "Notion", link: "https://www.notion.com/" },
+                                        { name: "Google AI Studio", link: "https://aistudio.google.com/" }
+                                    ].map((item, idx) => (
+                                        <li key={idx}>
+                                            <a href={item.link} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-blue-50 transition-colors border border-transparent hover:border-blue-100">
+                                                <span className="font-semibold text-slate-700 group-hover:text-blue-700">{item.name}</span>
+                                                <span className="text-xs text-blue-500 font-medium">Visit ↗</span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* 3. Image & Video Gen */}
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                                <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-2">
+                                    <span>🎨</span> ရုပ်ပုံနှင့် ဗီဒီယို ဖန်တီးရန်
+                                </h2>
+                                <p className="text-sm text-slate-500 mb-4">အရည်အသွေးပြည့် ရုပ်ပုံတွေ၊ ဗီဒီယိုတွေ ထုတ်ဖို့</p>
+                                <ul className="space-y-3 h-64 overflow-y-auto pr-2 custom-scrollbar">
+                                    {[
+                                        { name: "Leonardo AI", link: "https://leonardo.ai/" },
+                                        { name: "Midjourney AI", link: "https://www.midjourney.com/" },
+                                        { name: "RunwayML", link: "https://runwayml.com/" },
+                                        { name: "Pixverse", link: "https://app.pixverse.ai/onboard" },
+                                        { name: "Kling AI", link: "https://app.klingai.com/global/" },
+                                        { name: "DallE-3 (OpenArt)", link: "https://openart.ai/home" },
+                                        { name: "Google Labs", link: "https://labs.google/" },
+                                        { name: "Image-FX", link: "https://labs.google/fx/tools/image-fx" },
+                                        { name: "Heygen", link: "https://www.heygen.com/" }
+                                    ].map((item, idx) => (
+                                        <li key={idx}>
+                                            <a href={item.link} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-emerald-50 transition-colors border border-transparent hover:border-emerald-100">
+                                                <span className="font-semibold text-slate-700 group-hover:text-emerald-700">{item.name}</span>
+                                                <span className="text-xs text-emerald-500 font-medium">Visit ↗</span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* 4. Audio & Video Editing */}
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow flex flex-col gap-6">
+                                <div>
+                                    <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-2">
+                                        <span>🎵</span> အသံနှင့် ဂီတ ဖန်တီးရန်
+                                    </h2>
+                                    <ul className="space-y-3">
+                                        {[
+                                            { name: "Suno (For Song)", link: "https://suno.com/home" },
+                                            { name: "ElevenLabs", link: "https://elevenlabs.io/" },
+                                            { name: "Music Fx", link: "https://labs.google/fx/tools/music-fx" }
+                                        ].map((item, idx) => (
+                                            <li key={idx}>
+                                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-purple-50 transition-colors border border-transparent hover:border-purple-100">
+                                                    <span className="font-semibold text-slate-700 group-hover:text-purple-700">{item.name}</span>
+                                                    <span className="text-xs text-purple-500 font-medium">Visit ↗</span>
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-2">
+                                        <span>🎬</span> ရုပ်သံတည်းဖြတ်ရန်
+                                    </h2>
+                                    <ul className="space-y-3">
+                                        {[
+                                            { name: "CapCut", link: "https://www.capcut.com/tools/online-video-editor" },
+                                            { name: "Canva", link: "https://www.canva.com/" },
+                                            { name: "Clipchamp", link: "https://clipchamp.com/" },
+                                            { name: "Kinemaster", link: "https://www.kinemaster.com/" }
+                                        ].map((item, idx) => (
+                                            <li key={idx}>
+                                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-rose-50 transition-colors border border-transparent hover:border-rose-100">
+                                                    <span className="font-semibold text-slate-700 group-hover:text-rose-700">{item.name}</span>
+                                                    <span className="text-xs text-rose-500 font-medium">Visit ↗</span>
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {/* 5. Vibe Code Tools */}
+                            <div className="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800 hover:shadow-lg transition-shadow">
+                                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2 border-b border-slate-700 pb-2">
+                                    <span>💻</span> Vibe Code Tools
+                                </h2>
+                                <p className="text-sm text-slate-400 mb-4">Professional ဆန်ဆန် Code ရေးသားရန်</p>
+                                <ul className="space-y-3">
+                                    {[
+                                        { name: "Cursor AI", desc: "VS Code အခြေခံ AI Editor", link: "https://www.cursor.com/" },
+                                        { name: "Replit Agent", desc: "Browser ပေါ်မှာ App တည်ဆောက်ရန်", link: "https://www.replit.com/" },
+                                        { name: "Claude Artifacts", desc: "UI/UX များကို ချက်ချင်းစမ်းသပ်ရန်", link: "https://claude.ai/" }
+                                    ].map((item, idx) => (
+                                        <li key={idx}>
+                                            <a href={item.link} target="_blank" rel="noopener noreferrer" className="group block p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors border border-slate-700 hover:border-sky-500">
+                                                <div className="flex justify-between items-center mb-1">
+                                                    <span className="font-bold text-sky-400">{item.name}</span>
+                                                    <span className="text-xs text-slate-400 group-hover:text-sky-300">Visit ↗</span>
+                                                </div>
+                                                <p className="text-xs text-slate-400">{item.desc}</p>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* 6. Other Useful Websites */}
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                                <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-2">
+                                    <span>🌐</span> အခြား အသုံးဝင်သော Website များ
+                                </h2>
+                                <ul className="space-y-3 h-64 overflow-y-auto pr-2 custom-scrollbar">
+                                    {[
+                                        { name: "Remini", desc: "ဓာတ်ပုံဟောင်းတွေ ပြန်ပြုပြင်ဖို့", link: "https://remini.ai/try-remini" },
+                                        { name: "Pinterest", desc: "ဒီဇိုင်းနဲ့ ပုံတွေရှာရန်", link: "https://www.pinterest.com/" },
+                                        { name: "Blackbox AI", desc: "AI မျိုးစုံအား တနေရာတည်းမှ သုံးရန်", link: "https://www.blackbox.ai/" },
+                                        { name: "Watermark Remover", desc: "မူရင်း လိုဂိုနှင့် ရေစာများ ဖျက်ရန်", link: "https://www.watermarkremover.io/" },
+                                        { name: "Looka", desc: "Logo တွေ Design ဆွဲရန်", link: "https://looka.com/" },
+                                        { name: "v0 (by Vercel)", desc: "AI ဖြင့် UI တွေတည်ဆောက်ရန်", link: "https://v0.dev/" },
+                                        { name: "Freepik", desc: "All in One Design AI", link: "https://www.freepik.com/" },
+                                        { name: "Free AI Tools", desc: "Free Tools စုစည်းမှု", link: "https://mrfreetools.com/" }
+                                    ].map((item, idx) => (
+                                        <li key={idx}>
+                                            <a href={item.link} target="_blank" rel="noopener noreferrer" className="group flex flex-col p-3 bg-slate-50 rounded-lg hover:bg-amber-50 transition-colors border border-transparent hover:border-amber-100">
+                                                <div className="flex justify-between items-center w-full">
+                                                    <span className="font-semibold text-slate-800 group-hover:text-amber-700">{item.name}</span>
+                                                    <span className="text-xs text-amber-500 font-medium">Visit ↗</span>
+                                                </div>
+                                                <span className="text-xs text-slate-500 mt-1">{item.desc}</span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        {/* 🌟 Footer / AI GURU 🌟 */}
+                        <div className="mt-8 pt-6 border-t border-slate-200 text-center">
+                            <a
+                                href="https://www.facebook.com/aigurumm/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 hover:shadow-lg transition-all transform hover:-translate-y-1"
+                            >
+                                <span>👍</span> AI GURU Facebook Page သို့ သွားရန်
+                            </a>
+                        </div>
 
                     </div>
                 );
+
+            // case "ai-tools-websites":
+            //     return (
+            //         <div>
+            //             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">AI Tools & Websites</h2>
+
+            //             {/* 🌟 ပုံအသစ် ထည့်နည်း 🌟 */}
+            //             <img
+            //                 src="/src/assets/amara1.jpg"
+            //                 alt="ai-tools-websites"
+            //                 className="w-full rounded-2xl shadow-md mb-8 border border-slate-200"
+            //             />
+
+            //             <p className="mb-6">
+            //                 AI Tools နှင့် Websites များသည် နည်းပညာလောကတွင် အလွန်အရေးပါလာသော အရာများဖြစ်သည်။ ယခုခေတ်တွင် AI ကို အသုံးပြု၍ လူသားများ၏ အလုပ်များကို အလိုအလျောက် ကူညီလုပ်ဆောင်ပေးနိုင်သည့် Tools များနှင့် Websites များစွာ ရှိလာပြီဖြစ်သည်။
+
+            //                 <br /><br /> AI ခေတ်မှာ မြန်မာနိင်ငံသားတိုင်း ခေတ်နောက်မကျန်စေရေး တို့အရေးပါ။
+            //                 အားလုံးက လွယ်ကူနေပါပြီ။<br />
+            //                 ကျွန်တော် လက်ရှိသုံးနေတဲ့ AI Website တွေဖြစ်ပါတယ်။ ဖုန်းထဲမှာ application အနေနဲ့ အလေးခံပြီး ထည့်မထားတော့ဘဲ ဒီ Website Link တွေကနေ နှိပ်ပြီး AI Features တွေ သွားလုပ်လို့ရပါတယ်။ AI နယ်ပယ်က ကျယ်ဝန်းတော့ သူ့ အမျိုးအစားအလိုက် Category တွေ ခွဲပေးထားပါတယ်။
+            //                 ###################### <br />
+            //                 Artificial Intelligence (AI Links များ)
+            //                 <br />သိချင်တာတွေမေးဖို့၊ ပုံတွေထုတ်ဖို့နဲ့ သုံးလို့အကောင်းဆုံး AI ChatBot အမျိုးအစား ၄ ခု
+            //                 <br />(1) chatGPT
+            //                 https://chatgpt.com/
+            //                 (2) Google Gemini
+            //                 https://gemini.google.com/app
+            //                 (3) Grok
+            //                 https://grok.com/
+            //                 https://x.ai/grok
+            //                 (4) DeepSeek
+            //                 https://www.deepseek.com/
+            //                 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //                 <br /> စာလုပ်ဖို့၊ Program Coding တွေရေးဖို့၊ Powerpoint တွေ လုပ်ဖို့၊ စာတွေစစ်ဖို့၊ ဘာသာပြန်ဖို့ နဲ့
+            //                 ကျောင်းသားတွေအတွက် အကောင်းဆုံး AI  ၇ ခု
+            //                 (1) Claude AI
+            //                 https://claude.ai/
+            //                 (2) NotebookLM
+            //                 https://notebooklm.google/
+            //                 (3) Gamma
+            //                 https://gamma.app/
+            //                 (4) Grammarly
+            //                 https://www.grammarly.com/
+            //                 (5) Perplexity
+            //                 https://www.perplexity.ai/
+            //                 (6) Notion
+            //                 https://www.notion.com/
+            //                 (7) Google AI Studio
+            //                 https://aistudio.google.com/
+            //                 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //                 <br /> အရည်အသွေးပြည့် ရုပ်ပုံတွေ၊ ဗီဒီယိုတွေ ထုတ်ဖို့ AI ၉ ခု
+            //                 (1) Leonardo AI
+            //                 https://leonardo.ai/
+            //                 (2) Midjourney AI
+            //                 https://www.midjourney.com/
+            //                 (3) RunwayML
+            //                 https://runwayml.com/
+            //                 (4) Google AI Studio
+            //                 https://aistudio.google.com/
+            //                 (5) Pixverse
+            //                 https://app.pixverse.ai/onboard
+            //                 (6) Kling AI
+            //                 https://app.klingai.com/global/
+            //                 (7) DallE-3
+            //                 https://openart.ai/home
+            //                 https://openai.com/index/dall-e-3/
+            //                 😎 Google Labs (Flow, Whisk, Image-Fx, Music-Fx, Music-Fx-Dj)
+            //                 https://labs.google/
+            //                 https://labs.google/fx/tools/flow
+            //                 https://labs.google/fx/tools/whisk
+            //                 https://labs.google/fx/tools/image-fx
+            //                 https://labs.google/fx/tools/music-fx
+            //                 https://labs.google/fx/tools/music-fx-dj
+            //                 (9) Heygen
+            //                 https://www.heygen.com/
+            //                 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //                 <br />အသံပိုင်းဆိုင်ရာဖန်တီးခြင်း၊ ပြောင်းလဲခြင်း၊ ဂီတသီချင်းများဖန်တီးခြင်းများအတွက် အကောင်းဆုံး AI ၄ ခု
+            //                 (1) Suno (For Song)
+            //                 https://suno.com/home
+            //                 (2) ElevenLabs
+            //                 https://elevenlabs.io/
+            //                 (3) Clipchamp
+            //                 https://clipchamp.com/
+            //                 (4) Music Fx
+            //                 https://labs.google/fx/tools/music-fx
+            //                 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //                 <br />ရုပ်သံတည်းဖြတ်ခြင်း၊ လိုဂိုများ ကြော်ငြာများဖန်တီးခြင်းများအတွက် အကောင်းဆုံး Website ၃ ခု
+            //                 (1) CapCut
+            //                 https://www.capcut.com/tools/online-video-editor
+            //                 (2) Canva
+            //                 https://www.canva.com/
+            //                 (3) Kinemaster
+            //                 https://www.kinemaster.com/
+            //                 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //                 <br />ဓာတ်ပုံဟောင်းတွေ ပြန်ပြုပြင်ဖို့နဲ့ ပုံအလှတွေ ဖန်တီးဖို့ AI ၂ ခု
+            //                 (1) Remini
+            //                 https://remini.ai/try-remini
+            //                 (2) Myheritage
+            //                 https://www.myheritage.com/ai-time-machine
+            //                 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //                 <br /><br />အခြား အသုံးဝင်သော Website များ
+            //                 (1) Pinterest (ပုံရှာရန်)
+            //                 https://www.pinterest.com/
+            //                 (2) Hedra (ရုပ်သံဖန်တီးရန်)
+            //                 https://www.hedra.com/app/home
+            //                 (3) Yupp AI ( AI မျိုးစုံအား တနေရာတည်းမှ သုံးရန်)
+            //                 https://yupp.ai/
+            //                 (4) Blackbox AI ( AI မျိုးစုံအား တနေရာတည်းမှ သုံးရန်)
+            //                 https://www.blackbox.ai/
+            //                 (5) Logo and watermark Remover (မူရင်း လိုဂိုနှင့် ရေစာများ ဖျက်ရန်)
+            //                 https://www.watermarkremover.io/
+            //                 (6) Looka - (Logo တွေ Design ဆွဲပြီး Brand Merchandiseထုတ်ရန်)
+            //                 https://looka.com/
+            //                 (7) Soundraw - (Royalty-free Music တွေဖန်တီး)
+            //                 https://soundraw.io/
+            //                 (😎  Veed.io -( TikTok အတွက် ဗီဒီယိုတွေတည်းဖြတ်)
+            //                 https://www.veed.io/
+            //                 (9) v0 (by Vercel) - App တွေတည်ဆောက်)
+            //                 https://v0.dev/
+            //                 (10) SurgeGraph - ( Blog တွေရေး )
+            //                 https://surgegraph.io/1
+            //                 (11) Freepik (All AI )
+            //                 https://www.freepik.com/
+            //                 (12) free AI OXAAM
+            //                 https://www.oxaam.com/
+            //                 (13) Free AI tools
+            //                 https://mrfreetools.com/
+            //                 (14) All Prompts
+            //                 https://www.aiwind.org/
+            //                 (15) AI GURU Facebook Page
+            //                 https://www.facebook.com/aigurumm/
+            //                 <br />Vibe Code Tools
+            //                 (1) Cursor AIVS Code အခြေခံ AI Editor (Professional ဆန်ဆန် Code ရေးရန်) www.cursor.com
+            //                 (2) Replit AgentBrowser ပေါ်မှာတင် App တစ်ခုလုံးကို AI နဲ့ တည်ဆောက်ရန် www.replit.com
+            //                 (3) Claude AIArtifacts feature ဖြင့် UI/UX များကို ချက်ချင်းစမ်းသပ်ရန် www.claude.ai
+            //                 <br /> AI GURU
+
+            //             </p>
+
+            //         </div>
+            //     );
             default:
                 // ID အသစ်တွေအတွက် စာမရေးရသေးခင် ယာယီပြသမည့် စာသား
                 return (
