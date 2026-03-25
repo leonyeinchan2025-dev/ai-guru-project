@@ -1,6 +1,8 @@
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 from pydantic import BaseModel
+from typing import List
+from fastapi import FastAPI, Depends, HTTPException
 
 # ခုနက Google မှ ရလာသော Client ID ကို ဤနေရာတွင် ထည့်ပါ
 GOOGLE_CLIENT_ID = "768463165065-2uc4qbiv82rricq9s1vdms3ek5mcn11j.apps.googleusercontent.com"
@@ -297,12 +299,11 @@ def create_feedback(feedback: schemas.FeedbackCreate, db: Session = Depends(get_
     return new_feedback
 
 # (၂) Admin အတွက် Feedback အားလုံးဆွဲယူရန်
-@app.get("/feedbacks", response_model=list[schemas.FeedbackResponse])
+@app.get("/feedbacks", response_model=List[schemas.FeedbackResponse])
 def get_all_feedbacks(db: Session = Depends(get_db)):
     return db.query(models.Feedback).order_by(models.Feedback.created_at.desc()).all()
 
-# (၃) Highlight လုပ်ထားသော အကောင်းဆုံး Feedback များကိုဆွဲယူရန် (Home Page တွင်ပြရန်)
-@app.get("/feedbacks/highlighted", response_model=list[schemas.FeedbackResponse])
+@app.get("/feedbacks/highlighted", response_model=List[schemas.FeedbackResponse])
 def get_highlighted_feedbacks(db: Session = Depends(get_db)):
     return db.query(models.Feedback).filter(models.Feedback.is_highlighted == True).order_by(models.Feedback.created_at.desc()).all()
 
