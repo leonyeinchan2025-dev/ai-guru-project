@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // ✅ Variants ကို Import ထဲမှ ပြန်ဖြုတ်လိုက်ပါသည်
 import { motion, AnimatePresence } from 'framer-motion';
+import api from '../api'; // 🌟 ဤစာကြောင်းကို အသစ်ထပ်ထည့်ပါ
 
 // ✅ TypeScript Error မပြစေရန် : any ဟု ပြောင်းပေးလိုက်ပါသည်
 const containerVariants: any = {
@@ -51,22 +52,32 @@ export default function FeedbackForm() {
             return;
         }
 
+        // setIsSubmitting(true);
+
         setIsSubmitting(true);
 
-        // Simulation (ခတ္တစောင့်ဆိုင်းမှုကို အတုပြုလုပ်ခြင်း)
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+            // 🌟 Simulation အဟောင်းနေရာတွင် တကယ့် API ဖြင့် အစားထိုးလိုက်ပါ 🌟
+            await api.post('/feedbacks', {
+                name: name,
+                rating: rating,
+                comment: comment
+            });
 
-        // Success 
-        setIsSubmitting(false);
-        setSubmittedSuccess(true);
+            // Success (အောင်မြင်ပါက)
+            setIsSubmitting(false);
+            setSubmittedSuccess(true);
 
-        // Reset Form
-        setRating(0);
-        setName('');
-        setComment('');
+            // Reset Form
+            setRating(0);
+            setName('');
+            setComment('');
 
-        // ၅ စက္ကန့်အကြာတွင် Success Message ဖျောက်ရန်
-        setTimeout(() => setSubmittedSuccess(false), 5000);
+            setTimeout(() => setSubmittedSuccess(false), 5000);
+        } catch (err) {
+            setIsSubmitting(false);
+            setError("ပေးပို့ရာတွင် အမှားအယွင်းရှိပါသည်။ ဆာဗာကို စစ်ဆေးပါ။");
+        }
     };
 
     return (

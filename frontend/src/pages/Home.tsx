@@ -25,6 +25,9 @@ export default function Home() {
     const [user, setUser] = useState<any>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isSampleModalOpen, setIsSampleModalOpen] = useState(false); // 🌟 ဤ State အသစ် ထပ်ထည့်ပါ
+    // 🌟 အသစ်ထပ်တိုးရမည့် State များ 🌟
+    const [stats, setStats] = useState({ total_users: 0, total_feedbacks: 0 });
+    const [highlightedFeedbacks, setHighlightedFeedbacks] = useState<any[]>([]);
 
     useEffect(() => {
         const userString = localStorage.getItem('user');
@@ -32,6 +35,20 @@ export default function Home() {
             setUser(JSON.parse(userString));
         }
         document.title = "AI GURU - AI လေ့လာစရာ";
+        // 🌟 Website Stats နှင့် Highlight လုပ်ထားသော Feedback များ ဆွဲယူရန် 🌟
+        const fetchData = async () => {
+            try {
+                const statRes = await api.get('/stats');
+                setStats(statRes.data);
+
+                const fbRes = await api.get('/feedbacks/highlighted');
+                setHighlightedFeedbacks(fbRes.data);
+            } catch (err) {
+                console.error("Error fetching homepage data", err);
+            }
+        };
+        fetchData();
+
     }, []);
 
     const handleLogout = () => {
@@ -423,7 +440,61 @@ export default function Home() {
             </div>
             {/* ✅ 5. Feedback Section (Roadmap ၏အောက်၊ Footer ၏အပေါ်) ✅ */}
             <FeedbackForm />
+            {/* ✅ Website Stats (အရေအတွက်များ ပြသခြင်း) ✅ */}
+            <div className="py-12 bg-white border-b border-slate-100">
+                <div className="max-w-4xl mx-auto px-4 flex justify-around items-center text-center">
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                        <h3 className="text-4xl md:text-5xl font-black text-blue-600 mb-2">{stats.total_users}+</h3>
+                        <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">လေ့လာနေသူများ</p>
+                    </motion.div>
+                    <div className="w-px h-16 bg-slate-200"></div>
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
+                        <h3 className="text-4xl md:text-5xl font-black text-indigo-600 mb-2">{stats.total_feedbacks}+</h3>
+                        <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">သုံးသပ်ချက်များ</p>
+                    </motion.div>
+                </div>
+            </div>
 
+            {/* ✅ Highlighted Feedbacks (အကောင်းဆုံး အကြံပြုချက်များ ပြသခြင်း) ✅ */}
+            {highlightedFeedbacks.length > 0 && (
+                <div className="py-16 bg-[#f8fafc]">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4">အသုံးပြုသူများ၏ စကားသံများ</h2>
+                            <p className="text-slate-500 text-lg">AI GURU နှင့်ပတ်သက်၍ လေ့လာသူများ၏ ရင်တွင်းစကားများ</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {highlightedFeedbacks.map((fb, index) => (
+                                <motion.div
+                                    key={fb.id}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 relative"
+                                >
+                                    <div className="absolute top-6 right-8 text-4xl text-blue-100 font-serif">"</div>
+                                    <div className="flex text-yellow-400 text-lg mb-4">
+                                        {Array.from({ length: 5 }).map((_, i) => (
+                                            <span key={i}>{i < fb.rating ? '★' : '☆'}</span>
+                                        ))}
+                                    </div>
+                                    <p className="text-slate-600 italic mb-6 leading-relaxed relative z-10">
+                                        "{fb.comment}"
+                                    </p>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center text-white font-bold uppercase">
+                                            {fb.name.charAt(0)}
+                                        </div>
+                                        <span className="font-bold text-slate-800">{fb.name}</span>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
 
 
             {/* 🌟 Footer Section (Symmetrically Framed with Representative Portraits) 🌟 */}
