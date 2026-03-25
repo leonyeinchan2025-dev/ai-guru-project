@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '../api';
 import { motion, AnimatePresence } from 'framer-motion';
 import AuthModal from '../components/AuthModal';
 import SampleLessonsModal from '../components/SampleLessonsModal'; // 🌟 ဤစာကြောင်း ထပ်ထည့်ပါ
