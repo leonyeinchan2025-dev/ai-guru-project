@@ -315,3 +315,16 @@ def get_website_stats(db: Session = Depends(get_db)):
         "total_users": user_count,
         "total_feedbacks": feedback_count
     }
+
+# (၅) Admin မှ Feedback ကို Highlight လုပ်ရန် (အဖွင့်/အပိတ်)
+@app.put("/feedbacks/{feedback_id}/highlight", response_model=schemas.FeedbackResponse)
+def toggle_feedback_highlight(feedback_id: int, db: Session = Depends(get_db)):
+    feedback = db.query(models.Feedback).filter(models.Feedback.id == feedback_id).first()
+    if not feedback:
+        raise HTTPException(status_code=404, detail="Feedback not found")
+    
+    # ရှိပြီးသားအခြေအနေကို ပြောင်းပြန်လှန်မည် (True ဆိုလျှင် False, False ဆိုလျှင် True)
+    feedback.is_highlighted = not feedback.is_highlighted
+    db.commit()
+    db.refresh(feedback)
+    return feedback

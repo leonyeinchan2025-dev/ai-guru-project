@@ -1,9 +1,18 @@
-
-// // // src/pages/AdminDashboard.tsx
 // import React, { useState, useEffect } from 'react';
 // import ReactQuill from 'react-quill-new';
 // import 'react-quill-new/dist/quill.snow.css';
 // import api from '../api';
+
+// // 🌟 React Quill အတွက် Toolbar Setting အသစ် (Image, Video, Link များ ထည့်သွင်းထားသည်) 🌟
+// const quillModules = {
+//     toolbar: [
+//         [{ 'header': [1, 2, 3, false] }],
+//         ['bold', 'italic', 'underline', 'strike'],
+//         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+//         ['link', 'image', 'video'], // <-- ဤနေရာတွင် Link, Image နှင့် Video ခလုတ်များ ထည့်ထားပါသည်
+//         ['clean']
+//     ],
+// };
 
 // export default function AdminDashboard() {
 //     const [activeTab, setActiveTab] = useState<'lessons' | 'users'>('lessons');
@@ -171,11 +180,6 @@
 
 //                                 <div className="mb-4">
 //                                     <label className="block text-sm font-medium mb-1">အမျိုးအစား (Category)</label>
-//                                     {/* <select value={category} onChange={e => setCategory(e.target.value)} className="w-full border p-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-//                                         <option value="Machine Learning">Machine Learning</option>
-//                                         <option value="Deep Learning">Deep Learning</option>
-//                                         <option value="Computer Vision">Computer Vision</option>
-//                                     </select> */}
 //                                     <select value={category} onChange={e => setCategory(e.target.value)} className="w-full border p-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
 //                                         <option value="AI Basics">AI Basics (အခြေခံ)</option>
 //                                         <option value="Prompt Engineering">Prompt Engineering</option>
@@ -183,7 +187,6 @@
 //                                         <option value="Deep Learning">Deep Learning</option>
 //                                         <option value="Generative AI">Generative AI</option>
 //                                         <option value="Data Science">Data Science</option>
-//                                         <option value="AI Tools & Apps">Computer Vision</option>
 //                                         <option value="AI Tools & Apps">AI Tools & Apps</option>
 //                                         <option value="Others">Others (အခြား)</option>
 //                                     </select>
@@ -192,7 +195,14 @@
 //                                 <div className="mb-6">
 //                                     <label className="block text-sm font-medium mb-1">အကြောင်းအရာ (Content)</label>
 //                                     <div className="bg-white">
-//                                         <ReactQuill theme="snow" value={content} onChange={setContent} className="h-64 mb-12" />
+//                                         {/* 🌟 ဤနေရာတွင် modules: quillModules ကို ထည့်သွင်းချိတ်ဆက်ထားပါသည် 🌟 */}
+//                                         <ReactQuill
+//                                             theme="snow"
+//                                             value={content}
+//                                             onChange={setContent}
+//                                             className="h-64 mb-12"
+//                                             modules={quillModules}
+//                                         />
 //                                     </div>
 //                                 </div>
 
@@ -245,6 +255,7 @@
 //                             </div>
 //                         </div>
 //                     )}
+
 //                     {/* --- Users Section --- */}
 //                     {activeTab === 'users' && (
 //                         <div>
@@ -275,10 +286,7 @@
 //                                                         <span className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs font-bold">Pending</span>
 //                                                     }
 //                                                 </td>
-
-//                                                 {/* 🌟 ဤအပိုင်းသည် User Table ၏ လုပ်ဆောင်ချက် (Action) အပြည့်အစုံဖြစ်ပါသည် 🌟 */}
 //                                                 <td className="p-3 flex gap-2">
-//                                                     {/* (၁) Pending ဖြစ်နေလျှင် Approve ခလုတ်ပြမည် */}
 //                                                     {!u.is_approved && (
 //                                                         <button
 //                                                             onClick={() => handleApproveUser(u.id)}
@@ -287,8 +295,6 @@
 //                                                             အတည်ပြုမည်
 //                                                         </button>
 //                                                     )}
-
-//                                                     {/* (၂) Approve ဖြစ်ပြီးသားဆိုလျှင် Admin/User ရာထူးပြောင်းသည့် ခလုတ်ပြမည် */}
 //                                                     {u.is_approved && (
 //                                                         <button
 //                                                             onClick={() => handleToggleAdmin(u.id, u.is_admin)}
@@ -297,8 +303,6 @@
 //                                                             {u.is_admin ? '⬇️ User ပြောင်းမည်' : '⬆️ Admin ပေးမည်'}
 //                                                         </button>
 //                                                     )}
-
-//                                                     {/* (၃) ဖျက်ရန် ခလုတ် (အမြဲပေါ်မည်) */}
 //                                                     <button
 //                                                         onClick={() => handleDeleteUser(u.id)}
 //                                                         className="bg-red-100 text-red-700 px-3 py-1.5 rounded text-sm font-medium hover:bg-red-200 transition"
@@ -306,7 +310,6 @@
 //                                                         ဖျက်မည်
 //                                                     </button>
 //                                                 </td>
-
 //                                             </tr>
 //                                         ))}
 //                                     </tbody>
@@ -320,28 +323,42 @@
 //     );
 // }
 
+
 import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import api from '../api';
+import { motion } from 'framer-motion'; // 🌟 Animations အတွက် ထပ်ထည့်ထားပါသည်
 
-// 🌟 React Quill အတွက် Toolbar Setting အသစ် (Image, Video, Link များ ထည့်သွင်းထားသည်) 🌟
+// 🌟 React Quill အတွက် Toolbar Setting
 const quillModules = {
     toolbar: [
         [{ 'header': [1, 2, 3, false] }],
         ['bold', 'italic', 'underline', 'strike'],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-        ['link', 'image', 'video'], // <-- ဤနေရာတွင် Link, Image နှင့် Video ခလုတ်များ ထည့်ထားပါသည်
+        ['link', 'image', 'video'],
         ['clean']
     ],
 };
 
+// 🌟 Feedback Interface ထပ်တိုးပါသည်
+interface Feedback {
+    id: number;
+    name: string;
+    rating: number;
+    comment: string;
+    is_highlighted: boolean;
+    created_at: string;
+}
+
 export default function AdminDashboard() {
-    const [activeTab, setActiveTab] = useState<'lessons' | 'users'>('lessons');
+    // 🌟 activeTab တွင် 'feedbacks' ကို ထပ်တိုးထားပါသည်
+    const [activeTab, setActiveTab] = useState<'lessons' | 'users' | 'feedbacks'>('lessons');
 
     // States
     const [users, setUsers] = useState<any[]>([]);
     const [lessons, setLessons] = useState<any[]>([]);
+    const [feedbacks, setFeedbacks] = useState<Feedback[]>([]); // 🌟 Feedback State ထပ်တိုးပါသည်
 
     // Editor States
     const [editingId, setEditingId] = useState<number | null>(null);
@@ -361,11 +378,12 @@ export default function AdminDashboard() {
         }
     }, [user]);
 
-    // Data ဆွဲယူခြင်း
+    // Data ဆွဲယူခြင်း (Tab အလိုက်)
     useEffect(() => {
         if (user?.is_admin) {
             if (activeTab === 'users') fetchUsers();
             if (activeTab === 'lessons') fetchLessons();
+            if (activeTab === 'feedbacks') fetchFeedbacks(); // 🌟 Feedback Tab ကိုနှိပ်လျှင် Data ဆွဲမည်
         }
     }, [activeTab, user]);
 
@@ -465,9 +483,34 @@ export default function AdminDashboard() {
         }
     };
 
+    // --- 🌟 Feedbacks API 🌟 ---
+    const fetchFeedbacks = async () => {
+        try {
+            const res = await api.get('/feedbacks');
+            setFeedbacks(res.data);
+        } catch (err) {
+            console.error("Error fetching feedbacks", err);
+        }
+    };
+
+    const toggleHighlight = async (id: number) => {
+        try {
+            await api.put(`/feedbacks/${id}/highlight`);
+            // UI တွင် ချက်ချင်း အဖွင့်/အပိတ် ပြောင်းလဲစေရန်
+            setFeedbacks(feedbacks.map(fb =>
+                fb.id === id ? { ...fb, is_highlighted: !fb.is_highlighted } : fb
+            ));
+        } catch (err) {
+            console.error("Error toggling highlight", err);
+            alert("Highlight ပြုလုပ်ရာတွင် အမှားအယွင်းရှိပါသည်။ (Backend တွင် API Route အသစ် ထည့်ထားရန် သေချာပါစေ)");
+        }
+    };
+
     return (
         <div className="min-h-screen bg-slate-50 p-8 font-sans text-slate-900">
             <div className="max-w-6xl mx-auto">
+
+                {/* Header */}
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-3xl font-bold text-slate-800">⚙️ Admin Dashboard</h1>
                     <button onClick={() => window.location.href = '/'} className="text-blue-600 hover:underline">
@@ -476,18 +519,22 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* Tabs */}
-                <div className="flex gap-4 mb-8">
-                    <button onClick={() => setActiveTab('lessons')} className={`px-6 py-2.5 rounded-lg font-medium transition ${activeTab === 'lessons' ? 'bg-blue-600 text-white' : 'bg-white text-slate-600 hover:bg-slate-100'}`}>
+                <div className="flex flex-wrap gap-4 mb-8 border-b border-slate-200 pb-4">
+                    <button onClick={() => setActiveTab('lessons')} className={`px-6 py-2.5 rounded-lg font-medium transition ${activeTab === 'lessons' ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
                         📝 သင်ခန်းစာများ စီမံရန်
                     </button>
-                    <button onClick={() => setActiveTab('users')} className={`px-6 py-2.5 rounded-lg font-medium transition ${activeTab === 'users' ? 'bg-blue-600 text-white' : 'bg-white text-slate-600 hover:bg-slate-100'}`}>
+                    <button onClick={() => setActiveTab('users')} className={`px-6 py-2.5 rounded-lg font-medium transition ${activeTab === 'users' ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
                         👥 User များ စီမံရန်
+                    </button>
+                    {/* 🌟 ဤနေရာတွင် Feedback Tab ခလုတ်အသစ် ထည့်ထားပါသည် 🌟 */}
+                    <button onClick={() => setActiveTab('feedbacks')} className={`px-6 py-2.5 rounded-lg font-medium transition ${activeTab === 'feedbacks' ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
+                        ⭐ Feedback များ စီမံရန်
                     </button>
                 </div>
 
                 <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
 
-                    {/* --- Lessons Section --- */}
+                    {/* --- 1. Lessons Section --- */}
                     {activeTab === 'lessons' && (
                         <div>
                             <form onSubmit={handleSaveLesson} className="max-w-3xl mb-12 p-6 bg-slate-50 rounded-xl border">
@@ -517,7 +564,6 @@ export default function AdminDashboard() {
                                 <div className="mb-6">
                                     <label className="block text-sm font-medium mb-1">အကြောင်းအရာ (Content)</label>
                                     <div className="bg-white">
-                                        {/* 🌟 ဤနေရာတွင် modules: quillModules ကို ထည့်သွင်းချိတ်ဆက်ထားပါသည် 🌟 */}
                                         <ReactQuill
                                             theme="snow"
                                             value={content}
@@ -578,7 +624,7 @@ export default function AdminDashboard() {
                         </div>
                     )}
 
-                    {/* --- Users Section --- */}
+                    {/* --- 2. Users Section --- */}
                     {activeTab === 'users' && (
                         <div>
                             <h2 className="text-xl font-bold mb-6 border-b pb-2">👥 User စာရင်းနှင့် အကောင့် အတည်ပြုခြင်း</h2>
@@ -610,25 +656,16 @@ export default function AdminDashboard() {
                                                 </td>
                                                 <td className="p-3 flex gap-2">
                                                     {!u.is_approved && (
-                                                        <button
-                                                            onClick={() => handleApproveUser(u.id)}
-                                                            className="bg-blue-100 text-blue-700 px-3 py-1.5 rounded text-sm font-medium hover:bg-blue-200 transition"
-                                                        >
+                                                        <button onClick={() => handleApproveUser(u.id)} className="bg-blue-100 text-blue-700 px-3 py-1.5 rounded text-sm font-medium hover:bg-blue-200 transition">
                                                             အတည်ပြုမည်
                                                         </button>
                                                     )}
                                                     {u.is_approved && (
-                                                        <button
-                                                            onClick={() => handleToggleAdmin(u.id, u.is_admin)}
-                                                            className={`px-3 py-1.5 rounded text-sm font-medium transition ${u.is_admin ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'}`}
-                                                        >
+                                                        <button onClick={() => handleToggleAdmin(u.id, u.is_admin)} className={`px-3 py-1.5 rounded text-sm font-medium transition ${u.is_admin ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'}`}>
                                                             {u.is_admin ? '⬇️ User ပြောင်းမည်' : '⬆️ Admin ပေးမည်'}
                                                         </button>
                                                     )}
-                                                    <button
-                                                        onClick={() => handleDeleteUser(u.id)}
-                                                        className="bg-red-100 text-red-700 px-3 py-1.5 rounded text-sm font-medium hover:bg-red-200 transition"
-                                                    >
+                                                    <button onClick={() => handleDeleteUser(u.id)} className="bg-red-100 text-red-700 px-3 py-1.5 rounded text-sm font-medium hover:bg-red-200 transition">
                                                         ဖျက်မည်
                                                     </button>
                                                 </td>
@@ -639,6 +676,65 @@ export default function AdminDashboard() {
                             </div>
                         </div>
                     )}
+
+                    {/* --- 🌟 3. Feedbacks Management Section (အသစ်ထပ်တိုးထားသော UI) 🌟 --- */}
+                    {activeTab === 'feedbacks' && (
+                        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+                            <div className="flex justify-between items-center mb-6 border-b pb-2">
+                                <h2 className="text-xl font-bold text-slate-800">သုံးသပ်ချက်နှင့် အကြံပြုချက်များ (Feedbacks)</h2>
+                                <span className="bg-blue-100 text-blue-800 text-sm font-bold px-3 py-1 rounded-full">
+                                    စုစုပေါင်း: {feedbacks.length} ခု
+                                </span>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {feedbacks.length === 0 ? (
+                                    <p className="text-slate-500">Feedback များ မရှိသေးပါ...</p>
+                                ) : (
+                                    feedbacks.map((fb) => (
+                                        <div key={fb.id} className={`bg-white p-6 rounded-2xl shadow-sm border transition-all ${fb.is_highlighted ? 'border-green-400 ring-2 ring-green-50' : 'border-slate-200'}`}>
+
+                                            {/* Header (Name & Date) */}
+                                            <div className="flex justify-between items-start mb-3">
+                                                <div>
+                                                    <h3 className="font-bold text-slate-800 truncate max-w-[150px]" title={fb.name}>{fb.name}</h3>
+                                                    <p className="text-xs text-slate-500">
+                                                        {new Date(fb.created_at).toLocaleDateString('my-MM', { year: 'numeric', month: 'short', day: 'numeric' })}
+                                                    </p>
+                                                </div>
+                                                {/* Stars Rating Display */}
+                                                <div className="flex text-yellow-400 text-sm">
+                                                    {Array.from({ length: 5 }).map((_, i) => (
+                                                        <span key={i}>{i < fb.rating ? '★' : '☆'}</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            {/* Comment Body */}
+                                            <div className="bg-slate-50 p-4 rounded-xl mb-5 text-sm text-slate-700 h-24 overflow-y-auto custom-scrollbar">
+                                                "{fb.comment}"
+                                            </div>
+
+                                            {/* Footer (Highlight Toggle Option) */}
+                                            <div className="flex items-center justify-between border-t border-slate-100 pt-4">
+                                                <span className="text-sm font-semibold text-slate-600">Home တွင် ပြသမည်</span>
+                                                <button
+                                                    onClick={() => toggleHighlight(fb.id)}
+                                                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${fb.is_highlighted ? 'bg-green-500' : 'bg-slate-300'}`}
+                                                >
+                                                    <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${fb.is_highlighted ? 'translate-x-6' : 'translate-x-1'}`} />
+                                                </button>
+                                            </div>
+                                            {fb.is_highlighted && (
+                                                <p className="text-xs text-green-600 font-bold mt-2 text-right">✅ Website တွင် ပြသနေပါသည်</p>
+                                            )}
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+                        </motion.div>
+                    )}
+
                 </div>
             </div>
         </div>
