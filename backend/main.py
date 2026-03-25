@@ -3,9 +3,7 @@ from google.auth.transport import requests as google_requests
 from pydantic import BaseModel
 from typing import List
 from fastapi import FastAPI, Depends, HTTPException
-# models.py ၏ အပေါ်ဆုံးတွင် ဤသို့ ရှိရပါမည်
-from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime
-from datetime import datetime
+
 
 # ခုနက Google မှ ရလာသော Client ID ကို ဤနေရာတွင် ထည့်ပါ
 GOOGLE_CLIENT_ID = "768463165065-2uc4qbiv82rricq9s1vdms3ek5mcn11j.apps.googleusercontent.com"

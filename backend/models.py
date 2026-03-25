@@ -1,5 +1,8 @@
 # backend/models.py
-from sqlalchemy import Column, Integer, String, Boolean, Text
+# models.py ၏ အပေါ်ဆုံးတွင် ဤသို့ ရှိရပါမည်
+from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime
+from datetime import datetime
+
 from database import Base
 
 class User(Base):
