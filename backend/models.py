@@ -25,7 +25,7 @@ class Lesson(Base):
     category = Column(String)
     file_url = Column(String, nullable=True) # 🌟 ပုံ သို့မဟုတ် PDF လင့်ခ် သိမ်းရန်
 
-    # backend/models.py ၏ အောက်ဆုံးတွင် ထပ်ထည့်ရန်
+# backend/models.py ၏ အောက်ဆုံးတွင် ထပ်ထည့်ရန်
 from sqlalchemy import ForeignKey
 
 class Progress(Base):
@@ -33,3 +33,17 @@ class Progress(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"))
     lesson_id = Column(Integer, ForeignKey("lessons.id"))
+
+    from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime
+from datetime import datetime
+# (အပေါ်က import များ ရှိပြီးသားဆိုလျှင် ထပ်ထည့်ရန်မလိုပါ)
+
+class Feedback(Base):
+    __tablename__ = "feedbacks"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    rating = Column(Integer)
+    comment = Column(Text)
+    is_highlighted = Column(Boolean, default=False) # Admin မှ ပြန်ပြရန် ရွေးချယ်ထားခြင်း ရှိ/မရှိ
+    created_at = Column(DateTime, default=datetime.utcnow)

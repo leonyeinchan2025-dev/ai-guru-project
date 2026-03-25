@@ -281,3 +281,37 @@ def google_login(token_data: GoogleToken, db: Session = Depends(get_db)):
     except ValueError:
         raise HTTPException(status_code=400, detail="Google အကောင့် ချိတ်ဆက်မှု မှားယွင်းနေပါသည်။")
     
+# သင့် main.py ၏ အောက်ဆုံးနား သို့မဟုတ် သင့်တော်ရာနေရာတွင် ထည့်ပါ
+
+# (၁) Feedback အသစ် ပေးပို့ရန် (Frontend မှ လှမ်းပို့မည်)
+@app.post("/feedbacks", response_model=schemas.FeedbackResponse)
+def create_feedback(feedback: schemas.FeedbackCreate, db: Session = Depends(get_db)):
+    new_feedback = models.Feedback(
+        name=feedback.name,
+        rating=feedback.rating,
+        comment=feedback.comment
+    )
+    db.add(new_feedback)
+    db.commit()
+    db.refresh(new_feedback)
+    return new_feedback
+
+# (၂) Admin အတွက် Feedback အားလုံးဆွဲယူရန်
+@app.get("/feedbacks", response_model=list[schemas.FeedbackResponse])
+def get_all_feedbacks(db: Session = Depends(get_db)):
+    return db.query(models.Feedback).order_by(models.Feedback.created_at.desc()).all()
+
+# (၃) Highlight လုပ်ထားသော အကောင်းဆုံး Feedback များကိုဆွဲယူရန် (Home Page တွင်ပြရန်)
+@app.get("/feedbacks/highlighted", response_model=list[schemas.FeedbackResponse])
+def get_highlighted_feedbacks(db: Session = Depends(get_db)):
+    return db.query(models.Feedback).filter(models.Feedback.is_highlighted == True).order_by(models.Feedback.created_at.desc()).all()
+
+# (၄) Stats များဆွဲယူရန် (Feedback အရေအတွက်၊ User အရေအတွက်)
+@app.get("/stats")
+def get_website_stats(db: Session = Depends(get_db)):
+    user_count = db.query(models.User).count()
+    feedback_count = db.query(models.Feedback).count()
+    return {
+        "total_users": user_count,
+        "total_feedbacks": feedback_count
+    }

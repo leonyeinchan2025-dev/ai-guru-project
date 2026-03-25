@@ -13,6 +13,7 @@ const containerVariants: any = {
 };
 
 const starVariants: any = {
+
     initial: { scale: 1 },
     hover: { scale: 1.2, transition: { duration: 0.2 } },
     tap: { scale: 0.9 }
@@ -117,8 +118,8 @@ export default function FeedbackForm() {
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         className={`w-10 h-10 sm:w-12 sm:h-12 transition-colors ${(hoveredRating || rating) >= star
-                                                ? 'text-yellow-400 fill-yellow-400'
-                                                : 'text-slate-300'
+                                            ? 'text-yellow-400 fill-yellow-400'
+                                            : 'text-slate-300'
                                             }`}
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -188,8 +189,8 @@ export default function FeedbackForm() {
                             type="submit"
                             disabled={isSubmitting}
                             className={`w-full sm:w-auto min-w-[200px] text-white px-10 py-4 rounded-full font-bold text-base md:text-lg transition shadow-lg hover:shadow-xl ${isSubmitting
-                                    ? 'bg-slate-400 cursor-not-allowed'
-                                    : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'
+                                ? 'bg-slate-400 cursor-not-allowed'
+                                : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'
                                 }`}
                         >
                             {isSubmitting ? (
