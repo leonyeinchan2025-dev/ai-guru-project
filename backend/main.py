@@ -319,17 +319,25 @@ def record_visit(db: Session = Depends(get_db)):
     db.commit()
     return {"status": "success"}
 
-# (၂) Stats များဆွဲယူရန် (ယခင် Code ကို ဤ Code ဖြင့် အစားထိုးပါ)
+
+# (၂) Stats များဆွဲယူရန် (ယခု ၃ မျိုးလုံး ပြန်ပို့ပေးပါမည်)
 @app.get("/stats")
 def get_website_stats(db: Session = Depends(get_db)):
+    # ၁။ ဝင်ရောက်ကြည့်ရှုသူ (Visitors)
     stat = db.query(models.SiteStat).first()
     visits = stat.total_visits if stat else 0
+    
+    # ၂။ သင်ခန်းစာ လေ့လာနေသူများ (Registered Users / Login ဝင်ထားသူများ)
+    user_count = db.query(models.User).count()
+    
+    # ၃။ သုံးသပ်ချက် (Feedbacks)
     feedback_count = db.query(models.Feedback).count()
+    
     return {
-        "total_users": visits, # ယခု Visitor အရေအတွက်ကို ပြပါမည်
+        "total_visits": visits,
+        "total_users": user_count,
         "total_feedbacks": feedback_count
     }
-
 # (၃) နောက်ဆုံးရ Feedback ၃ ခုကို ဆွဲယူရန် (Marquee အတွက် အသစ်)
 @app.get("/feedbacks/latest", response_model=List[schemas.FeedbackResponse])
 def get_latest_feedbacks(db: Session = Depends(get_db)):
