@@ -50,3 +50,9 @@ class Feedback(Base):
     comment = Column(Text)
     is_highlighted = Column(Boolean, default=False) # Admin မှ ပြန်ပြရန် ရွေးချယ်ထားခြင်း ရှိ/မရှိ
     created_at = Column(DateTime, default=datetime.utcnow)
+
+class SiteStat(Base):
+    __tablename__ = "site_stats"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    total_visits = Column(Integer, default=0)

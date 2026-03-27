@@ -164,7 +164,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                     </form>
                     {/* --- Google Login Button --- */}
                     <div className="mt-6 border-t border-slate-200 pt-6">
-                        <p className="text-center text-sm text-slate-500 mb-4 font-medium">သို့မဟုတ် အောက်ပါဖြင့် ဝင်ရောက်ပါ</p>
+                        <p className="text-center text-sm text-slate-500 mb-4 font-medium">သို့မဟုတ် သင့် Google Account ဖြင့် ဝင်ရောက်ပါ</p>
                         <div className="flex justify-center">
                             <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
                                 <GoogleLogin

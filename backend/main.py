@@ -308,15 +308,32 @@ def get_all_feedbacks(db: Session = Depends(get_db)):
 def get_highlighted_feedbacks(db: Session = Depends(get_db)):
     return db.query(models.Feedback).filter(models.Feedback.is_highlighted == True).order_by(models.Feedback.created_at.desc()).all()
 
-# (၄) Stats များဆွဲယူရန် (Feedback အရေအတွက်၊ User အရေအတွက်)
+@app.post("/visit")
+def record_visit(db: Session = Depends(get_db)):
+    stat = db.query(models.SiteStat).first()
+    if not stat:
+        stat = models.SiteStat(total_visits=1)
+        db.add(stat)
+    else:
+        stat.total_visits += 1
+    db.commit()
+    return {"status": "success"}
+
+# (၂) Stats များဆွဲယူရန် (ယခင် Code ကို ဤ Code ဖြင့် အစားထိုးပါ)
 @app.get("/stats")
 def get_website_stats(db: Session = Depends(get_db)):
-    user_count = db.query(models.User).count()
+    stat = db.query(models.SiteStat).first()
+    visits = stat.total_visits if stat else 0
     feedback_count = db.query(models.Feedback).count()
     return {
-        "total_users": user_count,
+        "total_users": visits, # ယခု Visitor အရေအတွက်ကို ပြပါမည်
         "total_feedbacks": feedback_count
     }
+
+# (၃) နောက်ဆုံးရ Feedback ၃ ခုကို ဆွဲယူရန် (Marquee အတွက် အသစ်)
+@app.get("/feedbacks/latest", response_model=List[schemas.FeedbackResponse])
+def get_latest_feedbacks(db: Session = Depends(get_db)):
+    return db.query(models.Feedback).order_by(models.Feedback.created_at.desc()).limit(3).all()
 
 # (၅) Admin မှ Feedback ကို Highlight လုပ်ရန် (အဖွင့်/အပိတ်)
 @app.put("/feedbacks/{feedback_id}/highlight", response_model=schemas.FeedbackResponse)
