@@ -620,9 +620,62 @@ export default function AdminDashboard() {
                                         ))}
                                     </tbody>
                                 </table>
+                                {/* --- 🌟 အသစ်: Ebook နှင့် ဖိုင်များ တင်ရန် 🌟 --- */}
+                                {/* --- 🌟 အသစ်: External Link ဖြင့် Resources တင်ရန် 🌟 --- */}
+                                <div className="mt-16 border-t-2 border-slate-200 pt-10">
+                                    <h2 className="text-2xl font-bold mb-6 text-blue-700">🔗 နည်းပညာ စာအုပ်နှင့် ဖိုင်များ (External Links ဖြင့်) တင်ရန်</h2>
+                                    <form
+                                        onSubmit={async (e) => {
+                                            e.preventDefault();
+                                            const form = e.target as HTMLFormElement;
+                                            const title = (form.elements.namedItem('resTitle') as HTMLInputElement).value;
+                                            const fileUrl = (form.elements.namedItem('resUrl') as HTMLInputElement).value;
+                                            const fileType = (form.elements.namedItem('resType') as HTMLSelectElement).value;
+
+                                            try {
+                                                // JSON ပုံစံဖြင့် တိုက်ရိုက်ပို့ပါမည်
+                                                await api.post('/admin/resources', {
+                                                    title: title,
+                                                    file_url: fileUrl,
+                                                    file_type: fileType
+                                                });
+                                                alert("လင့်ခ်ထည့်သွင်းခြင်း အောင်မြင်ပါသည်!");
+                                                form.reset();
+                                                // (Optional) ဤနေရာတွင် Resources List ကို ပြန်ခေါ်ပေးနိုင်သည်
+                                            } catch (err) { alert("Error adding resource link"); }
+                                        }}
+                                        className="p-6 bg-blue-50 rounded-xl border border-blue-100 max-w-2xl"
+                                    >
+                                        <div className="mb-4">
+                                            <label className="block font-bold mb-2 text-slate-700">စာအုပ်/ဗီဒီယို အမည်</label>
+                                            <input name="resTitle" required type="text" placeholder="ဥပမာ - AI အခြေခံ Ebook (Google Drive)" className="w-full p-3 rounded-lg border focus:ring-2 focus:ring-blue-400" />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label className="block font-bold mb-2 text-slate-700">URL လင့်ခ် (Google Drive / YouTube Link)</label>
+                                            <input name="resUrl" required type="url" placeholder="https://..." className="w-full p-3 rounded-lg border focus:ring-2 focus:ring-blue-400" />
+                                        </div>
+                                        <div className="mb-6">
+                                            <label className="block font-bold mb-2 text-slate-700">ဖိုင်အမျိုးအစား ရွေးပါ</label>
+                                            <select name="resType" className="w-full p-3 rounded-lg border focus:ring-2 focus:ring-blue-400">
+                                                <option value="pdf">📕 PDF (စာအုပ်)</option>
+                                                <option value="video">🎬 Video (ဗီဒီယို)</option>
+                                                <option value="image">🖼️ Image (ပုံ)</option>
+                                                <option value="other">📁 Other (အခြား)</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" className="bg-blue-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-700">
+                                            Link ထည့်မည်
+                                        </button>
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
+
+
                     )}
+
+
 
                     {/* --- 2. Users Section --- */}
                     {activeTab === 'users' && (

@@ -279,7 +279,7 @@ export default function Home() {
                         <span className="mx-8 font-extrabold text-yellow-300 tracking-wider">
                             👀 ဝင်ရောက်ကြည့်ရှုသူများ: {stats.total_visits}+ ဦး &nbsp;&nbsp;|&nbsp;&nbsp;
                             🎓 သင်ခန်းစာ လေ့လာနေသူများ: {stats.total_users}+ ဦး &nbsp;&nbsp;|&nbsp;&nbsp;
-                            📝 သုံးသပ်ချက်များ: {stats.total_feedbacks}+ ခု
+                            📝 Customer စကားသံများ: {stats.total_feedbacks}+ ခု
                         </span>
 
                         <span className="mx-4 text-blue-300">|</span>
@@ -491,20 +491,34 @@ export default function Home() {
                     </div>
                 </div>
 
+                {/* ✅ Website Stats (အရေအတွက် (၃) မျိုးလုံး ပြသခြင်း - ဖုန်းတွင်ပါ ဘေးတိုက်ယှဉ်ပြရန်) ✅ */}
+                <div className="py-8 md:py-12 bg-white border-b border-slate-100">
+                    <div className="max-w-5xl mx-auto px-2 sm:px-4 flex flex-row justify-between md:justify-around items-center text-center">
 
+                        {/* ၁။ ဝင်ရောက်ကြည့်ရှုသူများ */}
+                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="w-1/3 px-1">
+                            <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-teal-500 mb-1 md:mb-2">{stats.total_visits}+</h3>
+                            <p className="text-slate-500 font-bold uppercase tracking-tight sm:tracking-widest text-[10px] sm:text-xs md:text-sm leading-tight">ကြည့်ရှုသူများ</p>
+                        </motion.div>
 
-                {/* ✅ Website Stats (အရေအတွက်များ ပြသခြင်း) ✅ */}
-                <div className="py-12 bg-white border-b border-slate-100">
-                    <div className="max-w-4xl mx-auto px-4 flex justify-around items-center text-center">
-                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                            <h3 className="text-4xl md:text-5xl font-black text-blue-600 mb-2">{stats.total_users}+</h3>
-                            <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">လေ့လာနေသူများ</p>
+                        {/* မျဉ်းခြား (Mobile တွင်ပါ ပြသမည်) */}
+                        <div className="w-px h-10 md:h-16 bg-slate-200 shrink-0"></div>
+
+                        {/* ၂။ လေ့လာနေသူများ (Login ဝင်ထားသူများ) */}
+                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="w-1/3 px-1">
+                            <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-blue-600 mb-1 md:mb-2">{stats.total_users}+</h3>
+                            <p className="text-slate-500 font-bold uppercase tracking-tight sm:tracking-widest text-[10px] sm:text-xs md:text-sm leading-tight">လေ့လာနေသူများ</p>
                         </motion.div>
-                        <div className="w-px h-16 bg-slate-200"></div>
-                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-                            <h3 className="text-4xl md:text-5xl font-black text-indigo-600 mb-2">{stats.total_feedbacks}+</h3>
-                            <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">သုံးသပ်ချက်များ</p>
+
+                        {/* မျဉ်းခြား (Mobile တွင်ပါ ပြသမည်) */}
+                        <div className="w-px h-10 md:h-16 bg-slate-200 shrink-0"></div>
+
+                        {/* ၃။ သုံးသပ်ချက်များ */}
+                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }} className="w-1/3 px-1">
+                            <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-indigo-600 mb-1 md:mb-2">{stats.total_feedbacks}+</h3>
+                            <p className="text-slate-500 font-bold uppercase tracking-tight sm:tracking-widest text-[10px] sm:text-xs md:text-sm leading-tight">သုံးသပ်ချက်များ</p>
                         </motion.div>
+
                     </div>
                 </div>
 

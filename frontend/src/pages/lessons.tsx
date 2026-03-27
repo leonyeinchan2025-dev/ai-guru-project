@@ -1,7 +1,4 @@
-// src/pages/Lessons.tsx
-// import React, { useEffect, useState } from 'react';
-import { useState, useEffect } from 'react';
-// import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '../api';
 
@@ -22,25 +19,31 @@ const fallbackImages = [
 export default function Lessons() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [lessons, setLessons] = useState<Lesson[]>([]);
-    const [completedIds, setCompletedIds] = useState<number[]>([]); // 🌟 ပြီးထားသော ID များ
+    const [completedIds, setCompletedIds] = useState<number[]>([]);
     const [loading, setLoading] = useState(true);
+    const [resources, setResources] = useState<any[]>([]);
 
     const userString = localStorage.getItem('user');
     const user = userString ? JSON.parse(userString) : null;
 
+    // 🌟 API အားလုံးဆွဲယူမည့် useEffect ကို စနစ်တကျ ပြန်လည်ရေးသားထားပါသည် 🌟
     useEffect(() => {
         if (!user) {
             window.location.href = '/';
             return;
         }
 
-        const fetchData = async () => {
+        const fetchAllData = async () => {
             try {
-                // သင်ခန်းစာ အားလုံးဆွဲယူခြင်း
+                // ၁။ Resources (စာအုပ်စာဆောင်များ) ဆွဲယူခြင်း
+                const resResources = await api.get('/resources');
+                setResources(resResources.data);
+
+                // ၂။ သင်ခန်းစာ အားလုံးဆွဲယူခြင်း
                 const resLessons = await api.get('/lessons', { params: { user_id: user.user_id } });
                 setLessons(resLessons.data);
 
-                // User ၏ Progress ဆွဲယူခြင်း
+                // ၃။ User ၏ Progress ဆွဲယူခြင်း
                 const resProgress = await api.get(`/progress/${user.user_id}`);
                 setCompletedIds(resProgress.data);
             } catch (err) {
@@ -50,7 +53,7 @@ export default function Lessons() {
             }
         };
 
-        fetchData();
+        fetchAllData();
     }, [user]);
 
     const handleLogout = () => {
@@ -78,22 +81,17 @@ export default function Lessons() {
     return (
         <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
 
-            {/* Navbar */}
-            {/* 🌟 Lessons Page Navigation Bar (Mobile & Desktop Responsive) 🌟 */}
-            {/* 🌟 Lessons Page Navigation Bar (Mobile Responsive UI) 🌟 */}
+            {/* 🌟 Lessons Page Navigation Bar 🌟 */}
             <nav className="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-slate-100">
                 <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-                    {/* min-h-[5rem] နှင့် py-2 ကိုသုံး၍ အပေါ်အောက် နေရာကျယ်ကျယ် ပေးထားပါသည် */}
                     <div className="flex justify-between items-center min-h-[5rem] py-2">
 
-                        {/* 🌟 ဘယ်ဘက်အခြမ်း (Logo + AI GURU + Home Icon - အလျားလိုက်) 🌟 */}
                         <div className="flex items-center gap-2 sm:gap-3 z-50">
                             <a href="/#home" className="flex items-center gap-1.5 sm:gap-2 cursor-pointer">
                                 <img src="/logo.png" alt="AI GURU Logo" className="h-9 w-9 md:h-11 md:w-11 rounded-full border border-blue-100 shadow-sm object-cover" />
                                 <div className="text-xl md:text-2xl font-black text-blue-600 tracking-tight">AI GURU</div>
                             </a>
 
-                            {/* Home Icon (ဖုန်းတွင် နေရာမကျပ်စေရန် 'Home' စာသားကို hidden md:inline ဖြင့် ဖျောက်ထားပါသည်) */}
                             <a href="/#home" title="ပင်မစာမျက်နှာသို့" className="flex items-center gap-1.5 text-slate-500 hover:text-blue-600 pl-2 sm:pl-3 border-l-2 border-slate-200 transition-colors ml-1">
                                 <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -102,11 +100,7 @@ export default function Lessons() {
                             </a>
                         </div>
 
-                        {/* 🌟 ညာဘက်အခြမ်း (Profile အပေါ် / Menu အောက် - ဒေါင်လိုက် flex-col) 🌟 */}
-                        {/* flex-col နှင့် items-end ကိုသုံး၍ အပေါ်/အောက် ညာဘက်ကပ်နေစေပါသည် */}
                         <div className="flex flex-col items-end gap-1.5 z-50">
-
-                            {/* ၁။ Profile Badge (အပေါ်) */}
                             {user && (
                                 <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 py-1 px-2.5 rounded-full shadow-sm">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
@@ -118,7 +112,6 @@ export default function Lessons() {
                                 </div>
                             )}
 
-                            {/* ၂။ Menu Button (အောက်) */}
                             <button
                                 onClick={() => setIsMobileMenuOpen(true)}
                                 className="flex items-center justify-center gap-1 text-slate-700 py-1 px-2.5 bg-white border border-slate-200 rounded-lg shadow-sm active:bg-slate-100 transition hover:bg-slate-50"
@@ -130,44 +123,34 @@ export default function Lessons() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
                                 </svg>
                             </button>
-
                         </div>
                     </div>
                 </div>
 
-                {/* 🌟 ၄။ Mobile Sidebar Menu (Menu နှိပ်လိုက်မှ ပေါ်လာမည့် အပိုင်း) 🌟 */}
                 <AnimatePresence>
                     {isMobileMenuOpen && (
                         <>
-                            {/* Backdrop */}
                             <motion.div
                                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] cursor-pointer"
                             />
-
-                            {/* Sidebar */}
                             <motion.div
                                 initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                                 className="fixed top-0 right-0 h-[100dvh] w-[85%] max-w-sm bg-[#f8fafc] shadow-2xl z-[70] flex flex-col rounded-l-3xl overflow-hidden"
                             >
-                                {/* Header (Logo & Close Button) */}
                                 <div className="flex justify-between items-center p-5 bg-white border-b border-slate-100 shrink-0 shadow-sm z-10">
                                     <div className="flex items-center gap-3">
                                         <img src="/logo.png" alt="Logo" className="w-10 h-10 rounded-full border border-blue-100 shadow-sm object-cover" />
                                         <span className="text-xl font-extrabold text-blue-700 tracking-wide">AI GURU</span>
                                     </div>
-                                    <button
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                        className="p-2 rounded-full bg-slate-50 text-slate-500 border border-slate-200 hover:bg-red-50 hover:text-red-600 transition-colors active:scale-90"
-                                    >
+                                    <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 rounded-full bg-slate-50 text-slate-500 border border-slate-200 hover:bg-red-50 hover:text-red-600 transition-colors active:scale-90">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
                                         </svg>
                                     </button>
                                 </div>
 
-                                {/* Menu Links (Home Page မှ Link များအတိုင်း) */}
                                 <div className="flex flex-col p-5 flex-1 overflow-y-auto">
                                     <a href="/#home" className="flex items-center gap-4 bg-white border border-slate-200 text-slate-700 font-bold px-5 py-3.5 rounded-2xl shadow-sm mb-3 hover:border-blue-300 transition-colors">
                                         <span className="text-xl">🏠</span> <span>Home</span>
@@ -186,7 +169,6 @@ export default function Lessons() {
                                     </a>
                                 </div>
 
-                                {/* Bottom Logout Section */}
                                 <div className="p-5 bg-white border-t border-slate-100 shrink-0 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
                                     {user && (
                                         <div className="flex flex-col gap-3">
@@ -195,7 +177,6 @@ export default function Lessons() {
                                                     ⚙️ Admin Panel
                                                 </a>
                                             )}
-                                            {/* 🌟 ဤနေရာမှ နှိပ်မှသာ Logout ထွက်မည် 🌟 */}
                                             <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 font-bold px-4 py-4 rounded-2xl border border-red-100 shadow-sm active:scale-95 transition-all hover:bg-red-100">
                                                 🚪 ထွက်မည် (Logout)
                                             </button>
@@ -234,6 +215,40 @@ export default function Lessons() {
                 </div>
             </div>
 
+            {/* 🌟 နည်းပညာ စာအုပ်စာဆောင်များ (Resources) 🌟 */}
+            {resources.length > 0 && (
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-16">
+                    <div className="flex items-center gap-3 mb-6 border-b-2 border-slate-200 pb-3">
+                        <span className="text-3xl">📚</span>
+                        <h2 className="text-2xl font-extrabold text-slate-800">နည်းပညာ စာအုင်နှင့် Link များ (Resources)</h2>
+                    </div>
+                    {/* 🌟 နည်းပညာ စာအုင်နှင့် Link များ (Resources) 🌟 */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {resources.map((res) => {
+                            // 🌟 အကယ်၍ Link သည် http ဖြင့်စပါက တိုက်ရိုက်သုံးမည်၊ မဟုတ်ပါက Backend URL တွဲပေးမည် (Backwards Compatibility) 🌟
+                            const fileUrl = res.file_url.startsWith('http')
+                                ? res.file_url
+                                : `${api.defaults.baseURL}${res.file_url}`;
+
+                            return (
+                                <div key={res.id} className="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm hover:shadow-md transition flex flex-col">
+                                    <div className="text-4xl mb-4 text-center">
+                                        {res.file_type === 'pdf' ? '📕' : res.file_type === 'video' ? '🎬' : res.file_type === 'image' ? '🖼️' : '🔗'}
+                                    </div>
+                                    <h3 className="font-bold text-slate-800 text-center mb-4 line-clamp-2 flex-grow">{res.title}</h3>
+
+                                    <div className="flex gap-2 justify-center mt-auto">
+                                        <a href={fileUrl} target="_blank" rel="noreferrer" className="w-full text-center bg-blue-600 text-white text-sm font-bold py-2.5 rounded-lg hover:bg-blue-700 transition shadow-sm">
+                                            {res.file_type === 'video' ? 'ဗီဒီယို ကြည့်မည် 🎬' : 'လင့်ခ် ဖွင့်မည် 🚀'}
+                                        </a>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
+
             <div className="max-w-7xl mx-auto px-4 pb-24">
                 {loading ? (
                     <div className="flex justify-center items-center py-20">
@@ -243,7 +258,7 @@ export default function Lessons() {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {lessons.map((lesson, index) => {
                             const fileType = getFileType(lesson.file_url);
-                            const isDone = completedIds.includes(lesson.id); // 🌟 ဤသင်ခန်းစာ ပြီးပြီလား စစ်ဆေးခြင်း
+                            const isDone = completedIds.includes(lesson.id);
 
                             return (
                                 <motion.div
@@ -253,10 +268,8 @@ export default function Lessons() {
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
                                     className={`bg-white rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 border overflow-hidden flex flex-col group ${isDone ? 'border-green-200 ring-2 ring-green-50' : 'border-slate-100'}`}
                                 >
-                                    {/* ဖိုင်အမျိုးအစားပေါ် မူတည်၍ ပြသမည့်အပိုင်း */}
                                     <div className="h-48 bg-slate-100 overflow-hidden relative flex items-center justify-center">
 
-                                        {/* 🌟 ပြီးဆုံးကြောင်း Badge (ညာဘက်အပေါ်) 🌟 */}
                                         {isDone && (
                                             <div className="absolute top-4 right-4 z-20">
                                                 <span className="bg-green-500 text-white px-3 py-1.5 rounded-full text-xs font-extrabold shadow-lg flex items-center gap-1">
@@ -288,19 +301,16 @@ export default function Lessons() {
                                         )}
                                     </div>
 
-                                    {/* စာသားနှင့် ခလုတ် */}
                                     <div className="p-6 flex flex-col flex-grow">
                                         <h2 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
                                             {lesson.title}
                                         </h2>
 
-                                        {/* Quill ဖြင့်ရေးထားသော HTML များကို မှန်ကန်စွာပေါ်စေရန် နှင့် စာကြောင်းရေ ကန့်သတ်ရန် */}
                                         <div
-                                            className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow line-clamp-3"
+                                            className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow line-clamp-3 custom-html-content"
                                             dangerouslySetInnerHTML={{ __html: lesson.content }}
                                         />
 
-                                        {/* ဖိုင်ရှိပါက Download သို့မဟုတ် View ခလုတ် ပြမည် */}
                                         {fileType === 'pdf' ? (
                                             <a href={lesson.file_url!} target="_blank" rel="noopener noreferrer" className={`mt-auto w-full text-center font-semibold py-3 rounded-xl transition-colors border ${isDone ? 'bg-green-50 text-green-700 border-green-100 hover:bg-green-600 hover:text-white' : 'bg-blue-50 text-blue-700 border-blue-100 hover:bg-blue-600 hover:text-white'}`}>
                                                 PDF ဖတ်ရန် / ဒေါင်းလုဒ်ဆွဲရန် ⬇️

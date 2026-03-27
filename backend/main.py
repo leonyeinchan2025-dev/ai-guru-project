@@ -1,3 +1,6 @@
+from fastapi import File, UploadFile, Form
+# from pydantic import BaseModel
+
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 from pydantic import BaseModel
@@ -31,6 +34,48 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# (၁) Uploads Folder တည်ဆောက်ခြင်း နှင့် ချိတ်ဆက်ခြင်း
+os.makedirs("uploads", exist_ok=True)
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+
+# (၂) Admin မှ ဖိုင်အသစ်တင်ရန် API
+# (၁) Resource လက်ခံရန် Schema အသစ် ကြေညာခြင်း (ဖိုင်၏ အပေါ်ပိုင်း schemas နေရာတွင် ထည့်နိုင်သည် သို့မဟုတ် ဤနေရာတွင် ထားပါ)
+class ResourceCreate(BaseModel):
+    title: str
+    file_url: str
+    file_type: str
+
+# (၂) Admin မှ External Link ဖြင့် ဖိုင်တင်ရန် API
+@app.post("/admin/resources")
+def create_external_resource(resource: ResourceCreate, db: Session = Depends(get_db)):
+    # ဖိုင်အစစ် လက်ခံမည့်အစား Link ကိုသာ Database တွင် တိုက်ရိုက်သိမ်းပါမည်
+    new_resource = models.Resource(
+        title=resource.title,
+        file_url=resource.file_url,
+        file_type=resource.file_type
+    )
+    db.add(new_resource)
+    db.commit()
+    db.refresh(new_resource)
+    return new_resource
+
+# (၃) တင်ထားသော ဖိုင်များအားလုံးကို ဆွဲယူရန် API
+@app.get("/resources")
+def get_resources(db: Session = Depends(get_db)):
+    return db.query(models.Resource).order_by(models.Resource.created_at.desc()).all()
+
+# (၄) Admin မှ ဖိုင်ပြန်ဖျက်ရန် API
+@app.delete("/admin/resources/{res_id}")
+def delete_resource(res_id: int, db: Session = Depends(get_db)):
+    res = db.query(models.Resource).filter(models.Resource.id == res_id).first()
+    if res:
+        # Server ပေါ်ရှိ ဖိုင်အစစ်ကိုပါ ဖျက်ရန် (Optional)
+        if os.path.exists(res.file_url.lstrip("/")):
+            os.remove(res.file_url.lstrip("/"))
+        db.delete(res)
+        db.commit()
+    return {"status": "deleted"}
 
 # ဖိုင်တင်ရန် Folder ဆောက်ခြင်း
 UPLOAD_DIR = "uploads"

@@ -56,3 +56,12 @@ class SiteStat(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     total_visits = Column(Integer, default=0)
+
+class Resource(Base):
+    __tablename__ = "resources"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, index=True)
+    file_url = Column(String)
+    file_type = Column(String) # ဥပမာ - 'pdf', 'video', 'image'
+    created_at = Column(DateTime, default=datetime.utcnow)
