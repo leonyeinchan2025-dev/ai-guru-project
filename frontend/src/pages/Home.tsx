@@ -56,8 +56,12 @@ export default function Home() {
         const fetchData = async () => {
             try {
                 const statRes = await api.get('/stats');
-                setStats(statRes.data);
-
+                // 🌟 အသစ်: Database မှ တကယ့်အရေအတွက်နှင့် မူရင်း (Base) အရေအတွက်များကို ပေါင်းပေးခြင်း 🌟
+                setStats({
+                    total_visits: statRes.data.total_visits + 30,     // ကြည့်ရှုသူ 20 ပေါင်းမည်
+                    total_users: statRes.data.total_users + 10,       // လေ့လာသူ 10 ပေါင်းမည်
+                    total_feedbacks: statRes.data.total_feedbacks + 5 // သုံးသပ်ချက် 5 ပေါင်းမည်
+                });
                 const fbRes = await api.get('/feedbacks/highlighted');
                 setHighlightedFeedbacks(fbRes.data);
 

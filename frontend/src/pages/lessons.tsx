@@ -220,7 +220,7 @@ export default function Lessons() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-16">
                     <div className="flex items-center gap-3 mb-6 border-b-2 border-slate-200 pb-3">
                         <span className="text-3xl">📚</span>
-                        <h2 className="text-2xl font-extrabold text-slate-800">နည်းပညာ စာအုင်နှင့် Link များ (Resources)</h2>
+                        <h2 className="text-2xl font-extrabold text-slate-800">နည်းပညာ (Resources) များ Download ရယူရန်</h2>
                     </div>
                     {/* 🌟 နည်းပညာ စာအုင်နှင့် Link များ (Resources) 🌟 */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
