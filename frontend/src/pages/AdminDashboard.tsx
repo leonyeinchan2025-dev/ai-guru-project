@@ -677,7 +677,7 @@ export default function AdminDashboard() {
 
 
 
-                    {/* --- 2. Users Section --- */}
+                    {/* --- 2. Users Section ---
                     {activeTab === 'users' && (
                         <div>
                             <h2 className="text-xl font-bold mb-6 border-b pb-2">👥 User စာရင်းနှင့် အကောင့် အတည်ပြုခြင်း</h2>
@@ -724,6 +724,86 @@ export default function AdminDashboard() {
                                                 </td>
                                             </tr>
                                         ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    )} */}
+
+                    {/* --- 2. Users Section --- */}
+                    {activeTab === 'users' && (
+                        <div>
+                            <h2 className="text-xl font-bold mb-6 border-b pb-2">👥 User စာရင်းနှင့် အကောင့် အတည်ပြုခြင်း</h2>
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr className="bg-slate-50 border-b">
+                                            <th className="p-3">ID</th>
+                                            <th className="p-3">အမည်</th>
+                                            <th className="p-3">Email</th>
+                                            <th className="p-3">အခြေအနေ</th>
+
+                                            {/* 🌟 အသစ်: Status ခေါင်းစဉ် 🌟 */}
+                                            <th className="p-3 text-center">Active Status</th>
+
+                                            <th className="p-3">လုပ်ဆောင်ချက်</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {users.map(u => {
+                                            // 🌟 ၅ မိနစ်အတွင်း Ping ထားသလား စစ်ဆေးခြင်း 🌟
+                                            const isOnline = u.last_active
+                                                ? (new Date().getTime() - new Date(u.last_active).getTime()) < 5 * 60 * 1000
+                                                : false;
+
+                                            return (
+                                                <tr key={u.id} className="border-b hover:bg-slate-50">
+                                                    <td className="p-3">{u.id}</td>
+                                                    <td className="p-3 font-medium">
+                                                        {u.fullname}
+                                                        {u.is_admin && <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded ml-2">Admin</span>}
+                                                    </td>
+                                                    <td className="p-3 text-slate-500">{u.email}</td>
+                                                    <td className="p-3">
+                                                        {u.is_approved ?
+                                                            <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">Approved</span> :
+                                                            <span className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs font-bold">Pending</span>
+                                                        }
+                                                    </td>
+
+                                                    {/* 🌟 အသစ်: Online / Offline ပြသမည့် နေရာ 🌟 */}
+                                                    <td className="p-3 text-center">
+                                                        {isOnline ? (
+                                                            <span className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 border border-green-200 px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                                                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                                                Online
+                                                            </span>
+                                                        ) : (
+                                                            <span className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-500 border border-slate-200 px-3 py-1 rounded-full text-xs font-bold">
+                                                                <span className="w-2 h-2 rounded-full bg-slate-400"></span>
+                                                                Offline
+                                                            </span>
+                                                        )}
+                                                    </td>
+
+                                                    <td className="p-3 flex gap-2">
+                                                        {!u.is_approved && (
+                                                            <button onClick={() => handleApproveUser(u.id)} className="bg-blue-100 text-blue-700 px-3 py-1.5 rounded text-sm font-medium hover:bg-blue-200 transition">
+                                                                အတည်ပြုမည်
+                                                            </button>
+                                                        )}
+                                                        {u.is_approved && (
+                                                            <button onClick={() => handleToggleAdmin(u.id, u.is_admin)} className={`px-3 py-1.5 rounded text-sm font-medium transition ${u.is_admin ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'}`}>
+                                                                {u.is_admin ? '⬇️ User ပြောင်းမည်' : '⬆️ Admin ပေးမည်'}
+                                                            </button>
+                                                        )}
+                                                        <button onClick={() => handleDeleteUser(u.id)} className="bg-red-100 text-red-700 px-3 py-1.5 rounded text-sm font-medium hover:bg-red-200 transition">
+                                                            ဖျက်မည်
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
                                     </tbody>
                                 </table>
                             </div>

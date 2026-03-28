@@ -33,6 +33,22 @@ export default function Lessons() {
             return;
         }
 
+        // 🌟 ဤအပိုင်းသည် Active Status (Heartbeat) အတွက် ဖြစ်သည် 🌟
+        const sendPing = async () => {
+            try {
+                await api.post('/users/ping', { user_id: user.user_id });
+            } catch (e) { console.log("Ping error", e); }
+        };
+
+        // ဝင်ဝင်ချင်း တစ်ခါ သတင်းပို့မည်
+        sendPing();
+
+        // ထို့နောက် ၃ မိနစ် (180,000 ms) လျှင် တစ်ခါ အလိုလို သတင်းပို့နေမည်
+        const intervalId = setInterval(sendPing, 180000);
+
+        // Page ကနေ ထွက်သွားပါက ရပ်တန့်မည်
+        return () => clearInterval(intervalId);
+
         const fetchAllData = async () => {
             try {
                 // ၁။ Resources (စာအုပ်စာဆောင်များ) ဆွဲယူခြင်း

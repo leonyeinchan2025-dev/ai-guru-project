@@ -24,6 +24,19 @@ from database import engine, get_db
 # Database Table များဖန်တီးခြင်း
 models.Base.metadata.create_all(bind=engine)
 
+
+class PingRequest(BaseModel):
+    user_id: int
+
+# 🌟 User ရှိနေကြောင်း (Online) သတင်းပို့သည့် API 🌟
+@app.post("/users/ping")
+def update_user_activity(req: PingRequest, db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.id == req.user_id).first()
+    if user:
+        user.last_active = datetime.utcnow()
+        db.commit()
+    return {"status": "online"}
+
 app = FastAPI()
 
 # Render နှင့် Vercel ချိတ်ဆက်နိုင်ရန် CORS သတ်မှတ်ခြင်း
