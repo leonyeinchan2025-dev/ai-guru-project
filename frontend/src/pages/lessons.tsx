@@ -23,8 +23,11 @@ export default function Lessons() {
     const [loading, setLoading] = useState(true);
     const [resources, setResources] = useState<any[]>([]);
 
-    const userString = localStorage.getItem('user');
-    const user = userString ? JSON.parse(userString) : null;
+    // ✅ အသစ်: Infinite Loop မဖြစ်စေရန် useState ဖြင့် ပြင်ဆင်ထားပါသည်
+    const [user] = useState(() => {
+        const userString = localStorage.getItem('user');
+        return userString ? JSON.parse(userString) : null;
+    });
 
     // 🌟 API အားလုံးဆွဲယူမည့် useEffect ကို စနစ်တကျ ပြန်လည်ရေးသားထားပါသည် 🌟
     useEffect(() => {

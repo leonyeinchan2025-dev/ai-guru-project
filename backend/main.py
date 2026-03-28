@@ -14,9 +14,15 @@ from google.auth.transport import requests as google_requests
 
 import models, schemas
 from database import engine, get_db
+from sqlalchemy import text # 🌟 ဤစာကြောင်း အသစ်ပါရပါမည်
 
 # --- 🌟 Database ဖန်တီးခြင်း 🌟 ---
 models.Base.metadata.create_all(bind=engine)
+try:
+    with engine.begin() as conn:
+        conn.execute(text("ALTER TABLE users ADD COLUMN last_active TIMESTAMP"))
+except Exception:
+    pass # ကော်လံရှိပြီးသားဖြစ်ပါက ကျော်သွားပါမည်
 
 # --- 🌟 Pydantic Schemas ကြေညာခြင်း 🌟 ---
 class PingRequest(BaseModel):

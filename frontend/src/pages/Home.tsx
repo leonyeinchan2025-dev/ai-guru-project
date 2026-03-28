@@ -56,19 +56,28 @@ export default function Home() {
         const fetchData = async () => {
             try {
                 const statRes = await api.get('/stats');
-                // 🌟 အသစ်: Database မှ တကယ့်အရေအတွက်နှင့် မူရင်း (Base) အရေအတွက်များကို ပေါင်းပေးခြင်း 🌟
+
+                // 🌟 Backend မှ Data ရလာပါက တကယ့်အရေအတွက်နှင့် မူရင်းဂဏန်းများ ပေါင်းပေးမည် 🌟
                 setStats({
-                    total_visits: statRes.data.total_visits + 30,     // ကြည့်ရှုသူ 20 ပေါင်းမည်
-                    total_users: statRes.data.total_users + 10,       // လေ့လာသူ 10 ပေါင်းမည်
-                    total_feedbacks: statRes.data.total_feedbacks + 5 // သုံးသပ်ချက် 5 ပေါင်းမည်
+                    total_visits: (statRes.data?.total_visits || 0) + 20,
+                    total_users: (statRes.data?.total_users || 0) + 10,
+                    total_feedbacks: (statRes.data?.total_feedbacks || 0) + 5
                 });
+
                 const fbRes = await api.get('/feedbacks/highlighted');
                 setHighlightedFeedbacks(fbRes.data);
 
-                const latestRes = await api.get('/feedbacks/latest'); // နောက်ဆုံး ၃ ခု
+                const latestRes = await api.get('/feedbacks/latest');
                 setLatestFeedbacks(latestRes.data);
+
             } catch (err) {
                 console.error("Error fetching homepage data", err);
+                // 🌟 အရေးကြီး: အကယ်၍ Backend Error တက်၍ Data မရပါက 0 မဖြစ်စေဘဲ မူရင်းဂဏန်းများ ပြထားပေးမည် 🌟
+                setStats({
+                    total_visits: 20,
+                    total_users: 10,
+                    total_feedbacks: 5
+                });
             }
         };
 
