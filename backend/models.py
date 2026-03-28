@@ -15,8 +15,7 @@ class User(Base):
     is_approved = Column(Boolean, default=False) # Admin က True ပေးမှ Login ရမည်
     is_admin = Column(Boolean, default=False)
 
-    # 🌟 ဤစာကြောင်းကို အသစ်ထပ်တိုးပါ 🌟
-    last_active = Column(DateTime, default=datetime.utcnow)
+
 
     # # 🌟 အသစ် ထပ်တိုးမည့် အကွက်များ 🌟
     # is_email_verified = Column(Boolean, default=False)  # Email အစစ်ဟုတ်မဟုတ်

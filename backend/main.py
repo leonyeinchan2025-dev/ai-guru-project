@@ -28,9 +28,6 @@ try:
 except Exception as e:
     print("⚠️ Database update skipped or error:", e)
 
-# --- 🌟 Pydantic Schemas ကြေညာခြင်း 🌟 ---
-class PingRequest(BaseModel):
-    user_id: int
 
 class ResourceCreate(BaseModel):
     title: str
@@ -75,14 +72,6 @@ app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 def root():
     return {"message": "AI GURU Backend is running!"}
 
-# --- 🟢 Active Status (Ping) API ---
-@app.post("/users/ping")
-def update_user_activity(req: PingRequest, db: Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.id == req.user_id).first()
-    if user:
-        user.last_active = datetime.utcnow()
-        db.commit()
-    return {"status": "online"}
 
 # --- 🔗 External Resources APIs ---
 @app.post("/admin/resources")
