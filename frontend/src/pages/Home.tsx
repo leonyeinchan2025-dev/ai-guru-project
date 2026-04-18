@@ -323,6 +323,39 @@ export default function Home() {
                             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
                                 AI GURU မှကြိုဆိုပါတယ်။ <br /><br className="hidden md:block" /> <br />ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br className="hidden md:block" /> <br /> အခြေခံ AI သင်ခန်းစာများအား <span className="text-yellow-600"> <b>ပညာဒါန </b></span> အခမဲ့ လေ့လာနိုင်ပါသည်။
                             </motion.p>
+                            {/* 🌟 အသစ်ထပ်တိုး: နှစ်သစ်ကူး Ebook လက်ဆောင် 🌟 */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                                className="mb-10 inline-block w-full max-w-md text-left"
+                            >
+                                <div className="bg-gradient-to-r from-red-500 via-pink-500 to-orange-500 p-[2px] rounded-2xl shadow-lg relative overflow-hidden group">
+                                    {/* ရောင်စုံရွေ့လျားနေသော Background Effect */}
+                                    <div className="absolute inset-0 bg-white/20 group-hover:bg-transparent transition-colors"></div>
+
+                                    <div className="bg-white rounded-[14px] p-5 flex items-center gap-4 relative z-10">
+                                        <div className="text-4xl md:text-5xl animate-bounce">🎁</div>
+                                        <div className="flex-1">
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">New Year Gift</span>
+                                            </div>
+                                            <h3 className="font-extrabold text-slate-800 text-base md:text-lg mb-1">AI အခြေခံ E-book (အခမဲ့)</h3>
+                                            <p className="text-xs text-slate-500 mb-3 font-medium">၂၀၂၆ နှစ်သစ်ကူး အထူးလက်ဆောင်အဖြစ် ရယူလိုက်ပါ။</p>
+
+                                            <div className="flex gap-2">
+                                                {/* 🔗 ဤနေရာတွင် သင်၏ Google Drive (သို့) PDF Link များကို ထည့်ပါ 🔗 */}
+                                                <a href="https://drive.google.com/..." target="_blank" rel="noreferrer" className="flex-1 text-center bg-red-50 text-red-600 border border-red-100 px-3 py-2 rounded-lg text-sm font-bold hover:bg-red-100 hover:border-red-200 transition">
+                                                    ဖတ်မည် 📖
+                                                </a>
+                                                <a href="https://drive.google.com/..." target="_blank" rel="noreferrer" download className="flex-1 text-center bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-2 rounded-lg text-sm font-bold hover:from-red-600 hover:to-orange-600 transition shadow-sm">
+                                                    ဒေါင်းလုဒ် ⬇️
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
 
                             {/* 🌟 ခလုတ် (၂) ခု ယှဉ်လျက် ပေါ်စေရန် Flex Box ဖြင့် ထုပ်ထားပါသည် 🌟 */}
                             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
