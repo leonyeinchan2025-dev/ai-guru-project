@@ -345,10 +345,10 @@ export default function Home() {
 
                                             <div className="flex gap-2">
                                                 {/* 🔗 ဤနေရာတွင် သင်၏ Google Drive (သို့) PDF Link များကို ထည့်ပါ 🔗 */}
-                                                <a href="https://drive.google.com/..." target="_blank" rel="noreferrer" className="flex-1 text-center bg-red-50 text-red-600 border border-red-100 px-3 py-2 rounded-lg text-sm font-bold hover:bg-red-100 hover:border-red-200 transition">
+                                                <a href="https://drive.google.com/file/d/1ZmbJIQlbTJo4ERSPMWdbGbeArXB4w8Wf/view?usp=sharing" target="_blank" rel="noreferrer" className="flex-1 text-center bg-red-50 text-red-600 border border-red-100 px-3 py-2 rounded-lg text-sm font-bold hover:bg-red-100 hover:border-red-200 transition">
                                                     ဖတ်မည် 📖
                                                 </a>
-                                                <a href="https://drive.google.com/..." target="_blank" rel="noreferrer" download className="flex-1 text-center bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-2 rounded-lg text-sm font-bold hover:from-red-600 hover:to-orange-600 transition shadow-sm">
+                                                <a href="https://drive.google.com/file/d/1ZmbJIQlbTJo4ERSPMWdbGbeArXB4w8Wf/view?usp=sharing" target="_blank" rel="noreferrer" download className="flex-1 text-center bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-2 rounded-lg text-sm font-bold hover:from-red-600 hover:to-orange-600 transition shadow-sm">
                                                     ဒေါင်းလုဒ် ⬇️
                                                 </a>
                                             </div>
