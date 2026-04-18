@@ -31,7 +31,12 @@ export default function Home() {
 
     // 🌟 အသစ်ထပ်တိုးရမည့် State များ (တစ်ခါသာ ကြေညာရပါမည်) 🌟
     // 🌟 အသစ်ထပ်တိုးရမည့် State များ (total_visits ပါ ထပ်တိုးထားပါသည်) 🌟
-    const [stats, setStats] = useState({ total_visits: 0, total_users: 0, total_feedbacks: 0 });
+    // 🌟 API မရောက်ခင် စစချင်းမှာ 0 မပေါ်စေဘဲ 20, 10, 5 တန်းပေါ်နေစေရန် Initial Value ပြင်ထားပါသည်
+    const [stats, setStats] = useState({
+        total_visits: 20,
+        total_users: 10,
+        total_feedbacks: 5
+    });
     const [highlightedFeedbacks, setHighlightedFeedbacks] = useState<any[]>([]);
     const [latestFeedbacks, setLatestFeedbacks] = useState<any[]>([]);
 
