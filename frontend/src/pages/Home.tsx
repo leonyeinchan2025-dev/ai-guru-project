@@ -340,7 +340,7 @@ export default function Home() {
                                             <div className="flex items-center gap-2 mb-1">
                                                 <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">New Year Gift</span>
                                             </div>
-                                            <h3 className="font-extrabold text-slate-800 text-base md:text-lg mb-1">AI အခြေခံ E-book (အခမဲ့)</h3>
+                                            <h3 className="font-extrabold text-slate-800 text-base md:text-lg mb-1">Coding အခြေခံ Scratch E-book (အခမဲ့)</h3>
                                             <p className="text-xs text-slate-500 mb-3 font-medium">၂၀၂၆ နှစ်သစ်ကူး အထူးလက်ဆောင်အဖြစ် ရယူလိုက်ပါ။</p>
 
                                             <div className="flex gap-2">
