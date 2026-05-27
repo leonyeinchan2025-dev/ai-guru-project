@@ -54,14 +54,13 @@ GOOGLE_CLIENT_ID = "768463165065-2uc4qbiv82rricq9s1vdms3ek5mcn11j.apps.googleuse
 # --- 🌟 FastAPI App စတင်ခြင်း 🌟 ---
 app = FastAPI()
 
-# ၂။ ခွင့်ပြုမည့် Domain လိပ်စာများကို List အနေနဲ့ သတ်မှတ်ပါ
+# --- 🌟 CORS Configuration (ဒါကို တစ်ခုပဲ ထားရပါမယ်) 🌟 ---
 origins = [
     "https://aiguru.site",
     "https://www.aiguru.site",
-    "http://localhost:3000", # Local မှာ စမ်းသပ်ရင် သုံးဖို့
+    "http://localhost:3000",
 ]
 
-# ၃။ CORSMiddleware ကို App မှာ ထည့်သွင်းပါ
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -70,63 +69,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-def read_root():
-    return {"message": "Hello World"}
-
-# Render နှင့် Vercel ချိတ်ဆက်နိုင်ရန် CORS သတ်မှတ်ခြင်း
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"], 
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# (၁) Uploads Folder တည်ဆောက်ခြင်း နှင့် ချိတ်ဆက်ခြင်း
+# --- 📂 Static Files & Directory ---
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
+# --- 🏠 Root Endpoint (တစ်ခုပဲ ထားပါ) ---
 @app.get("/")
 def root():
-    return {"message": "AI GURU Backend is running!"}
+    return {"message": "AI GURU Backend is running safely!"}
 
-
-# --- 🔗 External Resources APIs ---
-@app.post("/admin/resources")
-def create_external_resource(resource: ResourceCreate, db: Session = Depends(get_db)):
-    new_resource = models.Resource(
-        title=resource.title,
-        file_url=resource.file_url,
-        file_type=resource.file_type
-    )
-    db.add(new_resource)
-    db.commit()
-    db.refresh(new_resource)
-    return new_resource
-
-@app.get("/resources")
-def get_resources(db: Session = Depends(get_db)):
-    return db.query(models.Resource).order_by(models.Resource.created_at.desc()).all()
-
-@app.delete("/admin/resources/{res_id}")
-def delete_resource(res_id: int, db: Session = Depends(get_db)):
-    res = db.query(models.Resource).filter(models.Resource.id == res_id).first()
-    if res:
-        # File အစစ်မဟုတ်သော်လည်း သတိထားဖျက်ရန်
-        if not res.file_url.startswith('http') and os.path.exists(res.file_url.lstrip("/")):
-            os.remove(res.file_url.lstrip("/"))
-        db.delete(res)
-        db.commit()
-    return {"status": "deleted"}
-
-# --- 🔐 Authentication (Register & Login) ---
+# --- 🔐 Authentication (Register) ---
 @app.post("/register")
 def register_user(user: UserRegister, db: Session = Depends(get_db)):
     valid_domains = ["@gmail.com", "@yahoo.com", "@outlook.com"]
     if not any(user.email.endswith(domain) for domain in valid_domains):
-        raise HTTPException(status_code=400, detail="ကျေးဇူးပြု၍ @gmail.com ကဲ့သို့သော အီးမေးလ် အစစ်အမှန်ကိုသာ အသုံးပြုပါ။")
+        raise HTTPException(
+            status_code=400, 
+            detail="ကျေးဇူးပြု၍ @gmail.com ကဲ့သို့သော အီးမေးလ် အစစ်အမှန်ကိုသာ အသုံးပြုပါ။"
+        )
 
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if db_user:
@@ -142,7 +103,79 @@ def register_user(user: UserRegister, db: Session = Depends(get_db)):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return {"message": "Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။\n\nဆက်သွယ်ရန် Hot Line (Admin) Call and Viber: +959444445546"}
+    return {"message": "Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို စောင့်ဆိုင်းပေးပါ။"}
+
+# --- 🔗 External Resources APIs ---
+
+# # Render နှင့် Vercel ချိတ်ဆက်နိုင်ရန် CORS သတ်မှတ်ခြင်း
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"], 
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+# # (၁) Uploads Folder တည်ဆောက်ခြင်း နှင့် ချိတ်ဆက်ခြင်း
+# UPLOAD_DIR = "uploads"
+# os.makedirs(UPLOAD_DIR, exist_ok=True)
+# app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+
+# @app.get("/")
+# def root():
+#     return {"message": "AI GURU Backend is running!"}
+
+
+# # --- 🔗 External Resources APIs ---
+# @app.post("/admin/resources")
+# def create_external_resource(resource: ResourceCreate, db: Session = Depends(get_db)):
+#     new_resource = models.Resource(
+#         title=resource.title,
+#         file_url=resource.file_url,
+#         file_type=resource.file_type
+#     )
+#     db.add(new_resource)
+#     db.commit()
+#     db.refresh(new_resource)
+#     return new_resource
+
+# @app.get("/resources")
+# def get_resources(db: Session = Depends(get_db)):
+#     return db.query(models.Resource).order_by(models.Resource.created_at.desc()).all()
+
+# @app.delete("/admin/resources/{res_id}")
+# def delete_resource(res_id: int, db: Session = Depends(get_db)):
+#     res = db.query(models.Resource).filter(models.Resource.id == res_id).first()
+#     if res:
+#         # File အစစ်မဟုတ်သော်လည်း သတိထားဖျက်ရန်
+#         if not res.file_url.startswith('http') and os.path.exists(res.file_url.lstrip("/")):
+#             os.remove(res.file_url.lstrip("/"))
+#         db.delete(res)
+#         db.commit()
+#     return {"status": "deleted"}
+
+# # --- 🔐 Authentication (Register & Login) ---
+# @app.post("/register")
+# def register_user(user: UserRegister, db: Session = Depends(get_db)):
+#     valid_domains = ["@gmail.com", "@yahoo.com", "@outlook.com"]
+#     if not any(user.email.endswith(domain) for domain in valid_domains):
+#         raise HTTPException(status_code=400, detail="ကျေးဇူးပြု၍ @gmail.com ကဲ့သို့သော အီးမေးလ် အစစ်အမှန်ကိုသာ အသုံးပြုပါ။")
+
+#     db_user = db.query(models.User).filter(models.User.email == user.email).first()
+#     if db_user:
+#         raise HTTPException(status_code=400, detail="ဤ Email မှာ စာရင်းသွင်းပြီးသား ဖြစ်နေပါသည်။")
+    
+#     new_user = models.User(
+#         fullname=user.fullname, 
+#         email=user.email, 
+#         password=user.password, 
+#         is_approved=False,  
+#         is_admin=False      
+#     )
+#     db.add(new_user)
+#     db.commit()
+#     db.refresh(new_user)
+#     return {"message": "Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။\n\nဆက်သွယ်ရန် Hot Line (Admin) Call and Viber: +959444445546"}
 
 @app.post("/login")
 def login_user(user: UserLogin, db: Session = Depends(get_db)):
