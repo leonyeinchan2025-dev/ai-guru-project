@@ -54,6 +54,26 @@ GOOGLE_CLIENT_ID = "768463165065-2uc4qbiv82rricq9s1vdms3ek5mcn11j.apps.googleuse
 # --- 🌟 FastAPI App စတင်ခြင်း 🌟 ---
 app = FastAPI()
 
+# ၂။ ခွင့်ပြုမည့် Domain လိပ်စာများကို List အနေနဲ့ သတ်မှတ်ပါ
+origins = [
+    "https://aiguru.site",
+    "https://www.aiguru.site",
+    "http://localhost:3000", # Local မှာ စမ်းသပ်ရင် သုံးဖို့
+]
+
+# ၃။ CORSMiddleware ကို App မှာ ထည့်သွင်းပါ
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello World"}
+
 # Render နှင့် Vercel ချိတ်ဆက်နိုင်ရန် CORS သတ်မှတ်ခြင်း
 app.add_middleware(
     CORSMiddleware,
