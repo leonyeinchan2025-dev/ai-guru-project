@@ -772,8 +772,8 @@ export default function Home() {
 
                                     <div className="space-y-3">
                                         {[
-                                            { title: "Prompt Engineering လမ်းညွှန်", link: "https://drive.google.com/..." },
-                                            { title: "Basic Python အခြေခံ", link: "https://drive.google.com/..." },
+                                            { title: "Prompt Engineering လမ်းညွှန်", link: "https://drive.google.com/file/d/1pe8c2HFP7qzquJT4w_NbcSg7ZVbNpIQU/view?usp=sharing" },
+                                            { title: "Basic Python အခြေခံ", link: "https://drive.google.com/file/d/1aagCivYx61iDiS6r-Zx0W35DcdN1qNAt/view?usp=sharing" },
                                             { title: "NoteBookLM AI လက်စွဲ", link: "https://drive.google.com/file/d/1LmAnUWX6jpTtKvA2NbtYo65q3aJuryu4/view?usp=sharing" }
                                         ].map((book, idx) => (
                                             <div key={idx} className="flex flex-col sm:flex-row gap-3 items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-300 transition">
@@ -817,10 +817,10 @@ export default function Home() {
                                     <h3 className="text-xl font-bold text-slate-800 mb-2 font-heading">အမှာစာ ရောက်ရှိသွားပါပြီ</h3>
                                     <div className="bg-blue-50 border border-blue-100 p-4 rounded-xl mb-6">
                                         <p className="text-sm text-blue-800 font-medium leading-relaxed">
-                                            AI GURU Page Messenger (or) <br /> <span className="font-bold text-lg">09444445546</span> သို့ ဆက်သွယ်မှာယူနိုင်ပါတယ်။
+                                            AI GURU Page Messenger <br /> https://m.me/aigurumm (or) <br /> <span className="font-bold text-lg">09444445546</span> သို့ ဆက်သွယ်မှာယူနိုင်ပါတယ်။
                                         </p>
                                     </div>
-                                    <p className="text-xs text-slate-500 mb-6 px-2">ဆက်သွယ်ပြီးပါက အောက်ပါ လင့်ခ်ကိုနှိပ်၍ Google Drive တွင် Request Access တောင်းဆိုနိုင်ပါသည်။</p>
+                                    <p className="text-xs text-slate-500 mb-6 px-2">ကျသင့်ငွေပေးချေပြီးပါက အောက်ပါ လင့်ခ်ကိုနှိပ်၍ Google Drive တွင် Request Access တောင်းဆိုနိုင်ပါသည်။</p>
                                     <a href={selectedBook.link} target="_blank" rel="noopener noreferrer" className="block w-full bg-slate-800 text-white font-bold py-3.5 rounded-xl hover:bg-slate-900 transition shadow-md">
                                         Google Drive လင့်ခ် ဖွင့်မည် 🔗
                                     </a>
