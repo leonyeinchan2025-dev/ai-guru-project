@@ -71,18 +71,23 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             window.location.reload();
 
         } catch (error: any) {
-            // ၃။ Backend မှ Error ပြန်လာပါက
-            if (error.response && error.response.status === 403) {
-                // Admin အတည်ပြုချက် (Approve) မရသေးသော အခြေအနေ
-                // Backend မှ ပို့လိုက်သော "အတည်ပြုချက်စောင့်ပါ" စာတန်းကို ပြပေးမည်
+            // Admin အတည်ပြုချက် စောင့်ရမည့် အခြေအနေ (403)
+            if (error.response?.status === 403) {
                 alert(error.response.data.detail);
-
-                // (ရွေးချယ်ရန်) Error ပြပြီးနောက် Modal ကို ပိတ်ချင်လျှင် အောက်ပါ Code ကို ဖွင့်ပေးပါ
-                // onClose(); 
+                // onClose(); // လိုအပ်ပါက ဖွင့်ပါ
             } else {
-                // အခြားသော Network Error သို့မဟုတ် System Error များအတွက်
-                alert(error.response?.data?.detail || "Google ဖြင့် ဝင်ရောက်ရာတွင် အမှားအယွင်း ရှိပါသည်။");
-                console.error("Google Login Error:", error);
+                // [object Object] ပြဿနာကို ရှင်းလင်းရန်
+                const errorData = error.response?.data;
+
+                if (errorData) {
+                    // Object ဖြစ်နေလျှင် စာသားအဖြစ် ပြောင်းပြီး ပြသမည် (JSON.stringify)
+                    alert("Error: " + (typeof errorData === 'object' ? JSON.stringify(errorData) : errorData));
+                } else {
+                    // Network Error သို့မဟုတ် အခြား Error များအတွက်
+                    alert("Error: " + error.message);
+                }
+
+                console.error("Google Login Error Details:", error);
             }
         }
     };
