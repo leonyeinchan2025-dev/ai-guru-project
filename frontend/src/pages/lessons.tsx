@@ -38,8 +38,8 @@ export default function Lessons() {
 
         const fetchAllData = async () => {
             try {
-                // ၁။ Resources (စာအုပ်စာဆောင်များ) ဆွဲယူခြင်း
-                const resResources = await api.get('/lessons');
+                // ၁။ Resources များကို မှန်ကန်သော Endpoint မှ ဆွဲယူခြင်း (ယခင်က '/lessons' ဖြစ်နေပါသည်)
+                const resResources = await api.get('/resources');
                 setResources(resResources.data);
 
                 // ၂။ သင်ခန်းစာ အားလုံးဆွဲယူခြင်း

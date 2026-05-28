@@ -260,11 +260,23 @@ def update_user_role(user_id: int, role_data: RoleUpdate, db: Session = Depends(
     db.commit()
     return {"message": "ရာထူး အောင်မြင်စွာ ပြောင်းလဲပြီးပါပြီ။"}
 
-# --- 📚 Lessons Management ---
+# --- 📚 1. Lessons Management (ကိုယ်တိုင်ရေး / ဖိုင်တင်သော သင်ခန်းစာများ) ---
+
+@app.get("/lessons")
+def get_lessons(db: Session = Depends(get_db)):
+    return db.query(models.Lesson).order_by(models.Lesson.id.desc()).all()
+
+@app.get("/lessons/{lesson_id}")
+def get_lesson(lesson_id: int, db: Session = Depends(get_db)):
+    lesson = db.query(models.Lesson).filter(models.Lesson.id == lesson_id).first()
+    if not lesson:
+        raise HTTPException(status_code=404, detail="သင်ခန်းစာ ရှာမတွေ့ပါ။")
+    return lesson
+
 @app.post("/admin/upload-lesson")
-def create_lesson(
+def upload_lesson(
     title: str = Form(...),
-    content: str = Form(...),
+    content: str = Form(""),
     category: str = Form("General"),
     file: UploadFile = File(None), 
     db: Session = Depends(get_db)
@@ -277,49 +289,18 @@ def create_lesson(
             shutil.copyfileobj(file.file, buffer)
         file_url = f"/uploads/{safe_filename}"
 
+    # Lesson Table ထဲသို့သာ သိမ်းပါမည်
     new_lesson = models.Lesson(title=title, content=content, category=category, file_url=file_url)
     db.add(new_lesson)
     db.commit()
     db.refresh(new_lesson)
     return {"message": "သင်ခန်းစာ တင်ပြီးပါပြီ။", "data": new_lesson}
 
-# --- 🔗 External Lessons APIs ---
-
-@app.get("/lessons")
-def get_lessons(db: Session = Depends(get_db)):
-    # Database ထဲမှ Lesson/သင်ခန်းစာ အားလုံးကို အသစ်တင်ထားသော အစဉ်လိုက် ဆွဲထုတ်ပေးမည်
-    return db.query(models.Lesson).order_by(models.Lesson.created_at.desc()).all()
-
-# အကယ်၍ Admin ဘက်မှ သင်ခန်းစာအသစ် တင်ရန် (Create) Code ပါ ပျောက်နေပါက အောက်ပါ Code ကိုပါ ထည့်ပေးပါ
-@app.post("/admin/lessons")
-def create_lesson(lesson: schemas.LessonCreate, db: Session = Depends(get_db)):
-    new_lesson = models.Lesson(
-        title=lesson.title,
-        file_url=lesson.file_url,
-        file_type=lesson.file_type
-    )
-    db.add(new_lesson)
-    db.commit()
-    db.refresh(new_lesson)
-    return new_lesson
-
-
-# @app.get("/lessons")
-# def get_lessons(db: Session = Depends(get_db)):
-#     return db.query(models.Lesson).all()
-
-@app.get("/lessons/{lesson_id}")
-def get_lesson(lesson_id: int, db: Session = Depends(get_db)):
-    lesson = db.query(models.Lesson).filter(models.Lesson.id == lesson_id).first()
-    if not lesson:
-        raise HTTPException(status_code=404, detail="သင်ခန်းစာ ရှာမတွေ့ပါ။")
-    return lesson
-
 @app.put("/admin/lessons/{lesson_id}")
 def update_lesson(
     lesson_id: int,
     title: str = Form(...),
-    content: str = Form(...),
+    content: str = Form(""),
     category: str = Form("General"),
     file: UploadFile = File(None),
     db: Session = Depends(get_db)
@@ -350,6 +331,28 @@ def delete_lesson(lesson_id: int, db: Session = Depends(get_db)):
     db.delete(lesson)
     db.commit()
     return {"message": "ဖျက်ပစ်လိုက်ပါပြီ။"}
+
+
+# --- 🔗 2. Resources Management (External Links တိုက်ရိုက်တင်သော အပိုင်း) ---
+
+@app.get("/resources")
+def get_resources(db: Session = Depends(get_db)):
+    return db.query(models.Resource).order_by(models.Resource.created_at.desc()).all()
+
+@app.post("/admin/resources")
+def create_resource(resource: ResourceCreate, db: Session = Depends(get_db)):
+    # Resource Table ထဲသို့သာ သိမ်းပါမည်
+    new_resource = models.Resource(
+        title=resource.title,
+        file_url=resource.file_url,
+        file_type=resource.file_type
+    )
+    db.add(new_resource)
+    db.commit()
+    db.refresh(new_resource)
+    return {"message": "လင့်ခ် တင်ပြီးပါပြီ။", "data": new_resource}
+
+# --- ဤအောက်တွင် Progress Tracking နှင့် Feedbacks က ဆက်ရှိနေပါမည် ---
 
 # --- 📊 Progress Tracking ---
 @app.post("/progress/complete")
