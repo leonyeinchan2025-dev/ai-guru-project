@@ -118,10 +118,10 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 </button>
 
                 <div className="p-8">
-                    <h2 className="text-2xl font-bold text-center text-slate-800 mb-2">
+                    <h2 className="text-2xl font-bold text-center text-slate-800 mb-2 font-heading tracking-wide">
                         AI GURU သို့ ကြိုဆိုပါတယ်
                     </h2>
-                    <p className="text-center text-slate-500 text-sm mb-6">
+                    <p className="text-center text-slate-500 text-sm mb-6 font-heading tracking-wide">
                         {isLogin ? 'လေ့လာမှုများ ပြန်လည်စတင်ရန် အကောင့်ဝင်ပါ' : 'AI နည်းပညာများကို လေ့လာရန် အကောင့်သစ်ဖွင့်ပါ'}
                     </p>
 

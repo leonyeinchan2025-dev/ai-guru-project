@@ -1,3 +1,12 @@
+/* src/index.css ၏ အပေါ်ဆုံးတွင် ထည့်ရန် */
+@font-face {
+  font-family: 'MyanmarHeading';
+  /* မိမိကြိုက်နှစ်သက်ရာ နာမည်ပေးနိုင်ပါသည် */
+  src: url('./assets/fonts/A18_MyanKaYit-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

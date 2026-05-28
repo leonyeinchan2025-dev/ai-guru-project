@@ -283,9 +283,30 @@ def create_lesson(
     db.refresh(new_lesson)
     return {"message": "သင်ခန်းစာ တင်ပြီးပါပြီ။", "data": new_lesson}
 
+# --- 🔗 External Lessons APIs ---
+
 @app.get("/lessons")
 def get_lessons(db: Session = Depends(get_db)):
-    return db.query(models.Lesson).all()
+    # Database ထဲမှ Lesson/သင်ခန်းစာ အားလုံးကို အသစ်တင်ထားသော အစဉ်လိုက် ဆွဲထုတ်ပေးမည်
+    return db.query(models.Lesson).order_by(models.Lesson.created_at.desc()).all()
+
+# အကယ်၍ Admin ဘက်မှ သင်ခန်းစာအသစ် တင်ရန် (Create) Code ပါ ပျောက်နေပါက အောက်ပါ Code ကိုပါ ထည့်ပေးပါ
+@app.post("/admin/lessons")
+def create_lesson(lesson: schemas.LessonCreate, db: Session = Depends(get_db)):
+    new_lesson = models.Lesson(
+        title=lesson.title,
+        file_url=lesson.file_url,
+        file_type=lesson.file_type
+    )
+    db.add(new_lesson)
+    db.commit()
+    db.refresh(new_lesson)
+    return new_lesson
+
+
+# @app.get("/lessons")
+# def get_lessons(db: Session = Depends(get_db)):
+#     return db.query(models.Lesson).all()
 
 @app.get("/lessons/{lesson_id}")
 def get_lesson(lesson_id: int, db: Session = Depends(get_db)):
@@ -417,3 +438,4 @@ def force_admin(email: str, db: Session = Depends(get_db)):
         db.commit()
         return {"message": f"{email} ကို Admin အဖြစ် သတ်မှတ်ပြီးပါပြီ။"}
     return {"error": "User ရှာမတွေ့ပါ။"}
+

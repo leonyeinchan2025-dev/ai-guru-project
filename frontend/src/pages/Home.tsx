@@ -312,12 +312,12 @@ export default function Home() {
                     </Marquee>
                 </div>
 
-
                 {/* 🌟 1. Hero Section 🌟 */}
                 <div id="home" className="pt-10 pb-16 md:pb-20 px-4 max-w-7xl mx-auto scroll-mt-20 bg-gradient-to-b from-[#f0f9ff] to-white rounded-b-[3rem]">
                     <div className="md:grid md:grid-cols-2 md:gap-16 md:items-center">
                         <div className="md:text-left text-center">
-                            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
+                            {/* 🌟 ပြင်ဆင်ထားသောနေရာ: className ထဲတွင် font-heading ကို ထည့်ထားပါသည် */}
+                            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
                                 အနာဂတ်ကို <span className="text-blue-600">AI</span> ဖြင့် တည်ဆောက်ပါ
                             </motion.h1> <br /><br />
                             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
@@ -340,7 +340,8 @@ export default function Home() {
                                             <div className="flex items-center gap-2 mb-1">
                                                 <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">New Year Gift</span>
                                             </div>
-                                            <h3 className="font-extrabold text-slate-800 text-base md:text-lg mb-1">Coding အခြေခံ Scratch E-book (အခမဲ့)</h3>
+                                            {/* 🌟 ပြင်ဆင်ထားသောနေရာ: className ထဲတွင် font-heading ကို ထည့်ထားပါသည် */}
+                                            <h3 className="font-heading font-extrabold text-slate-800 text-base md:text-lg mb-1">Coding အခြေခံ Scratch E-book (အခမဲ့)</h3>
                                             <p className="text-xs text-slate-500 mb-3 font-medium">၂၀၂၆ နှစ်သစ်ကူး အထူးလက်ဆောင်အဖြစ် ရယူလိုက်ပါ။</p>
 
                                             <div className="flex gap-2">
@@ -356,7 +357,6 @@ export default function Home() {
                                     </div>
                                 </div>
                             </motion.div>
-
                             {/* 🌟 ခလုတ် (၂) ခု ယှဉ်လျက် ပေါ်စေရန် Flex Box ဖြင့် ထုပ်ထားပါသည် 🌟 */}
                             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                                 {!user && (
@@ -435,7 +435,7 @@ export default function Home() {
                                     ✨ Learn AI. Shape the Future.
                                 </motion.div>
 
-                                <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">AI ဆိုတာ ဘာလဲ?</h2>
+                                <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">AI ဆိုတာ ဘာလဲ?</h2>
                                 <p className="text-lg text-slate-600 leading-relaxed mb-6 text-left">
                                     <b>Artificial Intelligence (AI)</b> ဆိုသည်မှာ ကွန်ပျူတာစနစ်များကို လူသားများကဲ့သို့ တွေးခေါ်၊ ဆုံးဖြတ်၊ သင်ယူနိုင်စွမ်းရှိစေရန် ဖန်တီးထားသော နည်းပညာဖြစ်ပါသည်။
                                 </p>
@@ -460,7 +460,7 @@ export default function Home() {
                             >
                                 ✨ From Curiosity to Intelligence
                             </motion.div>
-                            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">AI နယ်ပယ်များ</h2>
+                            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">AI နယ်ပယ်များ</h2>
                             <p className="text-lg text-slate-600">လေ့လာနိုင်မည့် အဓိက Artificial Intelligence နယ်ပယ်ကြီး (၄) ခု</p>
                         </div>
 
@@ -506,7 +506,7 @@ export default function Home() {
                                 ✨ Unlock the Power of Artificial Intelligence
                             </motion.div>
 
-                            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-wide">Roadmap</h2>
+                            <h2 className="font-headingtext-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-wide">Roadmap</h2>
                             <p className="text-lg text-slate-500 font-medium">အဆင့်ဆင့် လေ့လာရမည့် လမ်းညွှန်မြေပုံ</p>
                         </div>
 
@@ -548,7 +548,7 @@ export default function Home() {
 
                         {/* ၁။ ဝင်ရောက်ကြည့်ရှုသူများ */}
                         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="w-1/3 px-1">
-                            <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-teal-500 mb-1 md:mb-2">{stats.total_visits}+</h3>
+                            <h3 className="font-heading text-2xl sm:text-3xl md:text-5xl font-black text-teal-500 mb-1 md:mb-2">{stats.total_visits}+</h3>
                             <p className="text-slate-500 font-bold uppercase tracking-tight sm:tracking-widest text-[10px] sm:text-xs md:text-sm leading-tight">ကြည့်ရှုသူများ</p>
                         </motion.div>
 
@@ -557,7 +557,7 @@ export default function Home() {
 
                         {/* ၂။ လေ့လာနေသူများ (Login ဝင်ထားသူများ) */}
                         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="w-1/3 px-1">
-                            <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-blue-600 mb-1 md:mb-2">{stats.total_users}+</h3>
+                            <h3 className="font-headingtext-2xl sm:text-3xl md:text-5xl font-black text-blue-600 mb-1 md:mb-2">{stats.total_users}+</h3>
                             <p className="text-slate-500 font-bold uppercase tracking-tight sm:tracking-widest text-[10px] sm:text-xs md:text-sm leading-tight">လေ့လာနေသူများ</p>
                         </motion.div>
 
@@ -566,7 +566,7 @@ export default function Home() {
 
                         {/* ၃။ သုံးသပ်ချက်များ */}
                         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }} className="w-1/3 px-1">
-                            <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-indigo-600 mb-1 md:mb-2">{stats.total_feedbacks}+</h3>
+                            <h3 className="font-heading text-2xl sm:text-3xl md:text-5xl font-black text-indigo-600 mb-1 md:mb-2">{stats.total_feedbacks}+</h3>
                             <p className="text-slate-500 font-bold uppercase tracking-tight sm:tracking-widest text-[10px] sm:text-xs md:text-sm leading-tight">သုံးသပ်ချက်များ</p>
                         </motion.div>
 
@@ -578,7 +578,7 @@ export default function Home() {
                     <div className="py-16 bg-[#f8fafc]">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="text-center mb-12">
-                                <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4">အသုံးပြုသူများ၏ စကားသံများ</h2>
+                                <h2 className="font-headingtext-3xl md:text-4xl font-extrabold text-slate-800 mb-4">အသုံးပြုသူများ၏ စကားသံများ</h2>
                                 <p className="text-slate-500 text-lg">AI GURU နှင့်ပတ်သက်၍ လေ့လာသူများ၏ ရင်တွင်းစကားများ</p>
                             </div>
 
