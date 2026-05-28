@@ -773,8 +773,8 @@ export default function Home() {
                                     <div className="space-y-3">
                                         {[
                                             { title: "Prompt Engineering လမ်းညွှန်", link: "https://drive.google.com/..." },
-                                            { title: "AI အခြေခံ သဘောတရားများ", link: "https://drive.google.com/..." },
-                                            { title: "Machine Learning လက်စွဲ", link: "https://drive.google.com/..." }
+                                            { title: "Basic Python အခြေခံ", link: "https://drive.google.com/..." },
+                                            { title: "NoteBookLM AI လက်စွဲ", link: "https://drive.google.com/file/d/1LmAnUWX6jpTtKvA2NbtYo65q3aJuryu4/view?usp=sharing" }
                                         ].map((book, idx) => (
                                             <div key={idx} className="flex flex-col sm:flex-row gap-3 items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-300 transition">
                                                 <span className="font-bold text-slate-700 text-sm text-center sm:text-left">{book.title}</span>
