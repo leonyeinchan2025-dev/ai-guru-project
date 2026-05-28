@@ -442,3 +442,18 @@ def force_admin(email: str, db: Session = Depends(get_db)):
         return {"message": f"{email} ကို Admin အဖြစ် သတ်မှတ်ပြီးပါပြီ။"}
     return {"error": "User ရှာမတွေ့ပါ။"}
 
+@app.post("/ebook-requests")
+def create_ebook_request(req: schemas.EbookRequestCreate, db: Session = Depends(get_db)):
+    new_req = models.EbookRequest(
+        book_title=req.book_title, 
+        name=req.name, 
+        contact_info=req.contact_info
+    )
+    db.add(new_req)
+    db.commit()
+    return {"message": "အမှာစာ ရောက်ရှိသွားပါပြီ။"}
+
+@app.get("/admin/ebook-requests")
+def get_ebook_requests(db: Session = Depends(get_db)):
+    # နောက်ဆုံးမှာထားသော အမှာစာများကို အပေါ်ဆုံးမှ ပြမည်
+    return db.query(models.EbookRequest).order_by(models.EbookRequest.created_at.desc()).all()

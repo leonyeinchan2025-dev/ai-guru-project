@@ -67,3 +67,12 @@ class Resource(Base):
     file_url = Column(String)
     file_type = Column(String) # ဥပမာ - 'pdf', 'video', 'image'
     created_at = Column(DateTime, default=datetime.utcnow)
+
+class EbookRequest(Base):
+    __tablename__ = "ebook_requests"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    book_title = Column(String)
+    name = Column(String)
+    contact_info = Column(String)
+    created_at = Column(DateTime, default=datetime.utcnow)

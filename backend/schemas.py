@@ -44,3 +44,8 @@ class FeedbackResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class EbookRequestCreate(BaseModel):
+    book_title: str
+    name: str
+    contact_info: str
