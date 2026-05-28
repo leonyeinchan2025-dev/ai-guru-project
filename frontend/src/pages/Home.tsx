@@ -4,44 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import AuthModal from '../components/AuthModal';
 import SampleLessonsModal from '../components/SampleLessonsModal'; // 🌟 ဤစာကြောင်း ထပ်ထည့်ပါ
 import footerPortraitTransparent from '../assets/amara1.png'; // သင့်ပုံနာမည်ပြောင်းပေးပါ
-
-// 🌟 EBook Order အတွက် State နှင့် Function အသစ်များ 🌟
-const [isEbookModalOpen, setIsEbookModalOpen] = useState(false);
-const [selectedBook, setSelectedBook] = useState<{ title: string, link: string } | null>(null);
-const [orderName, setOrderName] = useState('');
-const [orderPhone, setOrderPhone] = useState('');
-const [orderSuccess, setOrderSuccess] = useState(false);
-const [orderLoading, setOrderLoading] = useState(false);
-
-const handleEbookOrder = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedBook) return;
-    setOrderLoading(true);
-    try {
-        await api.post('/ebook-requests', {
-            book_title: selectedBook.title,
-            name: orderName,
-            contact_info: orderPhone
-        });
-        setOrderSuccess(true);
-    } catch (error) {
-        alert("အမှာစာ ပေးပို့ရာတွင် အမှားအယွင်းရှိပါသည်။ ပြန်စမ်းကြည့်ပါ။");
-    } finally {
-        setOrderLoading(false);
-    }
-};
-
-const closeEbookModal = () => {
-    setIsEbookModalOpen(false);
-    setTimeout(() => {
-        setSelectedBook(null);
-        setOrderSuccess(false);
-        setOrderName('');
-        setOrderPhone('');
-    }, 300);
-};
-// 🌟 ပြီးပါပြီ 🌟
-
 // ✅ FeedbackForm ကို import လုပ်ပါ
 import FeedbackForm from '../components/FeedbackForm';
 // 🌟 TypeScript Error ကို ကျော်ဖြတ်ရန် ကြေညာခြင်း 🌟
@@ -67,6 +29,42 @@ export default function Home() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isSampleModalOpen, setIsSampleModalOpen] = useState(false);
 
+    // 🌟 EBook Order အတွက် State နှင့် Function အသစ်များ 🌟
+    const [isEbookModalOpen, setIsEbookModalOpen] = useState(false);
+    const [selectedBook, setSelectedBook] = useState<{ title: string, link: string } | null>(null);
+    const [orderName, setOrderName] = useState('');
+    const [orderPhone, setOrderPhone] = useState('');
+    const [orderSuccess, setOrderSuccess] = useState(false);
+    const [orderLoading, setOrderLoading] = useState(false);
+
+    const handleEbookOrder = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!selectedBook) return;
+        setOrderLoading(true);
+        try {
+            await api.post('/ebook-requests', {
+                book_title: selectedBook.title,
+                name: orderName,
+                contact_info: orderPhone
+            });
+            setOrderSuccess(true);
+        } catch (error) {
+            alert("အမှာစာ ပေးပို့ရာတွင် အမှားအယွင်းရှိပါသည်။ ပြန်စမ်းကြည့်ပါ။");
+        } finally {
+            setOrderLoading(false);
+        }
+    };
+
+    const closeEbookModal = () => {
+        setIsEbookModalOpen(false);
+        setTimeout(() => {
+            setSelectedBook(null);
+            setOrderSuccess(false);
+            setOrderName('');
+            setOrderPhone('');
+        }, 300);
+    };
+    // 🌟 ပြီးပါပြီ 🌟
     // 🌟 အသစ်ထပ်တိုးရမည့် State များ (တစ်ခါသာ ကြေညာရပါမည်) 🌟
     // 🌟 အသစ်ထပ်တိုးရမည့် State များ (total_visits ပါ ထပ်တိုးထားပါသည်) 🌟
     // 🌟 API မရောက်ခင် စစချင်းမှာ 0 မပေါ်စေဘဲ 20, 10, 5 တန်းပေါ်နေစေရန် Initial Value ပြင်ထားပါသည်
