@@ -4,6 +4,44 @@ import { motion, AnimatePresence } from 'framer-motion';
 import AuthModal from '../components/AuthModal';
 import SampleLessonsModal from '../components/SampleLessonsModal'; // 🌟 ဤစာကြောင်း ထပ်ထည့်ပါ
 import footerPortraitTransparent from '../assets/amara1.png'; // သင့်ပုံနာမည်ပြောင်းပေးပါ
+
+// 🌟 EBook Order အတွက် State နှင့် Function အသစ်များ 🌟
+const [isEbookModalOpen, setIsEbookModalOpen] = useState(false);
+const [selectedBook, setSelectedBook] = useState<{ title: string, link: string } | null>(null);
+const [orderName, setOrderName] = useState('');
+const [orderPhone, setOrderPhone] = useState('');
+const [orderSuccess, setOrderSuccess] = useState(false);
+const [orderLoading, setOrderLoading] = useState(false);
+
+const handleEbookOrder = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedBook) return;
+    setOrderLoading(true);
+    try {
+        await api.post('/ebook-requests', {
+            book_title: selectedBook.title,
+            name: orderName,
+            contact_info: orderPhone
+        });
+        setOrderSuccess(true);
+    } catch (error) {
+        alert("အမှာစာ ပေးပို့ရာတွင် အမှားအယွင်းရှိပါသည်။ ပြန်စမ်းကြည့်ပါ။");
+    } finally {
+        setOrderLoading(false);
+    }
+};
+
+const closeEbookModal = () => {
+    setIsEbookModalOpen(false);
+    setTimeout(() => {
+        setSelectedBook(null);
+        setOrderSuccess(false);
+        setOrderName('');
+        setOrderPhone('');
+    }, 300);
+};
+// 🌟 ပြီးပါပြီ 🌟
+
 // ✅ FeedbackForm ကို import လုပ်ပါ
 import FeedbackForm from '../components/FeedbackForm';
 // 🌟 TypeScript Error ကို ကျော်ဖြတ်ရန် ကြေညာခြင်း 🌟
@@ -324,39 +362,58 @@ export default function Home() {
                                 AI GURU မှကြိုဆိုပါတယ်။ <br /><br className="hidden md:block" /> ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br className="hidden md:block" /> <br /> အခြေခံ AI သင်ခန်းစာများအား <span className="text-yellow-600"> <b>ပညာဒါန </b></span> အခမဲ့ လေ့လာနိုင်ပါသည်။
                             </motion.p>
                             {/* 🌟 အသစ်ထပ်တိုး: နှစ်သစ်ကူး Ebook လက်ဆောင် 🌟 */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-                                className="mb-10 inline-block w-full max-w-md text-left"
-                            >
-                                <div className="bg-gradient-to-r from-red-500 via-pink-500 to-orange-500 p-[2px] rounded-2xl shadow-lg relative overflow-hidden group">
-                                    {/* ရောင်စုံရွေ့လျားနေသော Background Effect */}
-                                    <div className="absolute inset-0 bg-white/20 group-hover:bg-transparent transition-colors"></div>
+                            {/* 🌟 Gift Box နှင့် EBook မှာယူရန် ခလုတ်ကို ယှဉ်လျက်/အောက်စီ ပေါ်စေမည့် Wrapper 🌟 */}
+                            <div className="flex flex-col md:flex-row gap-6 mb-10 w-full max-w-2xl mx-auto md:mx-0 items-stretch">
 
-                                    <div className="bg-white rounded-[14px] p-5 flex items-center gap-4 relative z-10">
-                                        <div className="text-4xl md:text-5xl animate-bounce">🎁</div>
-                                        <div className="flex-1">
-                                            <div className="flex items-center gap-2 mb-1">
-                                                <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">New Year Gift</span>
-                                            </div>
-                                            {/* 🌟 ပြင်ဆင်ထားသောနေရာ: className ထဲတွင် font-heading ကို ထည့်ထားပါသည် */}
-                                            <h3 className="font-heading font-extrabold text-slate-800 text-base md:text-lg mb-1">Coding အခြေခံ Scratch E-book (အခမဲ့)</h3>
-                                            <p className="text-xs text-slate-500 mb-3 font-medium">၂၀၂၆ နှစ်သစ်ကူး အထူးလက်ဆောင်အဖြစ် ရယူလိုက်ပါ။</p>
-
-                                            <div className="flex gap-2">
-                                                {/* 🔗 ဤနေရာတွင် သင်၏ Google Drive (သို့) PDF Link များကို ထည့်ပါ 🔗 */}
-                                                <a href="https://drive.google.com/file/d/1ZmbJIQlbTJo4ERSPMWdbGbeArXB4w8Wf/view?usp=sharing" target="_blank" rel="noreferrer" className="flex-1 text-center bg-red-50 text-red-600 border border-red-100 px-3 py-2 rounded-lg text-sm font-bold hover:bg-red-100 hover:border-red-200 transition">
-                                                    ဖတ်မည် 📖
-                                                </a>
-                                                <a href="https://drive.google.com/file/d/1ZmbJIQlbTJo4ERSPMWdbGbeArXB4w8Wf/view?usp=sharing" target="_blank" rel="noreferrer" download className="flex-1 text-center bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-2 rounded-lg text-sm font-bold hover:from-red-600 hover:to-orange-600 transition shadow-sm">
-                                                    ဒေါင်းလုဒ် ⬇️
-                                                </a>
+                                {/* 🎁 ယခင် New Year Gift Box */}
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                                    className="flex-1 text-left"
+                                >
+                                    <div className="bg-gradient-to-r from-red-500 via-pink-500 to-orange-500 p-[2px] rounded-2xl shadow-lg relative overflow-hidden group h-full">
+                                        <div className="absolute inset-0 bg-white/20 group-hover:bg-transparent transition-colors"></div>
+                                        <div className="bg-white rounded-[14px] p-5 flex items-center gap-4 relative z-10 h-full">
+                                            <div className="text-4xl md:text-5xl animate-bounce">🎁</div>
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">New Year Gift</span>
+                                                </div>
+                                                <h3 className="font-heading font-extrabold text-slate-800 text-base md:text-lg mb-1">Coding အခြေခံ Scratch</h3>
+                                                <div className="flex gap-2 mt-3">
+                                                    <a href="https://drive.google.com/file/d/1ZmbJIQlbTJo4ERSPMWdbGbeArXB4w8Wf/view?usp=sharing" target="_blank" rel="noreferrer" className="flex-1 text-center bg-red-50 text-red-600 border border-red-100 px-3 py-2 rounded-lg text-sm font-bold hover:bg-red-100 transition">ဖတ်မည်</a>
+                                                    <a href="https://drive.google.com/file/d/1ZmbJIQlbTJo4ERSPMWdbGbeArXB4w8Wf/view?usp=sharing" target="_blank" rel="noreferrer" download className="flex-1 text-center bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-2 rounded-lg text-sm font-bold hover:from-red-600 shadow-sm">ဒေါင်းလုဒ်</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </motion.div>
+                                </motion.div>
+
+                                {/* 📚 အသစ်ထပ်တိုးလိုက်သော EBook မှာယူရန် ခလုတ် */}
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+                                    className="flex-1 text-left"
+                                >
+                                    <button
+                                        onClick={() => setIsEbookModalOpen(true)}
+                                        className="w-full h-full bg-gradient-to-r from-blue-500 to-indigo-500 p-[2px] rounded-2xl shadow-lg relative group transition-all hover:shadow-xl text-left"
+                                    >
+                                        <div className="bg-white rounded-[14px] p-5 h-full flex flex-col justify-center relative z-10 group-hover:bg-slate-50 transition-colors">
+                                            <div className="flex items-center justify-between mb-2">
+                                                <div className="text-4xl md:text-5xl">📚</div>
+                                                <div className="bg-blue-100 text-blue-600 rounded-full p-2">
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+                                                </div>
+                                            </div>
+                                            <h3 className="font-heading font-extrabold text-slate-800 text-lg mb-1">EBook စာအုပ်များ မှာယူရန်</h3>
+                                            <p className="text-xs text-slate-500 font-medium leading-relaxed">အကောင့်ဝင်ရန်မလိုဘဲ တိုက်ရိုက်မှာယူနိုင်ပါသည်။</p>
+                                        </div>
+                                    </button>
+                                </motion.div>
+                            </div>
                             {/* 🌟 ခလုတ် (၂) ခု ယှဉ်လျက် ပေါ်စေရန် Flex Box ဖြင့် ထုပ်ထားပါသည် 🌟 */}
                             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                                 {!user && (
@@ -696,7 +753,85 @@ export default function Home() {
                 isOpen={isSampleModalOpen}
                 onClose={() => setIsSampleModalOpen(false)}
             />
+            {/* 🌟 EBook Download Modal (အမှာစာစနစ်သီးသန့်) 🌟 */}
+            <AnimatePresence>
+                {isEbookModalOpen && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity px-4">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            className="bg-white rounded-3xl shadow-2xl w-full max-w-md p-6 md:p-8 relative"
+                        >
+                            <button onClick={closeEbookModal} className="absolute top-4 right-4 text-slate-400 hover:text-red-500 bg-slate-50 hover:bg-red-50 p-2 rounded-full transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                            </button>
 
+                            {!selectedBook ? (
+                                <>
+                                    <h2 className="text-2xl font-bold text-slate-800 mb-2 font-heading">📚 EBook များ မှာယူရန်</h2>
+                                    <p className="text-slate-500 text-sm mb-6 leading-relaxed">သင် မှာယူလိုသော စာအုပ်ကို ရွေးချယ်ပါ။ လော့ဂ်အင် ဝင်ထားရန် မလိုအပ်ပါ။</p>
+
+                                    <div className="space-y-3">
+                                        {[
+                                            { title: "Prompt Engineering လမ်းညွှန်", link: "https://drive.google.com/..." },
+                                            { title: "AI အခြေခံ သဘောတရားများ", link: "https://drive.google.com/..." },
+                                            { title: "Machine Learning လက်စွဲ", link: "https://drive.google.com/..." }
+                                        ].map((book, idx) => (
+                                            <div key={idx} className="flex flex-col sm:flex-row gap-3 items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-300 transition">
+                                                <span className="font-bold text-slate-700 text-sm text-center sm:text-left">{book.title}</span>
+                                                <button
+                                                    onClick={() => setSelectedBook(book)}
+                                                    className="w-full sm:w-auto bg-blue-600 text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-blue-700 shadow-sm active:scale-95 transition"
+                                                >
+                                                    မှာယူမည် 🛒
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            ) : !orderSuccess ? (
+                                <>
+                                    <h2 className="text-xl font-bold text-blue-700 mb-4 font-heading border-b pb-3">
+                                        <span className="text-slate-500 text-sm font-normal block mb-1">ရွေးချယ်ထားသော စာအုပ်:</span>
+                                        {selectedBook.title}
+                                    </h2>
+                                    <form onSubmit={handleEbookOrder} className="space-y-4">
+                                        <div>
+                                            <label className="block text-sm font-bold text-slate-700 mb-1">အမည် <span className="text-red-500">*</span></label>
+                                            <input required type="text" value={orderName} onChange={e => setOrderName(e.target.value)} placeholder="သင့်အမည်" className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-bold text-slate-700 mb-1">ဖုန်းနံပါတ် (သို့) FB အမည် <span className="text-red-500">*</span></label>
+                                            <input required type="text" value={orderPhone} onChange={e => setOrderPhone(e.target.value)} placeholder="ဥပမာ - 09444... သို့မဟုတ် Leo" className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+                                        </div>
+                                        <button type="submit" disabled={orderLoading} className={`w-full bg-blue-600 text-white font-bold py-3.5 rounded-xl mt-4 transition shadow-md ${orderLoading ? 'opacity-70' : 'hover:bg-blue-700'}`}>
+                                            {orderLoading ? 'ပေးပို့နေပါသည်...' : 'အမှာစာ ပို့မည် 🚀'}
+                                        </button>
+                                        <button type="button" onClick={() => setSelectedBook(null)} className="w-full text-slate-500 text-sm font-bold py-2 hover:text-slate-800">
+                                            နောက်သို့ ပြန်သွားမည်
+                                        </button>
+                                    </form>
+                                </>
+                            ) : (
+                                <div className="text-center py-4">
+                                    <div className="text-5xl mb-4">✅</div>
+                                    <h3 className="text-xl font-bold text-slate-800 mb-2 font-heading">အမှာစာ ရောက်ရှိသွားပါပြီ</h3>
+                                    <div className="bg-blue-50 border border-blue-100 p-4 rounded-xl mb-6">
+                                        <p className="text-sm text-blue-800 font-medium leading-relaxed">
+                                            AI GURU Page Messenger (or) <br /> <span className="font-bold text-lg">09444445546</span> သို့ ဆက်သွယ်မှာယူနိုင်ပါတယ်။
+                                        </p>
+                                    </div>
+                                    <p className="text-xs text-slate-500 mb-6 px-2">ဆက်သွယ်ပြီးပါက အောက်ပါ လင့်ခ်ကိုနှိပ်၍ Google Drive တွင် Request Access တောင်းဆိုနိုင်ပါသည်။</p>
+                                    <a href={selectedBook.link} target="_blank" rel="noopener noreferrer" className="block w-full bg-slate-800 text-white font-bold py-3.5 rounded-xl hover:bg-slate-900 transition shadow-md">
+                                        Google Drive လင့်ခ် ဖွင့်မည် 🔗
+                                    </a>
+                                </div>
+                            )}
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }
