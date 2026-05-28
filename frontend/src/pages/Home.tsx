@@ -115,7 +115,7 @@ export default function Home() {
 
             {/* Navigation Bar */}
             {/* /* 🌟 Home Page Navigation Bar (Mobile တွင် Lessons Page အတိုင်း အတိအကျဖြစ်စေရန်) 🌟 */}
-            <nav className="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-slate-100">
+            <nav className="font-heading fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-slate-100">
                 <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
                     {/* min-h-[5rem] နှင့် py-2 ကိုသုံး၍ အပေါ်အောက် နေရာကျယ်ကျယ် ပေးထားပါသည် */}
                     <div className="flex justify-between items-center min-h-[5rem] py-2">
@@ -151,7 +151,7 @@ export default function Home() {
                         <div className="hidden md:flex items-center gap-4">
                             {user ? (
                                 <>
-                                    <span className="font-medium text-slate-700">မင်္ဂလာပါ, <span className="text-blue-600">{user.fullname}</span></span>
+                                    <span className="font-heading font-medium text-slate-700">မင်္ဂလာပါ, <span className="text-blue-600">{user.fullname}</span></span>
                                     {user.is_admin && <a href="/admin" className="text-sm bg-purple-100 text-purple-700 px-3 py-1.5 rounded-full font-bold hover:bg-purple-200 transition">Admin</a>}
                                     <button onClick={handleLogout} className="bg-red-50 text-red-600 px-5 py-2 rounded-full hover:bg-red-100 transition font-medium text-sm">ထွက်မည်</button>
                                 </>
@@ -266,12 +266,12 @@ export default function Home() {
                                                     ⚙️ Admin Panel
                                                 </a>
                                             )}
-                                            <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 font-bold px-4 py-4 rounded-2xl border border-red-100 shadow-sm active:scale-95 transition-all hover:bg-red-100">
+                                            <button onClick={handleLogout} className="font-heading w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 font-bold px-4 py-4 rounded-2xl border border-red-100 shadow-sm active:scale-95 transition-all hover:bg-red-100">
                                                 🚪 ထွက်မည် (Logout)
                                             </button>
                                         </div>
                                     ) : (
-                                        <button onClick={() => { setIsAuthModalOpen(true); setIsMobileMenuOpen(false); }} className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-bold px-4 py-4 rounded-2xl shadow-md active:scale-95 transition-all hover:bg-blue-700">
+                                        <button onClick={() => { setIsAuthModalOpen(true); setIsMobileMenuOpen(false); }} className="font-heading w-full flex items-center justify-center gap-2 bg-blue-600 text-white font-bold px-4 py-4 rounded-2xl shadow-md active:scale-95 transition-all hover:bg-blue-700">
                                             🔑 အကောင့် ဝင်ရောက်မည်
                                         </button>
                                     )}
@@ -287,7 +287,7 @@ export default function Home() {
 
                 {/* 🌟 0. အသစ်ပြောင်းရွှေ့ထားသော Marquee စာတန်းထိုး 🌟 */}
                 <div className="bg-blue-600 text-white py-2.5 overflow-hidden flex items-center shadow-md border-b border-blue-700">
-                    <div className="bg-yellow-400 text-blue-900 font-bold px-4 py-1 text-sm z-10 shadow-sm shrink-0 border-r-2 border-yellow-500 hidden md:block">
+                    <div className="font-heading bg-yellow-400 text-blue-900 font-bold px-4 py-1 text-sm z-10 shadow-sm shrink-0 border-r-2 border-yellow-500 hidden md:block">
                         နောက်ဆုံးရ အချက်အလက်များ 📢
                     </div>
                     {/* eslint-disable-next-line jsx-a11y/no-distracting-elements */}
@@ -319,9 +319,9 @@ export default function Home() {
                             {/* 🌟 ပြင်ဆင်ထားသောနေရာ: className ထဲတွင် font-heading ကို ထည့်ထားပါသည် */}
                             <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-heading text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
                                 အနာဂတ်ကို <span className="text-blue-600">AI</span> ဖြင့် တည်ဆောက်ပါ
-                            </motion.h1> <br /><br />
-                            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-600 mb-10 leading-relaxed">
-                                AI GURU မှကြိုဆိုပါတယ်။ <br /><br className="hidden md:block" /> <br />ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br className="hidden md:block" /> <br /> အခြေခံ AI သင်ခန်းစာများအား <span className="text-yellow-600"> <b>ပညာဒါန </b></span> အခမဲ့ လေ့လာနိုင်ပါသည်။
+                            </motion.h1> <br />
+                            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-heading text-xl text-slate-600 mb-10 leading-relaxed">
+                                AI GURU မှကြိုဆိုပါတယ်။ <br /><br className="hidden md:block" /> ဤနေရာတွင် Artificial Intelligence နည်းပညာများကို <b>မြန်မာဘာသာဖြင့် လွယ်ကူစွာ</b> အခြေခံမှစ၍ ကျွမ်းကျင်အဆင့်အထိ လေ့လာနိုင်ပါသည်။ <br className="hidden md:block" /> <br /> အခြေခံ AI သင်ခန်းစာများအား <span className="text-yellow-600"> <b>ပညာဒါန </b></span> အခမဲ့ လေ့လာနိုင်ပါသည်။
                             </motion.p>
                             {/* 🌟 အသစ်ထပ်တိုး: နှစ်သစ်ကူး Ebook လက်ဆောင် 🌟 */}
                             <motion.div
@@ -360,19 +360,19 @@ export default function Home() {
                             {/* 🌟 ခလုတ် (၂) ခု ယှဉ်လျက် ပေါ်စေရန် Flex Box ဖြင့် ထုပ်ထားပါသည် 🌟 */}
                             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                                 {!user && (
-                                    <motion.button onClick={() => setIsAuthModalOpen(true)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-xl">
+                                    <motion.button onClick={() => setIsAuthModalOpen(true)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="font-heading bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-xl">
                                         စာရင်းသွင်း၍ ယခုပဲ လေ့လာလိုက်ပါ
                                     </motion.button>
                                 )}
                                 {user && (
-                                    <motion.a href="/lessons" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-block bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-xl text-center">
+                                    <motion.a href="/lessons" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="font-headinginline-block bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-xl text-center">
                                         သင်ခန်းစာများသို့ ဆက်သွားမည် →
                                     </motion.a>
                                 )}
 
                                 {/* 🌟 အသစ်ထပ်တိုးလိုက်သော သင်ခန်းစာနမူနာများ ခလုတ် 🌟 */}
-                                <motion.button onClick={() => setIsSampleModalOpen(true)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="bg-white text-blue-700 border-2 border-blue-100 px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-50 hover:border-blue-200 transition shadow-lg hover:shadow-xl">
-                                    အခြေခံ AI သင်ခန်းစာများ 📖
+                                <motion.button onClick={() => setIsSampleModalOpen(true)} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="font-heading bg-white text-blue-700 border-2 border-blue-100 px-8 py-4 rounded-full text-lg font-bold hover:bg-blue-50 hover:border-blue-200 transition shadow-lg hover:shadow-xl">
+                                    အခြေခံ AI သင်ခန်းစာများ (FREE) 📖
                                 </motion.button>
                             </div>
 
@@ -461,7 +461,7 @@ export default function Home() {
                                 ✨ From Curiosity to Intelligence
                             </motion.div>
                             <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">AI နယ်ပယ်များ</h2>
-                            <p className="text-lg text-slate-600">လေ့လာနိုင်မည့် အဓိက Artificial Intelligence နယ်ပယ်ကြီး (၄) ခု</p>
+                            <p className="font-heading text-lg text-slate-600">လေ့လာနိုင်မည့် အဓိက Artificial Intelligence နယ်ပယ်ကြီး (၄) ခု</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -507,7 +507,7 @@ export default function Home() {
                             </motion.div>
 
                             <h2 className="font-headingtext-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-wide">Roadmap</h2>
-                            <p className="text-lg text-slate-500 font-medium">အဆင့်ဆင့် လေ့လာရမည့် လမ်းညွှန်မြေပုံ</p>
+                            <p className="font-heading text-lg text-slate-500 font-medium">အဆင့်ဆင့် လေ့လာရမည့် လမ်းညွှန်မြေပုံ</p>
                         </div>
 
                         <div className="max-w-5xl mx-auto relative">
@@ -579,7 +579,7 @@ export default function Home() {
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="text-center mb-12">
                                 <h2 className="font-headingtext-3xl md:text-4xl font-extrabold text-slate-800 mb-4">အသုံးပြုသူများ၏ စကားသံများ</h2>
-                                <p className="text-slate-500 text-lg">AI GURU နှင့်ပတ်သက်၍ လေ့လာသူများ၏ ရင်တွင်းစကားများ</p>
+                                <p className="font-heading text-slate-500 text-lg">AI GURU နှင့်ပတ်သက်၍ လေ့လာသူများ၏ ရင်တွင်းစကားများ</p>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
