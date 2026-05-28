@@ -169,47 +169,62 @@ def login_user(user: UserLogin, db: Session = Depends(get_db)):
 #         raise HTTPException(status_code=400, detail="Google အကောင့် ချိတ်ဆက်မှု မှားယွင်းနေပါသည်။")
 
 @app.post("/google-login")
-def google_login(google_data: GoogleLoginSchema, db: Session = Depends(get_db)):
-    # ၁။ Google မှ ပြန်လာသော အီးမေးလ်နှင့် နာမည်ကို ယူပါ
-    email = google_data.email
-    fullname = google_data.name 
+def google_login(google_data: GoogleToken, db: Session = Depends(get_db)):
+    try:
+        # ၂။ Google Token ကို စစ်ဆေးခြင်း နှင့် အချက်အလက် ထုတ်ယူခြင်း (Decode)
+        idinfo = id_token.verify_oauth2_token(
+            google_data.token, 
+            requests.Request(), 
+            GOOGLE_CLIENT_ID
+        )
+        # Google အကောင့်မှ Email နှင့် အမည်ကို ရယူပါပြီ
+        email = idinfo['email']
+        fullname = idinfo.get('name', 'Google User')
+        
+    except ValueError:
+        # Token ကုန်ဆုံးသွားခြင်း သို့မဟုတ် မှားယွင်းနေခြင်း
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, 
+            detail="Google အကောင့် ချိတ်ဆက်ခြင်း မှားယွင်းနေပါသည်။ ပြန်လည်ကြိုးစားကြည့်ပါ။"
+        )
 
-    # ၂။ Database ထဲတွင် ထိုအီးမေးလ် ရှိ/မရှိ စစ်ဆေးပါ
+    # ၃။ Database ထဲတွင် ထိုအီးမေးလ် ရှိ/မရှိ စစ်ဆေးပါ
     user = db.query(models.User).filter(models.User.email == email).first()
 
-    # ၃။ User အသစ်ဖြစ်နေပါက (Database ထဲတွင် မရှိပါက) Auto-Register လုပ်မည်
+    # ၄။ User အသစ်ဖြစ်နေပါက (Auto-Register)
     if not user:
         user = models.User(
             fullname=fullname,
             email=email,
-            password="google_oauth_user", # Google ဖြင့်ဝင်သူဖြစ်၍ dummy password ထည့်ထားပါမည်
-            is_approved=False,            # ❌ Admin ခွင့်ပြုချက် မရမချင်း False ဖြစ်နေပါမည်
+            password="google_oauth_user", 
+            is_approved=False,  # ❌ Admin ခွင့်ပြုချက် မရမချင်း False ဖြစ်နေပါမည်
             is_admin=False
         )
         db.add(user)
         db.commit()
         db.refresh(user)
         
-        # အကောင့်ဖန်တီးပြီးသွားသော်လည်း Login တန်းမပေးဘဲ Error Message ပြန်ချပေးပါမည်
+        # အကောင့်သစ် ဖွင့်ပြီးကြောင်းနှင့် အတည်ပြုချက်စောင့်ရန် Error ပြန်ပို့မည်
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, 
-            detail="Google ဖြင့် အကောင့်ဖွင့်ခြင်း အောင်မြင်ပါသည်။ သို့သော် Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။"
+            detail="Google ဖြင့် အကောင့်ဖွင့်ခြင်း အောင်မြင်ပါသည်။ သို့သော် Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။\n\nလိုအပ်လျှင် ဆက်သွယ်ရန် Hot Line: +959444445546"
         )
 
-    # ၄။ User အကောင့်ရှိနေသော်လည်း Admin Approval မရသေးပါက Login ပိတ်ထားမည်
+    # ၅။ User အကောင့်ရှိနေသော်လည်း Admin Approval မရသေးပါက Login ပိတ်ထားမည်
     if not user.is_approved:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="သင့်အကောင့်မှာ Admin အတည်ပြုချက် (Approval) မရရှိသေးပါ။ ကျေးဇူးပြု၍ ခေတ္တစောင့်ဆိုင်းပေးပါ။"
         )
 
-    # ၅။ User အကောင့်လည်းရှိ၊ Admin Approval လည်းရပြီးသား (is_approved=True) ဖြစ်မှသာ Login ပေးဝင်မည်
+    # ၆။ Login အောင်မြင်ပါက Frontend သို့ Data ပြန်ပို့မည်
     return {
         "message": "Login အောင်မြင်ပါသည်။",
-        "user_id": user.id,
-        "email": user.email,
-        "fullname": user.fullname,
-        # "access_token": generate_token(user.email) # သင့်စနစ်တွင် JWT Token သုံးပါက ဤနေရာတွင် ထုတ်ပေးပါ
+        "user": {
+            "id": user.id,
+            "email": user.email,
+            "fullname": user.fullname
+        }
     }
 
 # --- 🛠️ Admin Controls (Users) ---
