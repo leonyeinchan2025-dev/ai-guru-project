@@ -107,76 +107,6 @@ def register_user(user: UserRegister, db: Session = Depends(get_db)):
 
 # --- 🔗 External Resources APIs ---
 
-# # Render နှင့် Vercel ချိတ်ဆက်နိုင်ရန် CORS သတ်မှတ်ခြင်း
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"], 
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
-# # (၁) Uploads Folder တည်ဆောက်ခြင်း နှင့် ချိတ်ဆက်ခြင်း
-# UPLOAD_DIR = "uploads"
-# os.makedirs(UPLOAD_DIR, exist_ok=True)
-# app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
-
-# @app.get("/")
-# def root():
-#     return {"message": "AI GURU Backend is running!"}
-
-
-# # --- 🔗 External Resources APIs ---
-# @app.post("/admin/resources")
-# def create_external_resource(resource: ResourceCreate, db: Session = Depends(get_db)):
-#     new_resource = models.Resource(
-#         title=resource.title,
-#         file_url=resource.file_url,
-#         file_type=resource.file_type
-#     )
-#     db.add(new_resource)
-#     db.commit()
-#     db.refresh(new_resource)
-#     return new_resource
-
-# @app.get("/resources")
-# def get_resources(db: Session = Depends(get_db)):
-#     return db.query(models.Resource).order_by(models.Resource.created_at.desc()).all()
-
-# @app.delete("/admin/resources/{res_id}")
-# def delete_resource(res_id: int, db: Session = Depends(get_db)):
-#     res = db.query(models.Resource).filter(models.Resource.id == res_id).first()
-#     if res:
-#         # File အစစ်မဟုတ်သော်လည်း သတိထားဖျက်ရန်
-#         if not res.file_url.startswith('http') and os.path.exists(res.file_url.lstrip("/")):
-#             os.remove(res.file_url.lstrip("/"))
-#         db.delete(res)
-#         db.commit()
-#     return {"status": "deleted"}
-
-# # --- 🔐 Authentication (Register & Login) ---
-# @app.post("/register")
-# def register_user(user: UserRegister, db: Session = Depends(get_db)):
-#     valid_domains = ["@gmail.com", "@yahoo.com", "@outlook.com"]
-#     if not any(user.email.endswith(domain) for domain in valid_domains):
-#         raise HTTPException(status_code=400, detail="ကျေးဇူးပြု၍ @gmail.com ကဲ့သို့သော အီးမေးလ် အစစ်အမှန်ကိုသာ အသုံးပြုပါ။")
-
-#     db_user = db.query(models.User).filter(models.User.email == user.email).first()
-#     if db_user:
-#         raise HTTPException(status_code=400, detail="ဤ Email မှာ စာရင်းသွင်းပြီးသား ဖြစ်နေပါသည်။")
-    
-#     new_user = models.User(
-#         fullname=user.fullname, 
-#         email=user.email, 
-#         password=user.password, 
-#         is_approved=False,  
-#         is_admin=False      
-#     )
-#     db.add(new_user)
-#     db.commit()
-#     db.refresh(new_user)
-#     return {"message": "Register အောင်မြင်ပါသည်။ Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။\n\nဆက်သွယ်ရန် Hot Line (Admin) Call and Viber: +959444445546"}
-
 @app.post("/login")
 def login_user(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
@@ -193,50 +123,94 @@ def login_user(user: UserLogin, db: Session = Depends(get_db)):
         "is_admin": db_user.is_admin
     }
 
+# @app.post("/google-login")
+# def google_login(token_data: GoogleToken, db: Session = Depends(get_db)):
+#     try:
+#         idinfo = id_token.verify_oauth2_token(
+#             token_data.token, 
+#             google_requests.Request(), 
+#             GOOGLE_CLIENT_ID
+#         )
+
+#         email = idinfo['email']
+#         name = idinfo.get('name', 'Google User')
+
+#         user = db.query(models.User).filter(models.User.email == email).first()
+
+#         if not user:
+#             new_user = models.User(
+#                 fullname=name,
+#                 email=email,
+#                 password="GOOGLE_LOGIN_NO_PASSWORD", 
+#                 is_approved=False,       
+#                 is_admin=False,
+#                 is_email_verified=True   
+#             )
+#             db.add(new_user)
+#             db.commit()
+#             db.refresh(new_user)
+#             raise HTTPException(status_code=403, detail="အကောင့်အသစ် ဖန်တီးပြီးပါပြီ။ Admin ၏ အတည်ပြုချက် (Approve) ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။")
+
+#         else:
+#             if not user.is_approved:
+#                 raise HTTPException(status_code=403, detail="သင့်အကောင့်မှာ Admin အတည်ပြုချက် မရရှိသေးပါ။")
+            
+#             return {
+#                 "message": "Login အောင်မြင်ပါသည်။",
+#                 "user": {
+#                     "user_id": user.id,
+#                     "fullname": user.fullname,
+#                     "email": user.email,
+#                     "is_admin": user.is_admin
+#                 }
+#             }
+
+#     except ValueError:
+#         raise HTTPException(status_code=400, detail="Google အကောင့် ချိတ်ဆက်မှု မှားယွင်းနေပါသည်။")
+
 @app.post("/google-login")
-def google_login(token_data: GoogleToken, db: Session = Depends(get_db)):
-    try:
-        idinfo = id_token.verify_oauth2_token(
-            token_data.token, 
-            google_requests.Request(), 
-            GOOGLE_CLIENT_ID
+def google_login(google_data: GoogleLoginSchema, db: Session = Depends(get_db)):
+    # ၁။ Google မှ ပြန်လာသော အီးမေးလ်နှင့် နာမည်ကို ယူပါ
+    email = google_data.email
+    fullname = google_data.name 
+
+    # ၂။ Database ထဲတွင် ထိုအီးမေးလ် ရှိ/မရှိ စစ်ဆေးပါ
+    user = db.query(models.User).filter(models.User.email == email).first()
+
+    # ၃။ User အသစ်ဖြစ်နေပါက (Database ထဲတွင် မရှိပါက) Auto-Register လုပ်မည်
+    if not user:
+        user = models.User(
+            fullname=fullname,
+            email=email,
+            password="google_oauth_user", # Google ဖြင့်ဝင်သူဖြစ်၍ dummy password ထည့်ထားပါမည်
+            is_approved=False,            # ❌ Admin ခွင့်ပြုချက် မရမချင်း False ဖြစ်နေပါမည်
+            is_admin=False
+        )
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+        
+        # အကောင့်ဖန်တီးပြီးသွားသော်လည်း Login တန်းမပေးဘဲ Error Message ပြန်ချပေးပါမည်
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, 
+            detail="Google ဖြင့် အကောင့်ဖွင့်ခြင်း အောင်မြင်ပါသည်။ သို့သော် Admin ၏ အတည်ပြုချက်ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။"
         )
 
-        email = idinfo['email']
-        name = idinfo.get('name', 'Google User')
+    # ၄။ User အကောင့်ရှိနေသော်လည်း Admin Approval မရသေးပါက Login ပိတ်ထားမည်
+    if not user.is_approved:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="သင့်အကောင့်မှာ Admin အတည်ပြုချက် (Approval) မရရှိသေးပါ။ ကျေးဇူးပြု၍ ခေတ္တစောင့်ဆိုင်းပေးပါ။"
+        )
 
-        user = db.query(models.User).filter(models.User.email == email).first()
-
-        if not user:
-            new_user = models.User(
-                fullname=name,
-                email=email,
-                password="GOOGLE_LOGIN_NO_PASSWORD", 
-                is_approved=False,       
-                is_admin=False,
-                is_email_verified=True   
-            )
-            db.add(new_user)
-            db.commit()
-            db.refresh(new_user)
-            raise HTTPException(status_code=403, detail="အကောင့်အသစ် ဖန်တီးပြီးပါပြီ။ Admin ၏ အတည်ပြုချက် (Approve) ကို ခေတ္တစောင့်ဆိုင်းပေးပါ။")
-
-        else:
-            if not user.is_approved:
-                raise HTTPException(status_code=403, detail="သင့်အကောင့်မှာ Admin အတည်ပြုချက် မရရှိသေးပါ။")
-            
-            return {
-                "message": "Login အောင်မြင်ပါသည်။",
-                "user": {
-                    "user_id": user.id,
-                    "fullname": user.fullname,
-                    "email": user.email,
-                    "is_admin": user.is_admin
-                }
-            }
-
-    except ValueError:
-        raise HTTPException(status_code=400, detail="Google အကောင့် ချိတ်ဆက်မှု မှားယွင်းနေပါသည်။")
+    # ၅။ User အကောင့်လည်းရှိ၊ Admin Approval လည်းရပြီးသား (is_approved=True) ဖြစ်မှသာ Login ပေးဝင်မည်
+    return {
+        "message": "Login အောင်မြင်ပါသည်။",
+        "user_id": user.id,
+        "email": user.email,
+        "fullname": user.fullname,
+        # "access_token": generate_token(user.email) # သင့်စနစ်တွင် JWT Token သုံးပါက ဤနေရာတွင် ထုတ်ပေးပါ
+    }
 
 # --- 🛠️ Admin Controls (Users) ---
 @app.get("/admin/users")

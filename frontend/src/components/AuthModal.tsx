@@ -60,18 +60,46 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     };
     const handleGoogleSuccess = async (credentialResponse: any) => {
         try {
+            // ၁။ Backend သို့ Google Token လှမ်းပို့ခြင်း
             const res = await api.post('/google-login', { token: credentialResponse.credential });
+
+            // ၂။ Login အောင်မြင်ပါက (Admin မှ အတည်ပြုပြီးသားဖြစ်ပါက)
             alert("✅ Google ဖြင့် ဝင်ရောက်ခြင်း အောင်မြင်ပါသည်။");
             localStorage.setItem('user', JSON.stringify(res.data.user));
+            // လိုအပ်ပါက Modal ကိုပိတ်ပြီးမှ Reload လုပ်ပါ
+            onClose();
             window.location.reload();
+
         } catch (error: any) {
-            // Admin အတည်ပြုချက် စောင့်ရမည့် မက်ဆေ့ချ်များ ဤနေရာတွင် ပေါ်ပါမည်
-            alert(error.response?.data?.detail || "Google ဖြင့် ဝင်ရောက်ရာတွင် အမှားအယွင်း ရှိပါသည်။");
-            if (error.response?.status === 403) {
-                onClose(); // Modal ကို ပိတ်ပေးမည်
+            // ၃။ Backend မှ Error ပြန်လာပါက
+            if (error.response && error.response.status === 403) {
+                // Admin အတည်ပြုချက် (Approve) မရသေးသော အခြေအနေ
+                // Backend မှ ပို့လိုက်သော "အတည်ပြုချက်စောင့်ပါ" စာတန်းကို ပြပေးမည်
+                alert(error.response.data.detail);
+
+                // (ရွေးချယ်ရန်) Error ပြပြီးနောက် Modal ကို ပိတ်ချင်လျှင် အောက်ပါ Code ကို ဖွင့်ပေးပါ
+                // onClose(); 
+            } else {
+                // အခြားသော Network Error သို့မဟုတ် System Error များအတွက်
+                alert(error.response?.data?.detail || "Google ဖြင့် ဝင်ရောက်ရာတွင် အမှားအယွင်း ရှိပါသည်။");
+                console.error("Google Login Error:", error);
             }
         }
     };
+    // const handleGoogleSuccess = async (credentialResponse: any) => {
+    //     try {
+    //         const res = await api.post('/google-login', { token: credentialResponse.credential });
+    //         alert("✅ Google ဖြင့် ဝင်ရောက်ခြင်း အောင်မြင်ပါသည်။");
+    //         localStorage.setItem('user', JSON.stringify(res.data.user));
+    //         window.location.reload();
+    //     } catch (error: any) {
+    //         // Admin အတည်ပြုချက် စောင့်ရမည့် မက်ဆေ့ချ်များ ဤနေရာတွင် ပေါ်ပါမည်
+    //         alert(error.response?.data?.detail || "Google ဖြင့် ဝင်ရောက်ရာတွင် အမှားအယွင်း ရှိပါသည်။");
+    //         if (error.response?.status === 403) {
+    //             onClose(); // Modal ကို ပိတ်ပေးမည်
+    //         }
+    //     }
+    // };
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity">
