@@ -376,7 +376,7 @@ export default function Home() {
                                             <div className="text-4xl md:text-5xl animate-bounce">🎁</div>
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-2 mb-1">
-                                                    <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">New Year Gift</span>
+                                                    <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">New Year Gift</span><p>FREE</p>
                                                 </div>
                                                 <h3 className="font-heading font-extrabold text-slate-800 text-base md:text-lg mb-1">Coding အခြေခံ Scratch</h3>
                                                 <div className="flex gap-2 mt-3">
