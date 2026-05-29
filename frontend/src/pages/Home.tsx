@@ -768,13 +768,13 @@ export default function Home() {
                             {!selectedBook ? (
                                 <>
                                     <h2 className="text-2xl font-bold text-slate-800 mb-2 font-heading">📚 EBook များ မှာယူရန်</h2>
-                                    <p className="text-slate-500 text-sm mb-6 leading-relaxed">သင် မှာယူလိုသော စာအုပ်ကို ရွေးချယ်ပါ။ လော့ဂ်အင် ဝင်ထားရန် မလိုအပ်ပါ။</p>
+                                    <p className="text-slate-500 text-sm mb-6 leading-relaxed">သင် မှာယူလိုသော စာအုပ်ကို ရွေးချယ်ပါ။ လော့ဂ်အင် ဝင်ထားရန် မလိုအပ်ပါ။ <br />KPay,AYAPay,WAVE for 09450064323 (Nyeinchan Soe)</p>
 
                                     <div className="space-y-3">
                                         {[
-                                            { title: "Prompt Engineering လမ်းညွှန်", link: "https://drive.google.com/file/d/1pe8c2HFP7qzquJT4w_NbcSg7ZVbNpIQU/view?usp=sharing" },
-                                            { title: "Basic Python အခြေခံ", link: "https://drive.google.com/file/d/1aagCivYx61iDiS6r-Zx0W35DcdN1qNAt/view?usp=sharing" },
-                                            { title: "NoteBookLM AI လက်စွဲ", link: "https://drive.google.com/file/d/1LmAnUWX6jpTtKvA2NbtYo65q3aJuryu4/view?usp=sharing" }
+                                            { title: "Prompt Engineering လမ်းညွှန် (၇၀၀၀ ကျပ်)", link: "https://drive.google.com/file/d/1pe8c2HFP7qzquJT4w_NbcSg7ZVbNpIQU/view?usp=sharing" },
+                                            { title: "Basic Python အခြေခံ (၅၀၀၀ ကျပ်)", link: "https://drive.google.com/file/d/1aagCivYx61iDiS6r-Zx0W35DcdN1qNAt/view?usp=sharing" },
+                                            { title: "NoteBookLM AI လက်စွဲ (၅၀၀၀ ကျပ်)", link: "https://drive.google.com/file/d/1LmAnUWX6jpTtKvA2NbtYo65q3aJuryu4/view?usp=sharing" }
                                         ].map((book, idx) => (
                                             <div key={idx} className="flex flex-col sm:flex-row gap-3 items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-300 transition">
                                                 <span className="font-bold text-slate-700 text-sm text-center sm:text-left">{book.title}</span>
