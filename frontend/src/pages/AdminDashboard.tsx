@@ -117,6 +117,20 @@ export default function AdminDashboard() {
         } catch (error) { alert("User ဖျက်ရာတွင် အမှားရှိပါသည်။"); }
     };
 
+    // 🌟 အသစ်ထပ်တိုးရန်: EBook အမှာစာ ဖျက်မည့် Function 🌟
+    const handleDeleteEbookOrder = async (orderId: number) => {
+        if (!window.confirm("ဤအမှာစာကို ဖျက်ပစ်ရန် သေချာပါသလား? (ဖျက်ပြီးပါက ပြန်ယူ၍မရပါ)")) return;
+        try {
+            await api.delete(`/admin/ebook-requests/${orderId}`);
+            alert("အမှာစာ ဖျက်ပစ်ပြီးပါပြီ။");
+            // ဖျက်ပြီးပါက စာရင်းကို အသစ်ပြန်ခေါ်မည်
+            fetchEbookOrders();
+        } catch (error) {
+            console.error("Error deleting order:", error);
+            alert("အမှာစာဖျက်ရာတွင် အမှားရှိပါသည်။");
+        }
+    };
+
     const startEditLesson = (lesson: any) => {
         setEditingId(lesson.id);
         setTitle(lesson.title || '');
@@ -350,7 +364,7 @@ export default function AdminDashboard() {
                         </motion.div>
                     )}
 
-                    {/* --- 4. Ebook Orders Section --- */}
+                    {/* --- 4. Ebook Orders Section ---
                     {activeTab === 'ebooks' && (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                             <h2 className="text-xl font-bold mb-6 border-b pb-2">📚 EBook မှာယူထားသူများ စာရင်း</h2>
@@ -372,6 +386,48 @@ export default function AdminDashboard() {
                                         ))}
                                         {ebookOrders.length === 0 && (
                                             <tr><td colSpan={4} className="p-8 text-center text-slate-500">အမှာစာများ မရှိသေးပါ</td></tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </motion.div>
+                    )} */}
+
+                    {/* --- 4. Ebook Orders Section --- */}
+                    {activeTab === 'ebooks' && (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                            <h2 className="text-xl font-bold mb-6 border-b pb-2">📚 EBook မှာယူထားသူများ စာရင်း</h2>
+                            <div className="overflow-x-auto bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                                <table className="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr className="bg-slate-50 border-b">
+                                            <th className="p-3">အချိန်</th>
+                                            <th className="p-3">စာအုပ်အမည်</th>
+                                            <th className="p-3">အမည်</th>
+                                            <th className="p-3">ဆက်သွယ်ရန်</th>
+                                            <th className="p-3">လုပ်ဆောင်ချက်</th> {/* 🌟 ထပ်တိုး Column */}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {ebookOrders.map(order => (
+                                            <tr key={order.id} className="border-b hover:bg-slate-50">
+                                                <td className="p-3 text-sm text-slate-500">{new Date(order.created_at).toLocaleDateString()} {new Date(order.created_at).toLocaleTimeString()}</td>
+                                                <td className="p-3 font-semibold text-blue-700">{order.book_title}</td>
+                                                <td className="p-3 font-medium text-slate-800">{order.name}</td>
+                                                <td className="p-3 text-rose-600 font-bold">{order.contact_info}</td>
+                                                <td className="p-3">
+                                                    {/* 🌟 ဖျက်ရန် ခလုတ် 🌟 */}
+                                                    <button
+                                                        onClick={() => handleDeleteEbookOrder(order.id)}
+                                                        className="bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 px-3 py-1.5 rounded-lg text-sm font-bold transition-colors shadow-sm"
+                                                    >
+                                                        ဖျက်မည်
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                        {ebookOrders.length === 0 && (
+                                            <tr><td colSpan={5} className="p-8 text-center text-slate-500">အမှာစာများ မရှိသေးပါ</td></tr>
                                         )}
                                     </tbody>
                                 </table>
