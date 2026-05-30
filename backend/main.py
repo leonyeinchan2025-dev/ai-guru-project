@@ -457,3 +457,14 @@ def create_ebook_request(req: schemas.EbookRequestCreate, db: Session = Depends(
 def get_ebook_requests(db: Session = Depends(get_db)):
     # နောက်ဆုံးမှာထားသော အမှာစာများကို အပေါ်ဆုံးမှ ပြမည်
     return db.query(models.EbookRequest).order_by(models.EbookRequest.created_at.desc()).all()
+
+# --- 🌟 EBook အမှာစာ ဖျက်ရန် API အသစ် ---
+@app.delete("/admin/ebook-requests/{request_id}")
+def delete_ebook_request(request_id: int, db: Session = Depends(get_db)):
+    db_request = db.query(models.EbookRequest).filter(models.EbookRequest.id == request_id).first()
+    if not db_request:
+        raise HTTPException(status_code=404, detail="အမှာစာ မတွေ့ရှိပါ။")
+    
+    db.delete(db_request)
+    db.commit()
+    return {"message": "အမှာစာ ဖျက်ပစ်ပြီးပါပြီ။"}
