@@ -200,7 +200,7 @@ export default function Home() {
                         {/* flex-col နှင့် items-end ကိုသုံး၍ အပေါ်/အောက် ညာဘက်ကပ်နေစေပါသည် */}
                         <div className="md:hidden flex flex-col items-end gap-1.5 z-50">
 
-                            {/* ၁။ Profile Badge (အပေါ်) */}
+                            {/* ၁။ Profile Badge (အပေါ်)
                             {user ? (
                                 <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 py-1 px-2.5 rounded-full shadow-sm">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
@@ -217,8 +217,25 @@ export default function Home() {
                                 >
                                     ဝင်ရောက်မည်
                                 </button>
+                            )} */}
+                            {/* ၁။ Profile Badge (အပေါ်) */}
+                            {user ? (
+                                <div className="flex flex-col items-end bg-slate-50 border border-slate-200 py-1.5 px-3 rounded-xl shadow-sm text-right">
+                                    <span className="text-[11px] sm:text-xs font-extrabold text-slate-800 leading-tight">
+                                        {user.fullname}
+                                    </span>
+                                    <span className="text-[9px] sm:text-[10px] font-medium text-slate-500 leading-tight mt-0.5">
+                                        {user.email}
+                                    </span>
+                                </div>
+                            ) : (
+                                <button
+                                    onClick={() => setIsAuthModalOpen(true)}
+                                    className="text-[11px] sm:text-xs font-bold bg-blue-600 text-white py-1.5 px-3.5 rounded-full shadow-sm active:bg-blue-700 transition"
+                                >
+                                    ဝင်ရောက်မည်
+                                </button>
                             )}
-
                             {/* ၂။ Menu Button (အောက်) */}
                             <button
                                 className="flex items-center justify-center gap-1 text-slate-700 py-1 px-2.5 bg-white border border-slate-200 rounded-lg shadow-sm active:bg-slate-100 transition hover:bg-slate-50"
@@ -252,11 +269,47 @@ export default function Home() {
                                 initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                                 className="fixed top-0 right-0 h-[100dvh] w-[85%] max-w-sm bg-[#f8fafc] shadow-2xl z-[70] flex flex-col md:hidden rounded-l-3xl overflow-hidden"
                             >
-                                {/* Header (Logo & Close Button) */}
+                                {/* Header (Logo & Close Button)
                                 <div className="flex justify-between items-center p-5 bg-white border-b border-slate-100 shrink-0 shadow-sm z-10">
                                     <div className="flex items-center gap-3">
                                         <img src={logo} alt="Logo" className="w-10 h-10 rounded-full border border-blue-100 shadow-sm object-cover" />
                                         <span className="text-xl font-extrabold text-blue-700 tracking-wide">AI GURU</span>
+                                    </div>
+                                    <button
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="p-2 rounded-full bg-slate-50 text-slate-500 border border-slate-200 hover:bg-red-50 hover:text-red-600 transition-colors active:scale-90"
+                                    >
+                                        {/* အထွက်မြှားလေး (Close) */}
+                                {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>  */}
+                                {/* Header (User Profile or Logo & Close Button) */}
+                                <div className="flex justify-between items-center p-5 bg-white border-b border-slate-100 shrink-0 shadow-sm z-10">
+                                    <div className="flex items-center gap-3">
+                                        {user ? (
+                                            <>
+                                                {/* 🌟 ယာယီ User Profile လိုဂို (နာမည်၏ ပထမဆုံး စာလုံးဖြင့်) 🌟 */}
+                                                <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-lg uppercase shadow-md shrink-0">
+                                                    {user.fullname.charAt(0)}
+                                                </div>
+                                                <div className="flex flex-col overflow-hidden">
+                                                    <span className="text-sm font-extrabold text-slate-800 truncate max-w-[180px]">
+                                                        {user.fullname}
+                                                    </span>
+                                                    <span className="text-xs text-slate-500 truncate max-w-[180px]">
+                                                        {user.email}
+                                                    </span>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                {/* မူလ AI GURU လိုဂို (အကောင့် မဝင်ထားချိန်) */}
+                                                <img src={logo} alt="Logo" className="w-10 h-10 rounded-full border border-blue-100 shadow-sm object-cover" />
+                                                <span className="text-xl font-extrabold text-blue-700 tracking-wide">AI GURU</span>
+                                            </>
+                                        )}
                                     </div>
                                     <button
                                         onClick={() => setIsMobileMenuOpen(false)}
@@ -376,7 +429,7 @@ export default function Home() {
                                             <div className="text-4xl md:text-5xl animate-bounce">🎁</div>
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-2 mb-1">
-                                                    <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">New Year Gift</span><p>FREE</p>
+                                                    <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">New Year Gift</span><p> <b>FREE</b></p>
                                                 </div>
                                                 <h3 className="font-heading font-extrabold text-slate-800 text-base md:text-lg mb-1">Coding အခြေခံ Scratch</h3>
                                                 <div className="flex gap-2 mt-3">
@@ -768,10 +821,11 @@ export default function Home() {
                             {!selectedBook ? (
                                 <>
                                     <h2 className="text-2xl font-bold text-slate-800 mb-2 font-heading">📚 EBook များ မှာယူရန်</h2>
-                                    <p className="text-slate-500 text-sm mb-6 leading-relaxed">သင် မှာယူလိုသော စာအုပ်ကို ရွေးချယ်ပါ။ လော့ဂ်အင် ဝင်ထားရန် မလိုအပ်ပါ။ <br />KPay,AYAPay,WAVE for 09450064323 (Nyeinchan Soe)</p>
+                                    <p className="text-slate-500 text-sm mb-6 leading-relaxed"><b>သင် မှာယူလိုသော စာအုပ်ကို ရွေးချယ်ပါ။ လော့ဂ်အင် ဝင်ထားရန် မလိုအပ်ပါ။ </b></p>
 
-                                    <div className="space-y-3">
+                                    {/* <div className="space-y-3">
                                         {[
+                                            
                                             { title: "Prompt Engineering လမ်းညွှန် (၇၀၀၀ ကျပ်)", link: "https://drive.google.com/file/d/1pe8c2HFP7qzquJT4w_NbcSg7ZVbNpIQU/view?usp=sharing" },
                                             { title: "Basic Python အခြေခံ (၅၀၀၀ ကျပ်)", link: "https://drive.google.com/file/d/1aagCivYx61iDiS6r-Zx0W35DcdN1qNAt/view?usp=sharing" },
                                             { title: "NoteBookLM AI လက်စွဲ (၅၀၀၀ ကျပ်)", link: "https://drive.google.com/file/d/1LmAnUWX6jpTtKvA2NbtYo65q3aJuryu4/view?usp=sharing" }
@@ -786,14 +840,53 @@ export default function Home() {
                                                 </button>
                                             </div>
                                         ))}
+                                    </div> */}
+                                    <div className="space-y-3">
+                                        {[
+                                            {
+                                                title: "Prompt Engineering လမ်းညွှန်",
+                                                price: "၇၀၀၀ ကျပ်",
+                                                link: "https://drive.google.com/file/d/1pe8c2HFP7qzquJT4w_NbcSg7ZVbNpIQU/view?usp=sharing"
+                                            },
+                                            {
+                                                title: "Basic Python အခြေခံ",
+                                                price: "၅၀၀၀ ကျပ်",
+                                                link: "https://drive.google.com/file/d/1aagCivYx61iDiS6r-Zx0W35DcdN1qNAt/view?usp=sharing"
+                                            },
+                                            {
+                                                title: "NoteBookLM AI လက်စွဲ",
+                                                price: "၅၀၀၀ ကျပ်",
+                                                link: "https://drive.google.com/file/d/1LmAnUWX6jpTtKvA2NbtYo65q3aJuryu4/view?usp=sharing"
+                                            }
+                                        ].map((book, idx) => (
+                                            <div key={idx} className="flex flex-col sm:flex-row gap-3 items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-300 transition">
+
+                                                {/* 🌟 ဤနေရာတွင် Title နှင့် Price ကို အောက်တစ်ကြောင်းဆင်း၍ အလှဆင်ပြသထားပါသည် 🌟 */}
+                                                <span className="font-bold text-slate-700 text-sm text-center sm:text-left leading-relaxed">
+                                                    {book.title} <br />
+                                                    <span className="text-blue-600 font-black">({book.price})</span>
+                                                </span>
+
+                                                <button
+                                                    // 🌟 State သို့ ပို့ရာတွင် String များသာဖြစ်သော title နှင့် link ကိုသာ ရွေးပို့ပါမည် 🌟
+                                                    onClick={() => setSelectedBook({ title: book.title, link: book.link })}
+                                                    className="w-full sm:w-auto bg-blue-600 text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-blue-700 shadow-sm active:scale-95 transition whitespace-nowrap"
+                                                >
+                                                    မှာယူမည် 🛒
+                                                </button>
+                                            </div>
+                                        ))}
                                     </div>
                                 </>
                             ) : !orderSuccess ? (
-                                <>
+                                <>  <h2 className="text-xl font-bold text-blue-700 mb-4 font-heading border-b pb-3">
+                                    <span className="text-slate-500 text-sm font-normal block mb-1"><b>ငွေပေးချေရန်</b> <br /> KPay,AYAPay,WAVE for 09450064323 (Nyeinchan Soe)</span>
+                                </h2>
                                     <h2 className="text-xl font-bold text-blue-700 mb-4 font-heading border-b pb-3">
                                         <span className="text-slate-500 text-sm font-normal block mb-1">ရွေးချယ်ထားသော စာအုပ်:</span>
                                         {selectedBook.title}
                                     </h2>
+
                                     <form onSubmit={handleEbookOrder} className="space-y-4">
                                         <div>
                                             <label className="block text-sm font-bold text-slate-700 mb-1">အမည် <span className="text-red-500">*</span></label>
@@ -817,7 +910,20 @@ export default function Home() {
                                     <h3 className="text-xl font-bold text-slate-800 mb-2 font-heading">အမှာစာ ရောက်ရှိသွားပါပြီ</h3>
                                     <div className="bg-blue-50 border border-blue-100 p-4 rounded-xl mb-6">
                                         <p className="text-sm text-blue-800 font-medium leading-relaxed">
-                                            AI GURU Page Messenger <br /> https://m.me/aigurumm (or) <br /> <span className="font-bold text-lg">09444445546</span> သို့ ဆက်သွယ်မှာယူနိုင်ပါတယ်။
+                                            <b>KPay,AYAPay,WAVE for 09450064323 (Nyeinchan Soe) တွင် ကျသင့်ငွေ ပေးချေပြီးကြောင်း</b> <br />AI GURU Page Messenger <br />
+
+                                            {/* 🌟 ဤနေရာတွင် <a> tag ဖြင့် ပြင်ဆင်ထားပါသည် 🌟 */}
+                                            <a
+                                                href="https://m.me/aigurumm"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="font-bold underline hover:text-blue-900 transition-colors"
+                                            >
+                                                https://m.me/aigurumm
+                                            </a>
+
+                                            &nbsp;(or) <br />
+                                            <span className="font-bold text-lg">09444445546</span> သို့ ဆက်သွယ်မှာယူနိုင်ပါတယ်။
                                         </p>
                                     </div>
                                     <p className="text-xs text-slate-500 mb-6 px-2">ကျသင့်ငွေပေးချေပြီးပါက အောက်ပါ လင့်ခ်ကိုနှိပ်၍ Google Drive တွင် Request Access တောင်းဆိုနိုင်ပါသည်။</p>
